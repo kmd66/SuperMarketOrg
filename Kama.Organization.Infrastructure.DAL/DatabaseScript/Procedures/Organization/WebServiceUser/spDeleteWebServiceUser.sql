@@ -1,0 +1,32 @@
+﻿USE [Kama.Bonyad.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('org.spDeleteWebServiceUser'))
+	DROP PROCEDURE org.spDeleteWebServiceUser
+GO
+
+CREATE PROCEDURE org.spDeleteWebServiceUser
+	@AID UNIQUEIDENTIFIER
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
+
+	DECLARE
+		@ID UNIQUEIDENTIFIER = @AID
+
+	BEGIN TRY
+		BEGIN TRAN
+
+			DELETE org.WebServiceUser
+			WHERE ID = @ID
+
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+
+	RETURN @@ROWCOUNT
+END

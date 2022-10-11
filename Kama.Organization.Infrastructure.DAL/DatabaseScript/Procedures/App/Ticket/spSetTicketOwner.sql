@@ -1,0 +1,35 @@
+USE [Kama.Mefa.Organization]
+GO
+
+IF EXISTS( SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spSetTicketOwner'))
+	DROP PROCEDURE app.spSetTicketOwner
+GO
+
+CREATE PROCEDURE app.spSetTicketOwner
+	@AOwnerID UNIQUEIDENTIFIER,
+	@AID UNIQUEIDENTIFIER
+WITH ENCRYPTION
+AS
+
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
+
+	DECLARE 
+		@OwnerID UNIQUEIDENTIFIER = @AOwnerID,
+		@ID UNIQUEIDENTIFIER = @AID
+
+	BEGIN TRY
+		BEGIN TRAN
+			
+				UPDATE app.Ticket
+				SET OwnerID = @OwnerID
+				, [State] = 3
+				WHERE ID = @ID 
+						
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+END

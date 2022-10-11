@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7EDE5FDF-C8C5-46BE-935F-00932FEBCCFC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Organization.Core.Service</RootNamespace>
+    <AssemblyName>Kama.Organization.Core.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Organization.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kama.AppCore, Version=1.1.0.28467, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Library.Helper, Version=1.1.0.27714, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.Library.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.MailService.Core.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.MailService.Core.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.SmsService.Core.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.SmsService.Core.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\IAnnouncementService.cs" />
+    <Compile Include="Application\IApplicationSurveyQuestionService.cs" />
+    <Compile Include="Application\IApplicationSurveyGroupService.cs" />
+    <Compile Include="Application\IApplicationSurveyAnswerService.cs" />
+    <Compile Include="Application\IApplicationSurveyParticipantService.cs" />
+    <Compile Include="Application\IApplicationSurveyQuestionChoiceServic.cs" />
+    <Compile Include="Application\IContactDetailService.cs" />
+    <Compile Include="Application\IContactInfoService.cs" />
+    <Compile Include="Application\IApplicationSurveyService.cs" />
+    <Compile Include="Application\INotificationConditionService.cs" />
+    <Compile Include="Application\INotificationService.cs" />
+    <Compile Include="Application\ITicketSequenceService.cs" />
+    <Compile Include="Application\ITicketService.cs" />
+    <Compile Include="Application\ITicketSubjectService.cs" />
+    <Compile Include="Application\ITicketSubjectUserService.cs" />
+    <Compile Include="IAutomationTimer.cs" />
+    <Compile Include="ISmsService.cs" />
+    <Compile Include="Organization\DynamicPermissionService.cs" />
+    <Compile Include="Organization\IClientService.cs" />
+    <Compile Include="Organization\IPositionHistoryService.cs" />
+    <Compile Include="Organization\IRefreshTokenService.cs" />
+    <Compile Include="Organization\IEmailSecurityStampService.cs" />
+    <Compile Include="Organization\IDynamicPermissionService.cs" />
+    <Compile Include="Organization\ISmsSecurityStampService.cs" />
+    <Compile Include="Organization\IWebServiceUserService.cs" />
+    <Compile Include="Public\IAttachmentService.cs" />
+    <Compile Include="Organization\ICommandService.cs" />
+    <Compile Include="Organization\IApplicationService.cs" />
+    <Compile Include="Application\IContactService.cs" />
+    <Compile Include="Organization\IDepartmentService.cs" />
+    <Compile Include="Application\IFAQGroupService.cs" />
+    <Compile Include="Application\IFAQService.cs" />
+    <Compile Include="Application\IMessageService.cs" />
+    <Compile Include="Organization\IPlaceService.cs" />
+    <Compile Include="Organization\IPositionService.cs" />
+    <Compile Include="Organization\IPositionTypeService.cs" />
+    <Compile Include="Organization\IRoleService.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="Organization\IUserService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public\IPasswordBlackListService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kama.Organization.Core.Model\Kama.Organization.Core.Model.csproj">
+      <Project>{11db8558-6ba8-4650-bd02-655aca000a93}</Project>
+      <Name>Kama.Organization.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Organization.Core\Kama.Organization.Core.csproj">
+      <Project>{32238ad8-b422-4d6e-9fb0-d703c3d26347}</Project>
+      <Name>Kama.Organization.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

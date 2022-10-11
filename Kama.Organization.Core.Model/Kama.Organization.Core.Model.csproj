@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11DB8558-6BA8-4650-BD02-655ACA000A93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Organization.Core.Model</RootNamespace>
+    <AssemblyName>Kama.Organization.Core.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Organization.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kama.AppCore, Version=1.1.0.28467, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Library.Helper, Version=1.1.0.27714, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.Library.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\ApplicationSurvey\InsertSurveyAnswer.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyQuestionChoice.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyQuestionChoiceListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyParticipant.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyAnswer.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyParticipantListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyAnswerListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyQuestionListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyQuestion.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyGroupListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyGroup.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurveyListVM.cs" />
+    <Compile Include="Application\ApplicationSurvey\ApplicationSurvey.cs" />
+    <Compile Include="Application\Auth\Auth.cs" />
+    <Compile Include="Application\ContactInfo\ContactDetail.cs" />
+    <Compile Include="Application\ContactInfo\ContactInfo.cs" />
+    <Compile Include="Application\FAQ\FAQGroup.cs" />
+    <Compile Include="Application\Message\Message .cs" />
+    <Compile Include="Application\Message\DraftMessageListVM.cs" />
+    <Compile Include="Application\Message\OutboxMessageListVM.cs" />
+    <Compile Include="Application\Message\InboxMessageListVM.cs" />
+    <Compile Include="Application\Notification\NotificationCondition.cs" />
+    <Compile Include="Application\Notification\Notification.cs" />
+    <Compile Include="Application\Notification\NotificationConditionListVM.cs" />
+    <Compile Include="Application\Notification\NotificationPositionListVM.cs" />
+    <Compile Include="Application\Notification\NotificationPosition.cs" />
+    <Compile Include="Application\Notification\NotificationListByPositionVM.cs" />
+    <Compile Include="Application\Notification\NotificationListVM.cs" />
+    <Compile Include="Application\Ticket\Ticket.cs" />
+    <Compile Include="Application\Ticket\TicketListVM.cs" />
+    <Compile Include="Application\Ticket\TicketReportListVM.cs" />
+    <Compile Include="Application\Ticket\TicketSequence.cs" />
+    <Compile Include="Application\Ticket\TicketSequenceListVM.cs" />
+    <Compile Include="Application\Ticket\TicketSubject.cs" />
+    <Compile Include="Application\Ticket\TicketSubjectListVM.cs" />
+    <Compile Include="Application\Ticket\TicketSubjectUser.cs" />
+    <Compile Include="Application\Ticket\TicketSubjectUserListVM.cs" />
+    <Compile Include="CommandEnum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommandEnum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Common\PasswordBlackList\PasswordBlackList.cs" />
+    <Compile Include="Common\PasswordBlackList\PasswordBlackListVm.cs" />
+    <Compile Include="FileModel.cs" />
+    <Compile Include="Organization\Application\ApplicationListVM.cs" />
+    <Compile Include="Organization\Application\Application.cs" />
+    <Compile Include="Organization\Client\ClientListVM.cs" />
+    <Compile Include="Organization\Client\Client.cs" />
+    <Compile Include="Organization\Command\Command.cs" />
+    <Compile Include="Organization\Command\CommandListVM.cs" />
+    <Compile Include="Organization\Department\Department.cs" />
+    <Compile Include="Organization\Department\DepartmentListVM.cs" />
+    <Compile Include="Organization\DynamicPermission\DynamicPermissionListPositionsVM.cs" />
+    <Compile Include="Organization\DynamicPermission\DynamicPermissionListPositionVM.cs" />
+    <Compile Include="Organization\DynamicPermission\DynamicPermissionListVM.cs" />
+    <Compile Include="Organization\DynamicPermission\DynamicPermissionDetail.cs" />
+    <Compile Include="Organization\DynamicPermission\DynamicPermission.cs" />
+    <Compile Include="Organization\Place\Place.cs" />
+    <Compile Include="Organization\Place\PlaceListVM.cs" />
+    <Compile Include="Organization\PositionDepartmentMapping\PositionDepartmentMappingListVM.cs" />
+    <Compile Include="Organization\PositionDepartmentMapping\PositionDepartmentMapping.cs" />
+    <Compile Include="Organization\PositionHistory\PositionHistory.cs" />
+    <Compile Include="Organization\PositionHistory\PositionHistoryListVM.cs" />
+    <Compile Include="Organization\Position\GetOnlineUsersAndPositionsCountVM.cs" />
+    <Compile Include="Organization\Position\Position.cs" />
+    <Compile Include="Organization\Position\PositionListVM.cs" />
+    <Compile Include="Organization\PositionType\PositionTypeModel.cs" />
+    <Compile Include="Application\Announcement\AnnouncementListVM.cs" />
+    <Compile Include="Application\Announcement\Announcement.cs" />
+    <Compile Include="Application\Announcement\AnnouncementPositionType.cs" />
+    <Compile Include="Common\Attchment\Attachment.cs" />
+    <Compile Include="Application\Contact\ContactListVM.cs" />
+    <Compile Include="Application\Contact\Contact.cs" />
+    <Compile Include="Application\FAQ\FAQ.cs" />
+    <Compile Include="Application\Message\MessageReceiver.cs" />
+    <Compile Include="ListVM.cs" />
+    <Compile Include="Organization\RefreshToken\RefreshToken.cs" />
+    <Compile Include="Organization\Role\Role.cs" />
+    <Compile Include="Organization\Role\RoleListVM.cs" />
+    <Compile Include="Application\FAQ\FAQGroupListVM.cs" />
+    <Compile Include="Application\FAQ\FAQListVM.cs" />
+    <Compile Include="Organization\SecurityStamp\EmailSecurityStamp\EmailSecurityStamp.cs" />
+    <Compile Include="Organization\SecurityStamp\SmsSecurityStamp\SmsSecurityStamp.cs" />
+    <Compile Include="Organization\WebServiceUser\WebServiceUser.cs" />
+    <Compile Include="Organization\WebServiceUser\WebServiceUserListVM.cs" />
+    <Compile Include="Organization\WebServiceUser\WebServiceUserGetVM.cs" />
+    <Compile Include="Organization\User\SetPasswordWithSecuriyStampVM.cs" />
+    <Compile Include="Organization\User\UserProfileVM.cs" />
+    <Compile Include="Organization\User\VerifyEmailVM.cs" />
+    <Compile Include="Organization\User\VerifyCellPhoneVM.cs" />
+    <Compile Include="Organization\User\SetPasswordVM.cs" />
+    <Compile Include="Organization\User\GetRefreshTokenVM.cs" />
+    <Compile Include="Organization\User\User.cs" />
+    <Compile Include="Organization\User\UserListVM.cs" />
+    <Compile Include="Organization\User\UserModifyValidation.cs" />
+    <Compile Include="Organization\User\UserPermission.cs" />
+    <Compile Include="Organization\User\UserSetting.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Organization\User\Token.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommandEnum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CommandEnum.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

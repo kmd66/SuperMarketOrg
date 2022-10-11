@@ -1,0 +1,117 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)Kama.Mporg.Organization.API\Libs\Kama.Mporg.Organization.Core.Model.dll" #>
+<#@ assembly name="$(SolutionDir)Kama.Mporg.Organization.API\Libs\Kama.AppCore.dll" #>
+<#@ assembly name="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Threading.Tasks" #>
+<#@ import namespace="Kama.Mporg.Organization.Core.Model" #>
+<#@ import namespace="Kama.Mporg.Organization" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="Kama.AppCore" #>
+<#@ output extension=".cs" #>
+<# var connectionString = @"Data Source=46.225.116.210;Initial Catalog=Kama.Mporg.Organization;User ID=kama; Password=Kama123qwe!@#"; #>
+namespace Kama.Mporg.Organization.Core
+{
+    public enum AppScopes
+	{   
+<#
+var scopeGenerator = new ScopeGenerator(connectionString);
+var dic = scopeGenerator.GenerateScopesEnum();
+foreach(var key in dic.Keys)
+{
+#>
+		
+		/// <summary>
+        /// <#=dic[key].Title#>
+        /// </summary>
+		<#=key#> = <#=dic[key].ID#> ,
+<#}#>
+	}
+}
+
+<#+
+public class ScopeGenerator
+{
+    public ScopeGenerator(string connectionString)
+    {
+        _scopesEnumKeyValue = new Dictionary<string, AppScope>();
+		_connectionString = connectionString;
+    }
+
+	private string _connectionString;
+    private List<AppScope> _scopes;
+    private Dictionary<string, AppScope> _scopesEnumKeyValue;
+
+    public Dictionary<string, AppScope> GenerateScopesEnum()
+    {
+        //load scopes from database
+		_scopes = GetScopes();
+
+        //get root node
+        var rootNode = _scopes.FirstOrDefault(s => string.IsNullOrEmpty(s.ParentNode));
+        LoadChildScopes(rootNode);
+
+        return _scopesEnumKeyValue;
+    }
+
+    private void LoadChildScopes(AppScope parentScope, string scopePath = "")
+    {
+	    if(parentScope == null)
+		   return;
+
+        scopePath += $"_{parentScope.Name}";
+        _scopesEnumKeyValue.Add(scopePath.TrimStart('_'), parentScope);
+
+        var childScopes = _scopes.Where(s => s.ParentNode == parentScope.Node).ToList();
+
+        childScopes.ForEach(child =>
+        {
+            LoadChildScopes(child, scopePath);
+        });
+    } 
+
+	public List<AppScope> GetScopes()
+	{
+	    var table = new DataTable();
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "pbl.spGetScopes";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("AApplicationID", 1));
+                connection.Open();
+                var reader = command.ExecuteReader();
+                table.Load(reader);
+                connection.Close();
+            }
+        }
+
+		return Map(table);
+	}
+
+	private List<AppScope> Map(DataTable table)
+	{
+	    var scopes = new List<AppScope>();
+        for (int i = 0; i < table.Rows.Count; i++)
+        {
+            var scope = new AppScope();
+            scope.ID = Guid.Parse(table.Rows[i]["ID"].ToString());
+            scope.ApplicationID = Guid.Parse(table.Rows[i]["ApplicationID"].ToString());
+            scope.Name = Convert.ToString(table.Rows[i]["Name"]);
+            scope.Node = Convert.ToString(table.Rows[i]["Node"]);
+            scope.ParentNode = Convert.ToString(table.Rows[i]["ParentNode"]);
+            scope.Title = Convert.ToString(table.Rows[i]["Title"]);
+            scopes.Add(scope);
+        }
+
+		return scopes;
+	}
+}
+#>
+

@@ -1,0 +1,14 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="$(SolutionDir)Kama.Organization.API\bin\Kama.DatabaseModel.dll" #>
+<#@ assembly name="$(SolutionDir)Kama.Organization.API\bin\Kama.Organization.Core.Model.dll" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Kama.DatabaseModel" #>
+<#@ import namespace="Kama.Organization.Core.Model" #>
+<#@ output extension=".cs" #>
+<#
+	var generator = new Kama.DatabaseModel.Generator(@"Data Source=94.139.162.23\sql2019,1433;Initial Catalog=Kama.Bonyad.Organization;User ID=kama; Password=K@maPMGs@dUL98", "dbo");
+#>
+<#=generator.Generate("Kama.Organization.Infrastructure.DAL")#>

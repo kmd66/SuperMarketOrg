@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ErrorCodes>
+  <General>
+    <Action name="Database">
+      <error key="DatabaseModelBinderException" code="-1">خطای دیتابیس</error>
+    </Action>
+    <Action name="Application">
+      <error key="Error" code="-1">خطای سیستمی</error>
+    </Action>
+  </General>
+  <Permission>
+    <Action name="RolePermission">
+      <error key="InvalidPermission" code="-2">ساختار مجوزهای داده شده نامعتبر است.</error>
+      <error key="UnknownRole" code="-3">نقش مشخص نیست.</error>
+    </Action>
+  </Permission>
+  <User>
+    <Action name="General">
+      <error key="InvalidPassword" code="-1">کلمه عبور معتبر نمی باشد</error>
+      <error key="InvalidConfirmPassword" code="-2">تکرار کلمه عبور معتبر نمی باشد</error>
+    </Action>
+    <Action name="DB_Modify">
+      <error key="DepartmentUndefined" code="-2">شناسه دپارتمان نامعتبر است.</error>
+      <error key="DuplicateUsername" code="-3">شناسه کاربری تکراری می باشد.</error>
+      <error key="DuplicateNationalCode" code="-4">کد ملی تکراری می باشد.</error>
+    </Action>
+    <Action name="Role">
+      <error key="InvalidRoles" code="-2">نقش ها نامعتبر است.</error>
+      <error key="UserUndefined" code="-3">کاربر مشخص نیست.</error>
+    </Action>
+    <Action name="Register">
+      
+    </Action>
+    <Action name="DB_Delete">
+    </Action>
+ 
+    <Action name="Activation">
+      <error key="ActivationCodeIsInvalid" code="-1">کد فعالسازی معتبر نمی باشد</error>
+    </Action>
+  </User>
+  <Position>
+    <Action name="Modify">
+    </Action>
+  </Position>
+</ErrorCodes>

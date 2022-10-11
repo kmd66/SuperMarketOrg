@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6589FE7F-7B30-42C1-AB3E-DC51C820AEA4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Organization.Core.DataSource</RootNamespace>
+    <AssemblyName>Kama.Organization.Core.DataSource</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Organization.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Kama.Organization.Core.DataSource.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>Kama.Organization.Core.DataSource.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kama.AppCore, Version=1.1.0.28467, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Library.Helper, Version=1.1.0.28008, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.Library.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\IApplicationSurveyAnswerDataSource.cs" />
+    <Compile Include="Application\IApplicationSurveyQuestionChoiceDataSource.cs" />
+    <Compile Include="Application\IApplicationSurveyParticipantDataSource.cs" />
+    <Compile Include="Application\IApplicationSurveyQuestionDataSource.cs" />
+    <Compile Include="Application\IApplicationSurveyGroupDataSource.cs" />
+    <Compile Include="Application\IContactDetailDataSource.cs" />
+    <Compile Include="Application\IContactInfoDataSource.cs" />
+    <Compile Include="Application\IFAQDataSource.cs" />
+    <Compile Include="Application\IApplicationSurveyDataSource.cs" />
+    <Compile Include="Application\IFAQGroupDataSource.cs" />
+    <Compile Include="Application\IAnnouncementDataSource.cs" />
+    <Compile Include="Application\INotificationConditionDataSource.cs" />
+    <Compile Include="Application\INotificationDataSource.cs" />
+    <Compile Include="Application\IQueueMessageDataSource.cs" />
+    <Compile Include="Common\IPasswordBlackListDataSource.cs" />
+    <Compile Include="Application\ITicketDataSource.cs" />
+    <Compile Include="Application\ITicketSequenceDataSource.cs" />
+    <Compile Include="Application\ITicketSubjectDataSource.cs" />
+    <Compile Include="Application\ITicketSubjectUserDataSource.cs" />
+    <Compile Include="Organization\DynamicPermissionDataSource.cs" />
+    <Compile Include="Organization\IApplicationDataSource.cs" />
+    <Compile Include="Common\IAttachmentDataSource.cs" />
+    <Compile Include="Organization\IClientDataSource.cs" />
+    <Compile Include="Organization\ICommandDataSource.cs" />
+    <Compile Include="Application\IContactDataSource.cs" />
+    <Compile Include="Application\IMessageDataSource.cs" />
+    <Compile Include="IDataSource.cs" />
+    <Compile Include="Organization\IDeparmentDataSource.cs" />
+    <Compile Include="Organization\IPositionDepartmentMappingDataSource.cs" />
+    <Compile Include="Organization\IPlaceDataSource.cs" />
+    <Compile Include="Organization\IPositionDataSource.cs" />
+    <Compile Include="Organization\IPositionHistoryDataSource.cs" />
+    <Compile Include="Organization\IPositionTypeDataSource.cs" />
+    <Compile Include="Organization\IRefreshTokenDataSource.cs" />
+    <Compile Include="Organization\IDynamicPermissionDataSource.cs" />
+    <Compile Include="Organization\IRoleDataSource.cs" />
+    <Compile Include="Organization\ISecurityStampDataSource.cs" />
+    <Compile Include="Organization\IWebServiceUserDataSource.cs" />
+    <Compile Include="Organization\IUserDataSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kama.Organization.Core.Model\Kama.Organization.Core.Model.csproj">
+      <Project>{11db8558-6ba8-4650-bd02-655aca000a93}</Project>
+      <Name>Kama.Organization.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Organization.Core\Kama.Organization.Core.csproj">
+      <Project>{32238ad8-b422-4d6e-9fb0-d703c3d26347}</Project>
+      <Name>Kama.Organization.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

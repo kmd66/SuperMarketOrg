@@ -1,0 +1,23 @@
+USE [Kama.Bonyad.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('app.spGetFAQ'))
+	DROP PROCEDURE app.spGetFAQ
+GO
+
+CREATE PROCEDURE app.spGetFAQ
+	  @AID UNIQUEIDENTIFIER
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	 DECLARE @ID UNIQUEIDENTIFIER = @AID
+	
+	SELECT 
+	faq.*
+	FROM app.FAQ faq
+	WHERE faq.ID = @ID
+	ORDER BY faq.CreationDate ASC
+
+END

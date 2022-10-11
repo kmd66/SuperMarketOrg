@@ -1,0 +1,37 @@
+﻿USE [Kama.Bonyad.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('org.spDeletePosition'))
+	DROP PROCEDURE org.spDeletePosition
+GO
+
+CREATE PROCEDURE org.spDeletePosition
+	@AID UNIQUEIDENTIFIER,
+	@ARemoverID UNIQUEIDENTIFIER,
+	@ALog NVARCHAR(MAX)
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SET XACT_ABORT ON;
+
+	DECLARE   @ID UNIQUEIDENTIFIER = @AID
+			, @RemoverID UNIQUEIDENTIFIER = @ARemoverID
+			, @Log NVARCHAR(MAX) = LTRIM(RTRIM(@ALog))
+
+	BEGIN TRY
+		BEGIN TRAN
+
+			UPDATE org.Position
+			SET RemoverID = @RemoverID, RemoveDate = GETDATE()
+			WHERE ID = @ID
+
+			
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+	
+	RETURN @@ROWCOUNT
+END

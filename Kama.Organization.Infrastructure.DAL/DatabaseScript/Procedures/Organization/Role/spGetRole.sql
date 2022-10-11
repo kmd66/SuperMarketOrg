@@ -1,0 +1,25 @@
+USE [Kama.Bonyad.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('org.spGetRole'))
+	DROP PROCEDURE org.spGetRole
+GO
+
+CREATE PROCEDURE org.spGetRole
+	@AID UNIQUEIDENTIFIER
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE @ID UNIQUEIDENTIFIER = @AID
+	
+	SELECT 
+		ID,
+		ApplicationID,
+		[Name]
+	FROM org.[Role]
+	WHERE ID = @ID 
+
+	RETURN @@ROWCOUNT
+END

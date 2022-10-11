@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{204A828B-4EAC-465E-AD18-7EA50F0FAAAC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kama.Organization.Infrastructure.DAL</RootNamespace>
+    <AssemblyName>Kama.Organization.Infrastructure.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Kama.Organization.API\bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Kama.AppCore, Version=1.1.0.28467, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.AppCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.DatabaseModel, Version=1.1.0.28008, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.DatabaseModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Kama.Library.Helper, Version=1.1.0.27714, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kama.Organization.API\bin\Kama.Library.Helper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DatabaseModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Answer\spGetApplicationSurveyGroupByList.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnGetGregorianDate.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnGetShamsiDate.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnIsLeapYear.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnIsLeapYearShamsi.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnSplitStringList.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\fnTicketNumber.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spDeleteTicket.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spDeleteTicketSequence.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spDeleteTicketSubject.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spDeleteTicketSubjectUser.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicket.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTickets.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSequence.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSequences.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSubject.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSubjects.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSubjectUser.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spGetTicketSubjectUsers.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spModifyTicket.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spModifyTicketSequence.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spModifyTicketSubject.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spModifyTicketSubjectUser.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spRatingTicket.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spSetTicketOwner.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spSetTicketSequenceReadDate.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spTicketReport.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Ticket\spTicketStateUpdate.sql" />
+    <Content Include="DatabaseScript\Updates\Ticket-table-scripts.sql" />
+    <Content Include="DatabaseScript\Updates\generating_dynamic_permission-and_detail.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermissionDetail\spGetDynamicPermissionDetails.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spDeleteDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissionObjectsByPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissionPositions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spModifyDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionHistory\spDeletePositionHistory.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionHistory\spGetPositionHistory.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionHistory\spGetPositionHistorys.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionHistory\spModifyPositionHistory.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermissionDetail\spGetDynamicPermissionDetails.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spDeleteDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissionObjectsByPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissionPositions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spGetDynamicPermissions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\DynamicPermission\spModifyDynamicPermission.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetOnlineUsersAndPositionsCount.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetPositionsWithRoles.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\WebServiceUser\spGetWebServiceUsers.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\WebServiceUser\spDeleteWebServiceUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\WebServiceUser\spModifyWebServiceUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\WebServiceUser\spGetWebServiceUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\WebServiceUser\spGetWebServiceUserByUserPass.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Application\spDeleteApplication.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Client\spDeleteClient.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Client\spModifyClient.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\spCorrectPersianStrings.sql" />
+    <Content Include="DatabaseScript\Updates\DB Updates.sql" />
+    <Content Include="DatabaseScript\Functions\fnSetTime.sql" />
+    <Content Include="DatabaseScript\Functions\GetContentValue.sql" />
+    <Content Include="DatabaseScript\Functions\GetContextData.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spDeleteAnnouncement.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spGetAnnouncement.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spGetAnnouncementPositionTypes.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spGetAnnouncements.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spGetAnnouncementsForBulletin.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spModifyAnnouncement.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Announcement\spSetAnnouncementOrders.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Answer\spGetApplicationSurveyAnswer.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Answer\spGetApplicationSurveyAnswers.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Answer\spModifyApplicationSurveyAnswer.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Group\spDeleteApplicationSurveyGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Group\spGetApplicationSurveyGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Group\spGetApplicationSurveyGroups.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Group\spModifyApplicationSurveyGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Participant\spGetApplicationSurveyParticipant.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Participant\spGetApplicationSurveyParticipants.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Participant\spModifyApplicationSurveyParticipant.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\QuestionChoice\spDeleteApplicationSurveyQuestionChoice.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\QuestionChoice\spGetApplicationSurveyQuestionChoice.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\QuestionChoice\spGetApplicationSurveyQuestionChoices.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\QuestionChoice\spModifyApplicationSurveyQuestionChoice.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Question\spDeleteApplicationSurveyQuestion.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Question\spGetApplicationSurveyQuestion.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Question\spGetApplicationSurveyQuestions.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\Question\spModifyApplicationSurveyQuestion.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\spDeleteApplicationSurvey.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\spGetApplicationSurvey.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\spGetApplicationSurveys.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ApplicationSurvey\spModifyApplicationSurvey.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactDetail\spDeleteContactDetail.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactDetail\spGetContactDetail.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactDetail\spGetContactDetails.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactDetail\spModifyContactDetail.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactInfo\spDeleteContactInfo.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactInfo\spGetContactInfos.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactInfo\spGetContactInfo.sql" />
+    <Content Include="DatabaseScript\Procedures\App\ContactInfo\ContactInfo\spModifyContactInfo.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spDeleteMessage.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spGetDraftMessages.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spGetInboxMessages.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spGetMessage.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spGetMessageReceivers.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spGetOutboxMessages.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spModifyMessage.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spPermanentDelete.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spSendMassage.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Message\spSetMessageAsSeen.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spDeleteNotification.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\NotificationCondition\spDeleteNotificationCondition.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spGetNotification.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\NotificationCondition\spGetNotificationCondition.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\NotificationCondition\spGetNotificationConditions.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spGetNotifications.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spGetNotificationsByPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spGetNotificationPositions.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spModifyNotification.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spArchiveNotification.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\NotificationCondition\spModifyNotificationCondition.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\spSetNotificationPositionFromCondition.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Notification\Notification\spSendNotification.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Application\spGetApplications.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Client\spGetClient.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Client\spGetClients.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionDepartmentMapping\spGetPositionDepartmentMappings.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionDepartmentMapping\spMapDepartmentsToPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionDepartmentMapping\spMapPositionsToDepartment.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionType\spGetPositionType.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionType\spModifyPositionType.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionType\spGetPositionTypeRoles.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionType\spSetPositionTypeRoles.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\RefreshToken\spModifyRefreshToken.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\RefreshToken\spDeleteRefreshToken.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\RefreshToken\spGetRefreshToken.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\SecurityStamp\spGetSecurityStampByCellPhone.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\SecurityStamp\spGetSecurityStampByEmail.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\SecurityStamp\spSetSecurityStampByEmail.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\SecurityStamp\spSetSecurityStampByCellPhone.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spGetModifyUserValidation.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\Attachment\spDeleteAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\Attachment\spGetAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\Attachment\spGetAttachmentByParentIDs.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\Attachment\spGetAttachments.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\Attachment\spModifyAttachment.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Command\spDeleteCommand.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Command\spGetCommand.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Command\spGetCommands.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Command\spGetCommandsForEnum_.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Command\spModifyCommand.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Contact\spGetContact.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Contact\spGetContacts.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Contact\spModifyContact.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Contact\spSetArchive.sql" />
+    <Content Include="DatabaseScript\Procedures\App\Contact\spSetNote.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Department\spGetDepartment.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQGroup\spDeleteFAQGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQGroup\spGetFAQGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQGroup\spGetFAQGroups.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQGroup\spModifyFAQGroup.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQ\spDeleteFAQ.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQ\spGetFAQ.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQ\spGetFAQs.sql" />
+    <Content Include="DatabaseScript\Procedures\App\FAQ\FAQ\spModifyFAQ.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Place\spGetPlace.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\PositionType\spGetPositionTypes.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetPositionPermissions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spRemoveUserFromPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spSetDefaultPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\UserSetting\spGetUserSetting.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\UserSetting\spModifyUserSetting.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spGetUserByUserNameOrEmail.sql" />
+    <Compile Include="DatabaseModel.cs">
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="DataSources\Application\AnnouncementDataSource.cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyAnswerDataSource.cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyParticipantDataSource.cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyQuestionChoiceDataSource .cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyQuestionDataSource.cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyGroupDataSource.cs" />
+    <Compile Include="DataSources\Application\ContactDetailDataSource.cs" />
+    <Compile Include="DataSources\Application\ContactInfoDataSource.cs" />
+    <Compile Include="DataSources\Application\ApplicationSurveyDataSource.cs" />
+    <Compile Include="DataSources\Application\NotificationConditionDataSource.cs" />
+    <Compile Include="DataSources\Application\NotificationDataSource.cs" />
+    <Compile Include="DataSources\Application\TicketDataSource.cs" />
+    <Compile Include="DataSources\Application\TicketSequenceDataSource.cs" />
+    <Compile Include="DataSources\Application\TicketSubjectDataSource.cs" />
+    <Compile Include="DataSources\Application\TicketSubjectUserDataSource.cs" />
+    <Compile Include="DataSources\Organization\ApplicationDataSource.cs" />
+    <Compile Include="DataSources\Application\QueueMessageDataSource.cs" />
+    <Compile Include="DataSources\Organization\ClientDataSource.cs" />
+    <Compile Include="DataSources\Organization\DynamicPermissionDataSource.cs" />
+    <Compile Include="DataSources\Organization\PositionHistoryDataSource.cs" />
+    <Compile Include="DataSources\Organization\WebServiceUserDataSource.cs" />
+    <Compile Include="DataSources\Organization\PositionDepartmentMappingDataSource.cs" />
+    <Compile Include="DataSources\Organization\RefreshTokenDataSource.cs" />
+    <Compile Include="DataSources\Organization\SecurityStampDataSource.cs" />
+    <Compile Include="DataSources\Public\AttachmentDataSource.cs" />
+    <Compile Include="DataSources\Application\ContactDataSource.cs" />
+    <Compile Include="DataSources\Application\FAQDataSource.cs" />
+    <Compile Include="DataSources\Application\FAQGroupDataSource.cs" />
+    <Compile Include="DataSources\Application\MessageDataSource.cs" />
+    <Compile Include="DataSources\Organization\PositionTypeDataSource.cs" />
+    <Compile Include="DataSources\Organization\DeparmentDataSource.cs" />
+    <Compile Include="DataSources\Organization\CommandDataSource.cs" />
+    <Compile Include="DataSources\Organization\PlaceDataSource.cs" />
+    <Compile Include="DataSources\Organization\PositionDataSource.cs" />
+    <Compile Include="DataSources\Organization\RoleDataSource.cs" />
+    <Compile Include="DataSources\Organization\UserDataSource.cs" />
+    <Compile Include="DataSources\DataSource.cs" />
+    <Compile Include="DataSources\Public\PasswordBlackListDataSource.cs" />
+    <Compile Include="Extension.cs" />
+    <Compile Include="LayerRegistrar.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlProvider.cs" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spVerifyUserCellPhone.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spVerifyUserEmail.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\spCorrectPersianStrings.sql" />
+    <Content Include="DatabaseScript\Views\_Position.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\PasswordBlackList\spExecPasswordBlackList.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\PasswordBlackList\spGetPasswordBlackList.sql" />
+    <Content Include="DatabaseScript\Views\_Position.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DatabaseScript\Procedures\Organization\Application\spGetApplication.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Application\spModifyApplication.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Department\spDeleteDepartment.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Department\spGetDepartments.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Department\spModifyDepartment.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Place\spDeletePlace.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Place\spGetPlaces.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Place\spModifyPlace.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spDeletePosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetPositions.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spGetSuperiorPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Position\spModifyPosition.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Role\spDeleteRole.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Role\spGetRole.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Role\spGetRoles.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\Role\spModifyRole.sql" />
+    <Content Include="DatabaseScript\Procedures\Public\spAddLog.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spDeleteUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spGetUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spGetUsers.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spModifyUser.sql" />
+    <Content Include="DatabaseScript\Procedures\Organization\User\spSetUserPassword.sql" />
+    <Content Include="DatabaseScript\Schema.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatabaseScript\Useful Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kama.Organization.Core.DataSource\Kama.Organization.Core.DataSource.csproj">
+      <Project>{6589fe7f-7b30-42c1-ab3e-dc51c820aea4}</Project>
+      <Name>Kama.Organization.Core.DataSource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Organization.Core.Model\Kama.Organization.Core.Model.csproj">
+      <Project>{11db8558-6ba8-4650-bd02-655aca000a93}</Project>
+      <Name>Kama.Organization.Core.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kama.Organization.Core\Kama.Organization.Core.csproj">
+      <Project>{32238ad8-b422-4d6e-9fb0-d703c3d26347}</Project>
+      <Name>Kama.Organization.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

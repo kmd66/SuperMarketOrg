@@ -1,0 +1,33 @@
+USE [Kama.Mefa.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spDeleteTicketSubject'))
+	DROP PROCEDURE app.spDeleteTicketSubject
+GO
+
+CREATE PROCEDURE app.spDeleteTicketSubject
+	@AID UNIQUEIDENTIFIER,
+	@ALog NVARCHAR(MAX)
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE 
+		@ID UNIQUEIDENTIFIER = @AID,
+		@Log NVARCHAR(MAX) = LTRIM(RTRIM(@ALog))
+
+	BEGIN TRY
+		BEGIN TRAN
+			DELETE FROM app.TicketSubjectUser
+			WHERE TicketSubjectID = @ID
+
+			DELETE FROM app.TicketSubject 
+			WHERE ID = @ID
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+	RETURN @@ROWCOUNT
+END

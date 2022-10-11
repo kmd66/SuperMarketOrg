@@ -1,0 +1,34 @@
+USE [Kama.Bonyad.Organization]
+GO
+
+IF EXISTS(SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spDeleteNotificationCondition'))
+	DROP PROCEDURE app.spDeleteNotificationCondition
+GO
+
+CREATE PROCEDURE app.spDeleteNotificationCondition
+	@AID UNIQUEIDENTIFIER,
+	@ALog NVARCHAR(MAX)
+WITH ENCRYPTION
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DECLARE 
+		@ID UNIQUEIDENTIFIER = @AID,
+		@Log NVARCHAR(MAX) = LTRIM(RTRIM(@ALog))
+
+	BEGIN TRY
+		BEGIN TRAN
+		
+		BEGIN
+			DELETE FROM app.NotificationCondition
+			WHERE ID = @AID
+		END	
+		EXEC pbl.spAddLog @Log
+		COMMIT
+	END TRY
+	BEGIN CATCH
+		;THROW
+	END CATCH
+	RETURN @@ROWCOUNT
+END

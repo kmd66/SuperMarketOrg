@@ -1,0 +1,102 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)Kama.Mporg.Organization.API\Libs\Kama.Mporg.Organization.Core.Model.dll" #>
+<#@ assembly name="$(SolutionDir)Kama.Mporg.Organization.API\Libs\Kama.Mporg.Organization.Core.dll" #>
+<#@ assembly name="$(SolutionDir)Kama.Mporg.Organization.API\Libs\Kama.AppCore.dll" #>
+<#@ assembly name="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.Threading.Tasks" #>
+<#@ import namespace="Kama.Mporg.Organization.Core.Model" #>
+<#@ import namespace="Kama.Mporg.Organization.Core" #>
+<#@ import namespace="Kama.Mporg.Organization" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="Kama.AppCore" #>
+<#@ output extension=".cs" #>
+<# var connectionString = "Data Source=46.225.116.210;Initial Catalog=Kama.Mporg.Organization;User ID=kama; Password=K@ma123456!"; #>
+namespace Kama.Mporg.Organization.Core
+{
+    public static class AppCommands
+	{
+<#
+var scopeGenerator = new CommandGenerator(connectionString);
+var dic = scopeGenerator.GenerateCommandsEnum();
+foreach(var key in dic.Keys)
+{
+#>
+		
+		/// <summary>
+        /// <#=dic[key].Title#>
+        /// </summary>
+		<#=key#> = <#=dic[key].ID#> ,
+<#}#>
+	}
+}
+
+<#+
+public class CommandGenerator
+{
+    public CommandGenerator(string connectionString)
+    {
+        _scopesEnumKeyValue = new Dictionary<string, AppCommand>();
+		_connectionString = connectionString;
+    }
+
+	private string _connectionString;
+    private Dictionary<string, AppCommand> _scopesEnumKeyValue;
+
+    public Dictionary<string, AppCommand> GenerateCommandsEnum()
+    {
+        var commands = GetCommands();
+
+		commands.ForEach(command => {
+		    var scope = command.ScopeID;
+			var commandKey = $"{scope.ToString()}_{command.Name}";
+		    _scopesEnumKeyValue.Add(commandKey,command);
+		});
+        return _scopesEnumKeyValue;
+    }
+
+	public List<AppCommand> GetCommands()
+    {
+        var _connectionString = @"Data Source=46.225.116.210;Initial Catalog=Kama.Mporg.Organization;User ID=kama; Password=Kama123qwe!@#";
+        var table = new DataTable();
+        using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "pbl.spGetCommands";
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("AApplicationID", "6448C892-F0C7-4002-B139-011CB2E57D14"));
+                command.Parameters.Add(new SqlParameter("AScopeID", DBNull.Value));
+                connection.Open();
+                var reader = command.ExecuteReader();
+                table.Load(reader);
+                connection.Close();
+            }
+        }
+
+        return Map(table);
+    }
+
+    private List<AppCommand> Map(DataTable table)
+    {
+        var commands = new List<AppCommand>();
+        for (int i = 0; i < table.Rows.Count; i++)
+        {
+            var command = new AppCommand();
+            command.ID = Guid.Parse(table.Rows[i]["ID"].ToString());
+            command.ScopeID = Guid.Parse(table.Rows[i]["ScopeID"].ToString());
+            command.Name = Convert.ToString(table.Rows[i]["Name"]);
+            command.Title = Convert.ToString(table.Rows[i]["Title"]);
+            commands.Add(command);
+        }
+
+        return commands;
+    }
+}
+#>
+

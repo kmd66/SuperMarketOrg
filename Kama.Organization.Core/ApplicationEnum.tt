@@ -1,0 +1,23 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.Reflection" #>
+<#@ assembly name="$(SolutionDir)Kama.Organization.API\Libs\Kama.AppCore.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.Concurrent" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="Kama.AppCore" #>
+<#@ output extension=".cs" #>
+<#
+	Kama.AppCore.ApplicationGenerator generator = new Kama.AppCore.ApplicationGenerator
+    {
+        ConnectionString = "Data Source = 192.168.0.109; Initial Catalog = Kama.Mefa.Organization; User ID = kama; Password = K@maPMGs@dUL98"
+        ,
+        NameSpace = "Kama.Organization.Core"
+    };
+
+    var generatedString = generator.Generate();
+#>
+<#=generatedString#>
