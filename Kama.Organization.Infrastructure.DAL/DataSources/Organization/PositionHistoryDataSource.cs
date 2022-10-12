@@ -67,21 +67,23 @@ namespace Kama.Organization.Infrastructure.DAL
 
         public async Task<AppCore.Result<IEnumerable<Core.Model.PositionHistory>>> ListAsync(Core.Model.PositionHistoryListVM model)
         {
-            try
-            {
-                var result = (await _dbORG.GetPositionHistorysAsync(
-                        _positionID: model.PositionID,
-                        _pageSize: model.PageSize,
-                        _pageIndex: model.PageIndex,
-                        _sortExp: model.SortExp.ToSortExpString()
-                    )).ToListActionResult<Core.Model.PositionHistory>();
 
-                return result;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            throw new NotImplementedException();
+            //try
+            //{
+            //    var result = (await _dbORG.GetPositionHistorysAsync(
+            //            _positionID: model.PositionID,
+            //            _pageSize: model.PageSize,
+            //            _pageIndex: model.PageIndex,
+            //            _sortExp: model.SortExp.ToSortExpString()
+            //        )).ToListActionResult<Core.Model.PositionHistory>();
+
+            //    return result;
+            //}
+            //catch (Exception e)
+            //{
+            //    throw;
+            //}
         }        
         
         public async Task<AppCore.Result<Core.Model.PositionHistory>> GetAsync(Guid id)

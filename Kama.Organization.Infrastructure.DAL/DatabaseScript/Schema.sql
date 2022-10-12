@@ -1,4 +1,4 @@
-USE [Kama.Bonyad.Organization]
+USE [Kama.Sm.Organization]
 GO
 
 ---------------------------------------------------------------

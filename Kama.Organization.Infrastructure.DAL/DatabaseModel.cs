@@ -5,6 +5,3113 @@ using System.Threading.Tasks;
 
 namespace Kama.Organization.Infrastructure.DAL
 {
+class ORG: Database
+{
+#region Constructors
+public ORG(string connectionString)
+	:base(connectionString){}
+
+public ORG(string connectionString, IModelValueBinder modelValueBinder)
+	:base(connectionString, modelValueBinder){}
+#endregion
+
+#region SetPositionTypeRoles
+
+public System.Data.SqlClient.SqlCommand GetCommand_SetPositionTypeRoles(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spSetPositionTypeRoles", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+					new Parameter { Name = "@ARoleIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_roleIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_roleIDs) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> SetPositionTypeRolesAsync(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetPositionTypeRoles(_applicationID, _positionType, _roleIDs, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> SetPositionTypeRolesDapperAsync<T>(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spSetPositionTypeRoles",new {AApplicationID=_applicationID,APositionType=_positionType,ARoleIDs=string.IsNullOrWhiteSpace(_roleIDs) ? _roleIDs : ReplaceArabicWithPersianChars(_roleIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet SetPositionTypeRoles(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetPositionTypeRoles(_applicationID, _positionType, _roleIDs, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region SetSecurityStampByCellPhone
+
+public System.Data.SqlClient.SqlCommand GetCommand_SetSecurityStampByCellPhone(string _cellPhone, string _stamp, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spSetSecurityStampByCellPhone", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
+					new Parameter { Name = "@AStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_stamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_stamp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> SetSecurityStampByCellPhoneAsync(string _cellPhone, string _stamp, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetSecurityStampByCellPhone(_cellPhone, _stamp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> SetSecurityStampByCellPhoneDapperAsync<T>(string _cellPhone, string _stamp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spSetSecurityStampByCellPhone",new {ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AStamp=string.IsNullOrWhiteSpace(_stamp) ? _stamp : ReplaceArabicWithPersianChars(_stamp)} , timeout );
+}
+
+public ResultSet SetSecurityStampByCellPhone(string _cellPhone, string _stamp, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetSecurityStampByCellPhone(_cellPhone, _stamp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region SetSecurityStampByEmail
+
+public System.Data.SqlClient.SqlCommand GetCommand_SetSecurityStampByEmail(string _email, string _stamp, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spSetSecurityStampByEmail", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@AStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_stamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_stamp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> SetSecurityStampByEmailAsync(string _email, string _stamp, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetSecurityStampByEmail(_email, _stamp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> SetSecurityStampByEmailDapperAsync<T>(string _email, string _stamp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spSetSecurityStampByEmail",new {AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),AStamp=string.IsNullOrWhiteSpace(_stamp) ? _stamp : ReplaceArabicWithPersianChars(_stamp)} , timeout );
+}
+
+public ResultSet SetSecurityStampByEmail(string _email, string _stamp, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetSecurityStampByEmail(_email, _stamp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region SetUserPassword
+
+public System.Data.SqlClient.SqlCommand GetCommand_SetUserPassword(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spSetUserPassword", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> SetUserPasswordAsync(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetUserPassword(_id, _password, _passwordExpireDate, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> SetUserPasswordDapperAsync<T>(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spSetUserPassword",new {AID=_id,APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),APasswordExpireDate=_passwordExpireDate,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet SetUserPassword(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetUserPassword(_id, _password, _passwordExpireDate, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region VerifyUserCellPhone
+
+public System.Data.SqlClient.SqlCommand GetCommand_VerifyUserCellPhone(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spVerifyUserCellPhone", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@AIsVerified", IsOutput = false, Value = _isVerified == null ? DBNull.Value : (object)_isVerified }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> VerifyUserCellPhoneAsync(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_VerifyUserCellPhone(_userID, _isVerified, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> VerifyUserCellPhoneDapperAsync<T>(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spVerifyUserCellPhone",new {AUserID=_userID,AIsVerified=_isVerified,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet VerifyUserCellPhone(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_VerifyUserCellPhone(_userID, _isVerified, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeletePlace
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeletePlace(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeletePlace", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeletePlaceAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeletePlaceDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeletePlace",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeletePlace(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region VerifyUserEmail
+
+public System.Data.SqlClient.SqlCommand GetCommand_VerifyUserEmail(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spVerifyUserEmail", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@AIsVerified", IsOutput = false, Value = _isVerified == null ? DBNull.Value : (object)_isVerified }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> VerifyUserEmailAsync(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_VerifyUserEmail(_userID, _isVerified, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> VerifyUserEmailDapperAsync<T>(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spVerifyUserEmail",new {AUserID=_userID,AIsVerified=_isVerified,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet VerifyUserEmail(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_VerifyUserEmail(_userID, _isVerified, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeletePosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeletePosition(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeletePosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ARemoverID", IsOutput = false, Value = _removerID == null ? DBNull.Value : (object)_removerID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeletePositionAsync(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePosition(_id, _removerID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeletePositionDapperAsync<T>(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeletePosition",new {AID=_id,ARemoverID=_removerID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeletePosition(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePosition(_id, _removerID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeletePositionHistory
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeletePositionHistory(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeletePositionHistory", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeletePositionHistoryAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePositionHistory(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeletePositionHistoryDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeletePositionHistory",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeletePositionHistory(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeletePositionHistory(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteRefreshToken
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteRefreshToken(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteRefreshToken", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteRefreshTokenAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteRefreshToken(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteRefreshTokenDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteRefreshToken",new {AID=_id} , timeout );
+}
+
+public ResultSet DeleteRefreshToken(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteRefreshToken(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteRole
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteRole(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteRole", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteRoleAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteRole(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteRoleDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteRole",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteRole(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteRole(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteUser(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteUserAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteUser(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteUserDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteUser",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteUser(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteUser(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteWebServiceUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteWebServiceUser(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteWebServiceUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteWebServiceUserAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteWebServiceUser(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteWebServiceUserDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteWebServiceUser",new {AID=_id} , timeout );
+}
+
+public ResultSet DeleteWebServiceUser(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteWebServiceUser(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplication
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplication(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetApplication", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplication(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetApplication",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplication(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplication(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplications
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplications(string _name, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetApplications", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationsAsync(string _name, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplications(_name, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationsDapperAsync<T>(string _name, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetApplications",new {AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
+}
+
+public ResultSet GetApplications(string _name, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplications(_name, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetClient
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetClient(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetClient", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetClientAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClient(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetClientDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetClient",new {AID=_id} , timeout );
+}
+
+public ResultSet GetClient(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClient(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetClients
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetClients(Guid? _applicationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetClients", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetClientsAsync(Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClients(_applicationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetClientsDapperAsync<T>(Guid? _applicationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetClients",new {AApplicationID=_applicationID} , timeout );
+}
+
+public ResultSet GetClients(Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetClients(_applicationID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetCommand
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetCommand(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetCommand", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetCommandAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetCommand(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetCommandDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetCommand",new {AID=_id} , timeout );
+}
+
+public ResultSet GetCommand(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetCommand(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetCommands
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetCommands(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetCommands", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetCommandsAsync(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetCommands(_applicationID, _roleID, _parentID, _name, _title, _type, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetCommandsDapperAsync<T>(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetCommands",new {AApplicationID=_applicationID,ARoleID=_roleID,AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AType=_type} , timeout );
+}
+
+public ResultSet GetCommands(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetCommands(_applicationID, _roleID, _parentID, _name, _title, _type, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDepartment
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDepartment(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDepartment", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDepartmentAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDepartment(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDepartmentDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDepartment",new {AID=_id} , timeout );
+}
+
+public ResultSet GetDepartment(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDepartment(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDepartments
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDepartments(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDepartments", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AProvinceID", IsOutput = false, Value = _provinceID == null ? DBNull.Value : (object)_provinceID }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@ASearchWithHierarchy", IsOutput = false, Value = _searchWithHierarchy == null ? DBNull.Value : (object)_searchWithHierarchy }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDepartmentsAsync(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDepartments(_parentID, _provinceID, _type, _code, _name, _searchWithHierarchy, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDepartmentsDapperAsync<T>(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDepartments",new {AParentID=_parentID,AProvinceID=_provinceID,AType=_type,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ASearchWithHierarchy=_searchWithHierarchy,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetDepartments(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDepartments(_parentID, _provinceID, _type, _code, _name, _searchWithHierarchy, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDynamicPermission
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermission(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDynamicPermission", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDynamicPermissionAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermission(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDynamicPermission",new {AID=_id} , timeout );
+}
+
+public ResultSet GetDynamicPermission(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermission(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDynamicPermissionDetails
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionDetails(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDynamicPermissionDetails", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ADynamicPermissionIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_dynamicPermissionIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_dynamicPermissionIDs) }, 
+					new Parameter { Name = "@ADynamicPermissionID", IsOutput = false, Value = _dynamicPermissionID == null ? DBNull.Value : (object)_dynamicPermissionID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDynamicPermissionDetailsAsync(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionDetails(_dynamicPermissionIDs, _dynamicPermissionID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionDetailsDapperAsync<T>(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionDetails",new {ADynamicPermissionIDs=string.IsNullOrWhiteSpace(_dynamicPermissionIDs) ? _dynamicPermissionIDs : ReplaceArabicWithPersianChars(_dynamicPermissionIDs),ADynamicPermissionID=_dynamicPermissionID} , timeout );
+}
+
+public ResultSet GetDynamicPermissionDetails(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionDetails(_dynamicPermissionIDs, _dynamicPermissionID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDynamicPermissionObjectsByPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionObjectsByPosition(Guid? _positionID, Guid? _applicationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDynamicPermissionObjectsByPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDynamicPermissionObjectsByPositionAsync(Guid? _positionID, Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionObjectsByPosition(_positionID, _applicationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionObjectsByPositionDapperAsync<T>(Guid? _positionID, Guid? _applicationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionObjectsByPosition",new {APositionID=_positionID,AApplicationID=_applicationID} , timeout );
+}
+
+public ResultSet GetDynamicPermissionObjectsByPosition(Guid? _positionID, Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionObjectsByPosition(_positionID, _applicationID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDynamicPermissionPositions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionPositions(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDynamicPermissionPositions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDynamicPermissionPositionsAsync(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionPositions(_objectID, _applicationID, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionPositionsDapperAsync<T>(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionPositions",new {AObjectID=_objectID,AApplicationID=_applicationID,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetDynamicPermissionPositions(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissionPositions(_objectID, _applicationID, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDynamicPermissions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissions(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetDynamicPermissions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDynamicPermissionsAsync(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissions(_objectID, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionsDapperAsync<T>(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetDynamicPermissions",new {AObjectID=_objectID,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetDynamicPermissions(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDynamicPermissions(_objectID, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetModifyUserValidation
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetModifyUserValidation(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetModifyUserValidation", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
+					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetModifyUserValidationAsync(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetModifyUserValidation(_id, _nationalCode, _username, _cellPhone, _email, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetModifyUserValidationDapperAsync<T>(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetModifyUserValidation",new {AID=_id,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email)} , timeout );
+}
+
+public ResultSet GetModifyUserValidation(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetModifyUserValidation(_id, _nationalCode, _username, _cellPhone, _email, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetOnlineUsersAndPositionsCount
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetOnlineUsersAndPositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetOnlineUsersAndPositionsCount", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AAccessTokenExpireTimeSpan", IsOutput = false, Value = _accessTokenExpireTimeSpan == null ? DBNull.Value : (object)_accessTokenExpireTimeSpan }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetOnlineUsersAndPositionsCountAsync(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetOnlineUsersAndPositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetOnlineUsersAndPositionsCountDapperAsync<T>(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetOnlineUsersAndPositionsCount",new {AApplicationID=_applicationID,AAccessTokenExpireTimeSpan=_accessTokenExpireTimeSpan} , timeout );
+}
+
+public ResultSet GetOnlineUsersAndPositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetOnlineUsersAndPositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPlace
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPlace(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPlace", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPlaceAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPlace(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPlaceDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPlace",new {AID=_id} , timeout );
+}
+
+public ResultSet GetPlace(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPlace(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPlaces
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPlaces", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@AAncestorLevel", IsOutput = false, Value = _ancestorLevel == null ? DBNull.Value : (object)_ancestorLevel }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPlacesAsync(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPlacesDapperAsync<T>(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPlaces",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AParentID=_parentID,AType=_type,AAncestorLevel=_ancestorLevel,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
+}
+
+public ResultSet GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPosition(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPosition(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPosition",new {AID=_id} , timeout );
+}
+
+public ResultSet GetPosition(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPosition(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionDepartmentMappings
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionDepartmentMappings(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionDepartmentMappings", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+					new Parameter { Name = "@ADepartmentType", IsOutput = false, Value = _departmentType == null ? DBNull.Value : (object)_departmentType }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionDepartmentMappingsAsync(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionDepartmentMappings(_applicationID, _positionType, _departmentType, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionDepartmentMappingsDapperAsync<T>(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionDepartmentMappings",new {AApplicationID=_applicationID,APositionType=_positionType,ADepartmentType=_departmentType,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetPositionDepartmentMappings(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionDepartmentMappings(_applicationID, _positionType, _departmentType, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionHistory
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionHistory(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionHistory", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionHistoryAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionHistory(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionHistoryDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionHistory",new {AID=_id} , timeout );
+}
+
+public ResultSet GetPositionHistory(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionHistory(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionPermissions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionPermissions(Guid? _positionID, Guid? _commandID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionPermissions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@ACommandID", IsOutput = false, Value = _commandID == null ? DBNull.Value : (object)_commandID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionPermissionsAsync(Guid? _positionID, Guid? _commandID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionPermissions(_positionID, _commandID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionPermissionsDapperAsync<T>(Guid? _positionID, Guid? _commandID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionPermissions",new {APositionID=_positionID,ACommandID=_commandID} , timeout );
+}
+
+public ResultSet GetPositionPermissions(Guid? _positionID, Guid? _commandID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionPermissions(_positionID, _commandID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositions(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
+					new Parameter { Name = "@ADepartmentName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_departmentName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_departmentName) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ATypes", IsOutput = false, Value = string.IsNullOrWhiteSpace(_types) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_types) }, 
+					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
+					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
+					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
+					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionsAsync(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositions(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionsDapperAsync<T>(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositions",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AApplicationID=_applicationID,ADepartmentID=_departmentID,ADepartmentName=string.IsNullOrWhiteSpace(_departmentName) ? _departmentName : ReplaceArabicWithPersianChars(_departmentName),AType=_type,ATypes=string.IsNullOrWhiteSpace(_types) ? _types : ReplaceArabicWithPersianChars(_types),AUserType=_userType,AUserID=_userID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnableState=_enableState,ARoleID=_roleID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetPositions(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositions(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionsWithRoles
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionsWithRoles(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionsWithRoles", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
+					new Parameter { Name = "@ADepartmentName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_departmentName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_departmentName) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ATypes", IsOutput = false, Value = string.IsNullOrWhiteSpace(_types) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_types) }, 
+					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
+					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
+					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
+					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionsWithRolesAsync(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionsWithRoles(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionsWithRolesDapperAsync<T>(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionsWithRoles",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AApplicationID=_applicationID,ADepartmentID=_departmentID,ADepartmentName=string.IsNullOrWhiteSpace(_departmentName) ? _departmentName : ReplaceArabicWithPersianChars(_departmentName),AType=_type,ATypes=string.IsNullOrWhiteSpace(_types) ? _types : ReplaceArabicWithPersianChars(_types),AUserType=_userType,AUserID=_userID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnableState=_enableState,ARoleID=_roleID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetPositionsWithRoles(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionsWithRoles(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionType
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionType(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionType", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionTypeAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionType(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypeDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionType",new {AID=_id} , timeout );
+}
+
+public ResultSet GetPositionType(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionType(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionTypeRoles
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionTypeRoles(Guid? _applicationID, byte? _positionType, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionTypeRoles", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionTypeRolesAsync(Guid? _applicationID, byte? _positionType, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionTypeRoles(_applicationID, _positionType, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypeRolesDapperAsync<T>(Guid? _applicationID, byte? _positionType, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionTypeRoles",new {AApplicationID=_applicationID,APositionType=_positionType} , timeout );
+}
+
+public ResultSet GetPositionTypeRoles(Guid? _applicationID, byte? _positionType, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionTypeRoles(_applicationID, _positionType, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPositionTypes
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPositionTypes(Guid? _applicationID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetPositionTypes", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPositionTypesAsync(Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionTypes(_applicationID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypesDapperAsync<T>(Guid? _applicationID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetPositionTypes",new {AApplicationID=_applicationID} , timeout );
+}
+
+public ResultSet GetPositionTypes(Guid? _applicationID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPositionTypes(_applicationID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetRefreshToken
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetRefreshToken(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetRefreshToken", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetRefreshTokenAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRefreshToken(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetRefreshTokenDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetRefreshToken",new {AID=_id} , timeout );
+}
+
+public ResultSet GetRefreshToken(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRefreshToken(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetRole
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetRole(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetRole", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetRoleAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRole(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetRoleDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetRole",new {AID=_id} , timeout );
+}
+
+public ResultSet GetRole(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRole(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetRoles
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetRoles(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetRoles", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetRolesAsync(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRoles(_applicationID, _name, _positionType, _positionID, _userID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetRolesDapperAsync<T>(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetRoles",new {AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APositionType=_positionType,APositionID=_positionID,AUserID=_userID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetRoles(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetRoles(_applicationID, _name, _positionType, _positionID, _userID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetSecurityStampByCellPhone
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetSecurityStampByCellPhone(string _cellPhone, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetSecurityStampByCellPhone", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetSecurityStampByCellPhoneAsync(string _cellPhone, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSecurityStampByCellPhone(_cellPhone, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetSecurityStampByCellPhoneDapperAsync<T>(string _cellPhone, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetSecurityStampByCellPhone",new {ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone)} , timeout );
+}
+
+public ResultSet GetSecurityStampByCellPhone(string _cellPhone, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSecurityStampByCellPhone(_cellPhone, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetSecurityStampByEmail
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetSecurityStampByEmail(string _email, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetSecurityStampByEmail", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetSecurityStampByEmailAsync(string _email, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSecurityStampByEmail(_email, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetSecurityStampByEmailDapperAsync<T>(string _email, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetSecurityStampByEmail",new {AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email)} , timeout );
+}
+
+public ResultSet GetSecurityStampByEmail(string _email, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSecurityStampByEmail(_email, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetSuperiorPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetSuperiorPosition(Guid? _magistrateID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetSuperiorPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AMagistrateID", IsOutput = false, Value = _magistrateID == null ? DBNull.Value : (object)_magistrateID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetSuperiorPositionAsync(Guid? _magistrateID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSuperiorPosition(_magistrateID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetSuperiorPositionDapperAsync<T>(Guid? _magistrateID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetSuperiorPosition",new {AMagistrateID=_magistrateID} , timeout );
+}
+
+public ResultSet GetSuperiorPosition(Guid? _magistrateID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetSuperiorPosition(_magistrateID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetUser(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetUserAsync(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUser(_id, _userName, _nationalCode, _email, _password, _applicationID, _currentUserID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetUserDapperAsync<T>(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetUser",new {AID=_id,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),AApplicationID=_applicationID,ACurrentUserID=_currentUserID} , timeout );
+}
+
+public ResultSet GetUser(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUser(_id, _userName, _nationalCode, _email, _password, _applicationID, _currentUserID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetUserByUserNameOrEmail
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetUserByUserNameOrEmail(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetUserByUserNameOrEmail", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetUserByUserNameOrEmailAsync(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUserByUserNameOrEmail(_username, _email, _applicationID, _currentUserID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetUserByUserNameOrEmailDapperAsync<T>(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetUserByUserNameOrEmail",new {AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),AApplicationID=_applicationID,ACurrentUserID=_currentUserID} , timeout );
+}
+
+public ResultSet GetUserByUserNameOrEmail(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUserByUserNameOrEmail(_username, _email, _applicationID, _currentUserID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetUsers
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetUsers(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetUsers", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
+					new Parameter { Name = "@AEnablOrDisable", IsOutput = false, Value = _enablOrDisable == null ? DBNull.Value : (object)_enablOrDisable }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetUsersAsync(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUsers(_applicationID, _nationalCode, _name, _email, _cellphone, _enablOrDisable, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetUsersDapperAsync<T>(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetUsers",new {AApplicationID=_applicationID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnablOrDisable=_enablOrDisable,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetUsers(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUsers(_applicationID, _nationalCode, _name, _email, _cellphone, _enablOrDisable, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetUserSetting
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetUserSetting(Guid? _userID, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetUserSetting", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetUserSettingAsync(Guid? _userID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUserSetting(_userID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetUserSettingDapperAsync<T>(Guid? _userID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetUserSetting",new {AUserID=_userID} , timeout );
+}
+
+public ResultSet GetUserSetting(Guid? _userID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetUserSetting(_userID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetWebServiceUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUser(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetWebServiceUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetWebServiceUserAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUser(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUserDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetWebServiceUser",new {AID=_id} , timeout );
+}
+
+public ResultSet GetWebServiceUser(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUser(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetWebServiceUserByUserPass
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUserByUserPass(string _userName, string _password, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetWebServiceUserByUserPass", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetWebServiceUserByUserPassAsync(string _userName, string _password, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUserByUserPass(_userName, _password, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUserByUserPassDapperAsync<T>(string _userName, string _password, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetWebServiceUserByUserPass",new {AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password)} , timeout );
+}
+
+public ResultSet GetWebServiceUserByUserPass(string _userName, string _password, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUserByUserPass(_userName, _password, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetWebServiceUsers
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUsers(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spGetWebServiceUsers", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
+					new Parameter { Name = "@AOrganID", IsOutput = false, Value = _organID == null ? DBNull.Value : (object)_organID }, 
+					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetWebServiceUsersAsync(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUsers(_userName, _organID, _enableState, _comment, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUsersDapperAsync<T>(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spGetWebServiceUsers",new {AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),AOrganID=_organID,AEnableState=_enableState,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetWebServiceUsers(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetWebServiceUsers(_userName, _organID, _enableState, _comment, _sortExp, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region MapDepartmentsToPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_MapDepartmentsToPosition(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spMapDepartmentsToPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+					new Parameter { Name = "@AMappings", IsOutput = false, Value = string.IsNullOrWhiteSpace(_mappings) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_mappings) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> MapDepartmentsToPositionAsync(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_MapDepartmentsToPosition(_applicationID, _positionType, _mappings, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> MapDepartmentsToPositionDapperAsync<T>(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spMapDepartmentsToPosition",new {AApplicationID=_applicationID,APositionType=_positionType,AMappings=string.IsNullOrWhiteSpace(_mappings) ? _mappings : ReplaceArabicWithPersianChars(_mappings),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet MapDepartmentsToPosition(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_MapDepartmentsToPosition(_applicationID, _positionType, _mappings, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region MapPositionsToDepartment
+
+public System.Data.SqlClient.SqlCommand GetCommand_MapPositionsToDepartment(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spMapPositionsToDepartment", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ADepartmentType", IsOutput = false, Value = _departmentType == null ? DBNull.Value : (object)_departmentType }, 
+					new Parameter { Name = "@AMappings", IsOutput = false, Value = string.IsNullOrWhiteSpace(_mappings) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_mappings) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> MapPositionsToDepartmentAsync(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_MapPositionsToDepartment(_applicationID, _departmentType, _mappings, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> MapPositionsToDepartmentDapperAsync<T>(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spMapPositionsToDepartment",new {AApplicationID=_applicationID,ADepartmentType=_departmentType,AMappings=string.IsNullOrWhiteSpace(_mappings) ? _mappings : ReplaceArabicWithPersianChars(_mappings),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet MapPositionsToDepartment(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_MapPositionsToDepartment(_applicationID, _departmentType, _mappings, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyApplication
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyApplication(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyApplication", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyApplicationAsync(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyApplication(_isNewRecord, _id, _code, _name, _enabled, _comment, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyApplicationDapperAsync<T>(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyApplication",new {AIsNewRecord=_isNewRecord,AID=_id,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnabled=_enabled,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyApplication(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyApplication(_isNewRecord, _id, _code, _name, _enabled, _comment, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyClient
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyClient(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyClient", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@ASecret", IsOutput = false, Value = string.IsNullOrWhiteSpace(_secret) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_secret) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
+					new Parameter { Name = "@ARefreshTokenLifeTime", IsOutput = false, Value = _refreshTokenLifeTime == null ? DBNull.Value : (object)_refreshTokenLifeTime }, 
+					new Parameter { Name = "@AAllowedOrigin", IsOutput = false, Value = string.IsNullOrWhiteSpace(_allowedOrigin) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_allowedOrigin) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyClientAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyClient(_isNewRecord, _id, _applicationID, _name, _secret, _type, _enabled, _refreshTokenLifeTime, _allowedOrigin, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyClientDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyClient",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ASecret=string.IsNullOrWhiteSpace(_secret) ? _secret : ReplaceArabicWithPersianChars(_secret),AType=_type,AEnabled=_enabled,ARefreshTokenLifeTime=_refreshTokenLifeTime,AAllowedOrigin=string.IsNullOrWhiteSpace(_allowedOrigin) ? _allowedOrigin : ReplaceArabicWithPersianChars(_allowedOrigin),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyClient(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyClient(_isNewRecord, _id, _applicationID, _name, _secret, _type, _enabled, _refreshTokenLifeTime, _allowedOrigin, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyCommand
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyCommand(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyCommand", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AFullName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_fullName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_fullName) }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+					new Parameter { Name = "@AResult", IsOutput = true }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyCommandAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyCommand(_isNewRecord, _id, _parentID, _node, _applicationID, _name, _fullName, _title, _type, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyCommandDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyCommand",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFullName=string.IsNullOrWhiteSpace(_fullName) ? _fullName : ReplaceArabicWithPersianChars(_fullName),ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AType=_type,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyCommand(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyCommand(_isNewRecord, _id, _parentID, _node, _applicationID, _name, _fullName, _title, _type, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyDepartment
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyDepartment(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyDepartment", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
+					new Parameter { Name = "@AProvinceID", IsOutput = false, Value = _provinceID == null ? DBNull.Value : (object)_provinceID }, 
+					new Parameter { Name = "@AAddress", IsOutput = false, Value = string.IsNullOrWhiteSpace(_address) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_address) }, 
+					new Parameter { Name = "@APostalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_postalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_postalCode) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+					new Parameter { Name = "@AResult", IsOutput = true }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyDepartmentAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyDepartment(_isNewRecord, _id, _parentID, _node, _type, _code, _name, _enabled, _provinceID, _address, _postalCode, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyDepartmentDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyDepartment",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AType=_type,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnabled=_enabled,AProvinceID=_provinceID,AAddress=string.IsNullOrWhiteSpace(_address) ? _address : ReplaceArabicWithPersianChars(_address),APostalCode=string.IsNullOrWhiteSpace(_postalCode) ? _postalCode : ReplaceArabicWithPersianChars(_postalCode),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyDepartment(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyDepartment(_isNewRecord, _id, _parentID, _node, _type, _code, _name, _enabled, _provinceID, _address, _postalCode, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyDynamicPermission
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyDynamicPermission(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyDynamicPermission", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
+					new Parameter { Name = "@AOrder", IsOutput = false, Value = _order == null ? DBNull.Value : (object)_order }, 
+					new Parameter { Name = "@ADetails", IsOutput = false, Value = string.IsNullOrWhiteSpace(_details) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_details) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyDynamicPermissionAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyDynamicPermission(_isNewRecord, _id, _applicationID, _objectID, _order, _details, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyDynamicPermissionDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyDynamicPermission",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AObjectID=_objectID,AOrder=_order,ADetails=string.IsNullOrWhiteSpace(_details) ? _details : ReplaceArabicWithPersianChars(_details)} , timeout );
+}
+
+public ResultSet ModifyDynamicPermission(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyDynamicPermission(_isNewRecord, _id, _applicationID, _objectID, _order, _details, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyPlace
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyPlace", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
+					new Parameter { Name = "@ALatinName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_latinName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_latinName) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyPlaceAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _node, _type, _name, _code, _latinName, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyPlaceDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyPlace",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AType=_type,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),ALatinName=string.IsNullOrWhiteSpace(_latinName) ? _latinName : ReplaceArabicWithPersianChars(_latinName),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _node, _type, _name, _code, _latinName, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyPosition(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@ARoleIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_roleIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_roleIDs) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+					new Parameter { Name = "@AResult", IsOutput = true }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyPositionAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPosition(_isNewRecord, _id, _parentID, _applicationID, _departmentID, _userID, _type, _roleIDs, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyPosition",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,AApplicationID=_applicationID,ADepartmentID=_departmentID,AUserID=_userID,AType=_type,ARoleIDs=string.IsNullOrWhiteSpace(_roleIDs) ? _roleIDs : ReplaceArabicWithPersianChars(_roleIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyPosition(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPosition(_isNewRecord, _id, _parentID, _applicationID, _departmentID, _userID, _type, _roleIDs, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyPositionHistory
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyPositionHistory(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyPositionHistory", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@ALetterNumber", IsOutput = false, Value = string.IsNullOrWhiteSpace(_letterNumber) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_letterNumber) }, 
+					new Parameter { Name = "@ADate", IsOutput = false, Value = _date == null ? DBNull.Value : (object)_date }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+					new Parameter { Name = "@ACreatorUserID", IsOutput = false, Value = _creatorUserID == null ? DBNull.Value : (object)_creatorUserID }, 
+					new Parameter { Name = "@ACreatorPositionID", IsOutput = false, Value = _creatorPositionID == null ? DBNull.Value : (object)_creatorPositionID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyPositionHistoryAsync(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPositionHistory(_isNewRecord, _id, _positionID, _userID, _letterNumber, _date, _comment, _creatorUserID, _creatorPositionID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionHistoryDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyPositionHistory",new {AIsNewRecord=_isNewRecord,AID=_id,APositionID=_positionID,AUserID=_userID,ALetterNumber=string.IsNullOrWhiteSpace(_letterNumber) ? _letterNumber : ReplaceArabicWithPersianChars(_letterNumber),ADate=_date,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ACreatorUserID=_creatorUserID,ACreatorPositionID=_creatorPositionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyPositionHistory(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPositionHistory(_isNewRecord, _id, _positionID, _userID, _letterNumber, _date, _comment, _creatorUserID, _creatorPositionID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyPositionType
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyPositionType(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyPositionType", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
+					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyPositionTypeAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPositionType(_isNewRecord, _id, _parentID, _positionType, _userType, _applicationID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionTypeDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyPositionType",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,APositionType=_positionType,AUserType=_userType,AApplicationID=_applicationID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyPositionType(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyPositionType(_isNewRecord, _id, _parentID, _positionType, _userType, _applicationID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyRefreshToken
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyRefreshToken(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyRefreshToken", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@AIssuedDate", IsOutput = false, Value = _issuedDate == null ? DBNull.Value : (object)_issuedDate }, 
+					new Parameter { Name = "@AExpireDate", IsOutput = false, Value = _expireDate == null ? DBNull.Value : (object)_expireDate }, 
+					new Parameter { Name = "@AProtectedTicket", IsOutput = false, Value = string.IsNullOrWhiteSpace(_protectedTicket) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_protectedTicket) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyRefreshTokenAsync(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyRefreshToken(_isNewRecord, _id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyRefreshTokenDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyRefreshToken",new {AIsNewRecord=_isNewRecord,AID=_id,AUserID=_userID,AIssuedDate=_issuedDate,AExpireDate=_expireDate,AProtectedTicket=string.IsNullOrWhiteSpace(_protectedTicket) ? _protectedTicket : ReplaceArabicWithPersianChars(_protectedTicket)} , timeout );
+}
+
+public ResultSet ModifyRefreshToken(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyRefreshToken(_isNewRecord, _id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyRole
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyRole(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyRole", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@APermissions", IsOutput = false, Value = string.IsNullOrWhiteSpace(_permissions) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_permissions) }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyRoleAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyRole(_isNewRecord, _id, _applicationID, _name, _permissions, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyRoleDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyRole",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APermissions=string.IsNullOrWhiteSpace(_permissions) ? _permissions : ReplaceArabicWithPersianChars(_permissions),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyRole(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyRole(_isNewRecord, _id, _applicationID, _name, _permissions, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyUser(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
+					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
+					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
+					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
+					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
+					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
+					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AEmailVerified", IsOutput = false, Value = _emailVerified == null ? DBNull.Value : (object)_emailVerified }, 
+					new Parameter { Name = "@ACellPhoneVerified", IsOutput = false, Value = _cellPhoneVerified == null ? DBNull.Value : (object)_cellPhoneVerified }, 
+					new Parameter { Name = "@AForeigner", IsOutput = false, Value = _foreigner == null ? DBNull.Value : (object)_foreigner }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyUserAsync(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyUser(_isNewRecord, _id, _enabled, _username, _password, _passwordExpireDate, _firstName, _lastName, _nationalCode, _email, _cellPhone, _applicationID, _emailVerified, _cellPhoneVerified, _foreigner, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyUserDapperAsync<T>(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyUser",new {AIsNewRecord=_isNewRecord,AID=_id,AEnabled=_enabled,AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),APasswordExpireDate=_passwordExpireDate,AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AApplicationID=_applicationID,AEmailVerified=_emailVerified,ACellPhoneVerified=_cellPhoneVerified,AForeigner=_foreigner,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet ModifyUser(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyUser(_isNewRecord, _id, _enabled, _username, _password, _passwordExpireDate, _firstName, _lastName, _nationalCode, _email, _cellPhone, _applicationID, _emailVerified, _cellPhoneVerified, _foreigner, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteApplication
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteApplication(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteApplication", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteApplicationAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteApplication(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteApplicationDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteApplication",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteApplication(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteApplication(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyUserSetting
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyUserSetting(Guid? _userID, string _setting, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyUserSetting", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@ASetting", IsOutput = false, Value = string.IsNullOrWhiteSpace(_setting) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_setting) }, 
+					new Parameter { Name = "@AResult", IsOutput = true }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyUserSettingAsync(Guid? _userID, string _setting, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyUserSetting(_userID, _setting, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyUserSettingDapperAsync<T>(Guid? _userID, string _setting, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyUserSetting",new {AUserID=_userID,ASetting=string.IsNullOrWhiteSpace(_setting) ? _setting : ReplaceArabicWithPersianChars(_setting)} , timeout );
+}
+
+public ResultSet ModifyUserSetting(Guid? _userID, string _setting, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyUserSetting(_userID, _setting, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region ModifyWebServiceUser
+
+public System.Data.SqlClient.SqlCommand GetCommand_ModifyWebServiceUser(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spModifyWebServiceUser", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+					new Parameter { Name = "@AOrganID", IsOutput = false, Value = _organID == null ? DBNull.Value : (object)_organID }, 
+					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
+					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
+					new Parameter { Name = "@ACreatorID", IsOutput = false, Value = _creatorID == null ? DBNull.Value : (object)_creatorID }, 
+					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> ModifyWebServiceUserAsync(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyWebServiceUser(_isNewRecord, _id, _userName, _password, _organID, _enabled, _passwordExpireDate, _creatorID, _comment, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> ModifyWebServiceUserDapperAsync<T>(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spModifyWebServiceUser",new {AIsNewRecord=_isNewRecord,AID=_id,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),AOrganID=_organID,AEnabled=_enabled,APasswordExpireDate=_passwordExpireDate,ACreatorID=_creatorID,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment)} , timeout );
+}
+
+public ResultSet ModifyWebServiceUser(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
+{
+	using(var cmd = GetCommand_ModifyWebServiceUser(_isNewRecord, _id, _userName, _password, _organID, _enabled, _passwordExpireDate, _creatorID, _comment, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region RemoveUserFromPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_RemoveUserFromPosition(Guid? _positionID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spRemoveUserFromPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> RemoveUserFromPositionAsync(Guid? _positionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_RemoveUserFromPosition(_positionID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> RemoveUserFromPositionDapperAsync<T>(Guid? _positionID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spRemoveUserFromPosition",new {APositionID=_positionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet RemoveUserFromPosition(Guid? _positionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_RemoveUserFromPosition(_positionID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteClient
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteClient(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteClient", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteClientAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteClient(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteClientDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteClient",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteClient(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteClient(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteCommand
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteCommand(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteCommand", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteCommandAsync(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteCommand(_id, _applicationID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteCommandDapperAsync<T>(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteCommand",new {AID=_id,AApplicationID=_applicationID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteCommand(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteCommand(_id, _applicationID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region SetDefaultPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_SetDefaultPosition(Guid? _positionID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spSetDefaultPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> SetDefaultPositionAsync(Guid? _positionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetDefaultPosition(_positionID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> SetDefaultPositionDapperAsync<T>(Guid? _positionID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spSetDefaultPosition",new {APositionID=_positionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet SetDefaultPosition(Guid? _positionID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_SetDefaultPosition(_positionID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteDepartment
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteDepartment(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteDepartment", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteDepartmentAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteDepartment(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteDepartmentDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteDepartment",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteDepartment(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteDepartment(_id, _currentUserID, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteDynamicPermission
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteDynamicPermission(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("org.spDeleteDynamicPermission", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteDynamicPermissionAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteDynamicPermission(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteDynamicPermissionDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("org.spDeleteDynamicPermission",new {AID=_id} , timeout );
+}
+
+public ResultSet DeleteDynamicPermission(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteDynamicPermission(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+}
+
 class APP: Database
 {
 #region Constructors
@@ -13,6 +3120,1577 @@ public APP(string connectionString)
 
 public APP(string connectionString, IModelValueBinder modelValueBinder)
 	:base(connectionString, modelValueBinder){}
+#endregion
+
+#region DeleteFAQGroup
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteFAQGroup(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spDeleteFAQGroup", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteFAQGroupAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteFAQGroup(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteFAQGroupDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spDeleteFAQGroup",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteFAQGroup(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteFAQGroup(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteMessage
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteMessage(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spDeleteMessage", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteMessageAsync(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteMessage(_currentUserID, _messageID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteMessageDapperAsync<T>(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spDeleteMessage",new {ACurrentUserID=_currentUserID,AMessageID=_messageID} , timeout );
+}
+
+public ResultSet DeleteMessage(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteMessage(_currentUserID, _messageID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteNotification
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteNotification(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spDeleteNotification", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteNotificationAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteNotification(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteNotificationDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spDeleteNotification",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteNotification(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteNotification(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region DeleteNotificationCondition
+
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteNotificationCondition(Guid? _id, string _log, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spDeleteNotificationCondition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> DeleteNotificationConditionAsync(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteNotificationCondition(_id, _log, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteNotificationConditionDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spDeleteNotificationCondition",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+}
+
+public ResultSet DeleteNotificationCondition(Guid? _id, string _log, int? timeout = null)
+{
+	using(var cmd = GetCommand_DeleteNotificationCondition(_id, _log, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetAnnouncement
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncement(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetAnnouncement", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetAnnouncementAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncement(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetAnnouncement",new {AID=_id} , timeout );
+}
+
+public ResultSet GetAnnouncement(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncement(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetAnnouncementPositionTypes
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncementPositionTypes(Guid? _announcementID, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetAnnouncementPositionTypes", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AAnnouncementID", IsOutput = false, Value = _announcementID == null ? DBNull.Value : (object)_announcementID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetAnnouncementPositionTypesAsync(Guid? _announcementID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncementPositionTypes(_announcementID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementPositionTypesDapperAsync<T>(Guid? _announcementID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetAnnouncementPositionTypes",new {AAnnouncementID=_announcementID} , timeout );
+}
+
+public ResultSet GetAnnouncementPositionTypes(Guid? _announcementID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncementPositionTypes(_announcementID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetAnnouncements
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncements(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetAnnouncements", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ACurrentUserProvinceID", IsOutput = false, Value = _currentUserProvinceID == null ? DBNull.Value : (object)_currentUserProvinceID }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@AEnable", IsOutput = false, Value = _enable == null ? DBNull.Value : (object)_enable }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetAnnouncementsAsync(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncements(_userID, _applicationID, _currentUserProvinceID, _title, _enable, _type, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementsDapperAsync<T>(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetAnnouncements",new {AUserID=_userID,AApplicationID=_applicationID,ACurrentUserProvinceID=_currentUserProvinceID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AEnable=_enable,AType=_type,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetAnnouncements(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncements(_userID, _applicationID, _currentUserProvinceID, _title, _enable, _type, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetAnnouncementsForBulletin
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncementsForBulletin(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetAnnouncementsForBulletin", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ACurrentUserProvinceID", IsOutput = false, Value = _currentUserProvinceID == null ? DBNull.Value : (object)_currentUserProvinceID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetAnnouncementsForBulletinAsync(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncementsForBulletin(_positionID, _applicationID, _currentUserProvinceID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementsForBulletinDapperAsync<T>(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetAnnouncementsForBulletin",new {APositionID=_positionID,AApplicationID=_applicationID,ACurrentUserProvinceID=_currentUserProvinceID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetAnnouncementsForBulletin(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAnnouncementsForBulletin(_positionID, _applicationID, _currentUserProvinceID, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurvey
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurvey(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurvey", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurvey(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurvey",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplicationSurvey(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurvey(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyAnswer
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyAnswer(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyAnswer", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyAnswerAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyAnswer(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyAnswerDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyAnswer",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplicationSurveyAnswer(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyAnswer(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyAnswers
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyAnswers(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyAnswers", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
+					new Parameter { Name = "@ADate", IsOutput = false, Value = _date == null ? DBNull.Value : (object)_date }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyAnswersAsync(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyAnswers(_userID, _date, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyAnswersDapperAsync<T>(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyAnswers",new {AUserID=_userID,ADate=_date,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
+}
+
+public ResultSet GetApplicationSurveyAnswers(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyAnswers(_userID, _date, _pageSize, _pageIndex, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyGroup
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyGroup(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyGroup", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyGroupAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyGroup(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyGroupDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyGroup",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplicationSurveyGroup(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyGroup(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyGroups
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyGroups(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyGroups", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationSurveyID", IsOutput = false, Value = _applicationSurveyID == null ? DBNull.Value : (object)_applicationSurveyID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AShowRemov", IsOutput = false, Value = _showRemov == null ? DBNull.Value : (object)_showRemov }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyGroupsAsync(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyGroups(_applicationSurveyID, _applicationID, _name, _showRemov, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyGroupsDapperAsync<T>(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyGroups",new {AApplicationSurveyID=_applicationSurveyID,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AShowRemov=_showRemov,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetApplicationSurveyGroups(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyGroups(_applicationSurveyID, _applicationID, _name, _showRemov, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyQuestion
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestion(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestion", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyQuestionAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestion(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestion",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplicationSurveyQuestion(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestion(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyQuestionChoice
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestionChoice(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestionChoice", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyQuestionChoiceAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoice(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionChoiceDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestionChoice",new {AID=_id} , timeout );
+}
+
+public ResultSet GetApplicationSurveyQuestionChoice(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoice(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyQuestionChoices
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestionChoices(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestionChoices", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AQuestionID", IsOutput = false, Value = _questionID == null ? DBNull.Value : (object)_questionID }, 
+					new Parameter { Name = "@AQuestionIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_questionIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_questionIDs) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyQuestionChoicesAsync(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoices(_questionID, _questionIDs, _name, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionChoicesDapperAsync<T>(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestionChoices",new {AQuestionID=_questionID,AQuestionIDs=string.IsNullOrWhiteSpace(_questionIDs) ? _questionIDs : ReplaceArabicWithPersianChars(_questionIDs),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetApplicationSurveyQuestionChoices(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoices(_questionID, _questionIDs, _name, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveyQuestions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestions(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AGroupID", IsOutput = false, Value = _groupID == null ? DBNull.Value : (object)_groupID }, 
+					new Parameter { Name = "@AGroupIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_groupIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_groupIDs) }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveyQuestionsAsync(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestions(_groupID, _groupIDs, _name, _type, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionsDapperAsync<T>(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestions",new {AGroupID=_groupID,AGroupIDs=string.IsNullOrWhiteSpace(_groupIDs) ? _groupIDs : ReplaceArabicWithPersianChars(_groupIDs),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AType=_type,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetApplicationSurveyQuestions(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveyQuestions(_groupID, _groupIDs, _name, _type, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetApplicationSurveys
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveys(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetApplicationSurveys", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetApplicationSurveysAsync(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveys(_applicationID, _name, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveysDapperAsync<T>(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetApplicationSurveys",new {AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetApplicationSurveys(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetApplicationSurveys(_applicationID, _name, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContact
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContact(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContact", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContact(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContact",new {AID=_id} , timeout );
+}
+
+public ResultSet GetContact(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContact(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContactDetail
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContactDetail(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContactDetail", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactDetailAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactDetail(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactDetailDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContactDetail",new {AID=_id} , timeout );
+}
+
+public ResultSet GetContactDetail(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactDetail(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContactDetails
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContactDetails(string _contactInfoIDs, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContactDetails", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AContactInfoIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_contactInfoIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_contactInfoIDs) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactDetailsAsync(string _contactInfoIDs, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactDetails(_contactInfoIDs, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactDetailsDapperAsync<T>(string _contactInfoIDs, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContactDetails",new {AContactInfoIDs=string.IsNullOrWhiteSpace(_contactInfoIDs) ? _contactInfoIDs : ReplaceArabicWithPersianChars(_contactInfoIDs)} , timeout );
+}
+
+public ResultSet GetContactDetails(string _contactInfoIDs, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactDetails(_contactInfoIDs, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContactInfo
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContactInfo(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContactInfo", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactInfoAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactInfo(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactInfoDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContactInfo",new {AID=_id} , timeout );
+}
+
+public ResultSet GetContactInfo(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactInfo(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContactInfos
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContactInfos(Guid? _parentID, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContactInfos", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactInfosAsync(Guid? _parentID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactInfosDapperAsync<T>(Guid? _parentID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContactInfos",new {AParentID=_parentID} , timeout );
+}
+
+public ResultSet GetContactInfos(Guid? _parentID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetContacts
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetContacts(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetContacts", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
+					new Parameter { Name = "@ACreationDateFrom", IsOutput = false, Value = _creationDateFrom == null ? DBNull.Value : (object)_creationDateFrom }, 
+					new Parameter { Name = "@ACreationDateTo", IsOutput = false, Value = _creationDateTo == null ? DBNull.Value : (object)_creationDateTo }, 
+					new Parameter { Name = "@AArchivedType", IsOutput = false, Value = _archivedType == null ? DBNull.Value : (object)_archivedType }, 
+					new Parameter { Name = "@ANote", IsOutput = false, Value = string.IsNullOrWhiteSpace(_note) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_note) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetContactsAsync(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContacts(_applicationID, _title, _content, _creationDateFrom, _creationDateTo, _archivedType, _note, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetContactsDapperAsync<T>(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetContacts",new {AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),ACreationDateFrom=_creationDateFrom,ACreationDateTo=_creationDateTo,AArchivedType=_archivedType,ANote=string.IsNullOrWhiteSpace(_note) ? _note : ReplaceArabicWithPersianChars(_note),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetContacts(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetContacts(_applicationID, _title, _content, _creationDateFrom, _creationDateTo, _archivedType, _note, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetDraftMessages
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetDraftMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetDraftMessages", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetDraftMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDraftMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetDraftMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetDraftMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetDraftMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetDraftMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetFAQ
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetFAQ(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetFAQ", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetFAQAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQ(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetFAQDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetFAQ",new {AID=_id} , timeout );
+}
+
+public ResultSet GetFAQ(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQ(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetFAQGroup
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetFAQGroup(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetFAQGroup", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetFAQGroupAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQGroup(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetFAQGroupDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetFAQGroup",new {AID=_id} , timeout );
+}
+
+public ResultSet GetFAQGroup(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQGroup(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetFAQGroups
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetFAQGroups(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetFAQGroups", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetFAQGroupsAsync(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQGroups(_applicationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetFAQGroupsDapperAsync<T>(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetFAQGroups",new {AApplicationID=_applicationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetFAQGroups(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQGroups(_applicationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetFAQs
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetFAQs(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetFAQs", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@AFAQGroupID", IsOutput = false, Value = _fAQGroupID == null ? DBNull.Value : (object)_fAQGroupID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetFAQsAsync(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQs(_applicationID, _fAQGroupID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetFAQsDapperAsync<T>(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetFAQs",new {AApplicationID=_applicationID,AFAQGroupID=_fAQGroupID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetFAQs(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetFAQs(_applicationID, _fAQGroupID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetInboxMessages
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetInboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetInboxMessages", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetInboxMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetInboxMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetInboxMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetInboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetInboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetMessage
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetMessage(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetMessage", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetMessageAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetMessage(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetMessageDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetMessage",new {AID=_id} , timeout );
+}
+
+public ResultSet GetMessage(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetMessage(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetMessageReceivers
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetMessageReceivers(Guid? _messageID, string _messageIDs, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetMessageReceivers", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
+					new Parameter { Name = "@AMessageIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_messageIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_messageIDs) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetMessageReceiversAsync(Guid? _messageID, string _messageIDs, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetMessageReceivers(_messageID, _messageIDs, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetMessageReceiversDapperAsync<T>(Guid? _messageID, string _messageIDs, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetMessageReceivers",new {AMessageID=_messageID,AMessageIDs=string.IsNullOrWhiteSpace(_messageIDs) ? _messageIDs : ReplaceArabicWithPersianChars(_messageIDs)} , timeout );
+}
+
+public ResultSet GetMessageReceivers(Guid? _messageID, string _messageIDs, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetMessageReceivers(_messageID, _messageIDs, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotification
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotification(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotification", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotification(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotification",new {AID=_id} , timeout );
+}
+
+public ResultSet GetNotification(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotification(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotificationCondition
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationCondition(Guid? _id, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotificationCondition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationConditionAsync(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationCondition(_id, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationConditionDapperAsync<T>(Guid? _id, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotificationCondition",new {AID=_id} , timeout );
+}
+
+public ResultSet GetNotificationCondition(Guid? _id, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationCondition(_id, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotificationConditions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationConditions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotificationConditions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationConditionsAsync(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationConditions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationConditionsDapperAsync<T>(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotificationConditions",new {ANotificationID=_notificationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetNotificationConditions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationConditions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotificationPositions
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationPositions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotificationPositions", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationPositionsAsync(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationPositions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationPositionsDapperAsync<T>(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotificationPositions",new {ANotificationID=_notificationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetNotificationPositions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationPositions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotifications
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotifications(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotifications", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ASenderType", IsOutput = false, Value = _senderType == null ? DBNull.Value : (object)_senderType }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
+					new Parameter { Name = "@APriority", IsOutput = false, Value = _priority == null ? DBNull.Value : (object)_priority }, 
+					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
+					new Parameter { Name = "@ACreationDateFrom", IsOutput = false, Value = _creationDateFrom == null ? DBNull.Value : (object)_creationDateFrom }, 
+					new Parameter { Name = "@ACreationDateTo", IsOutput = false, Value = _creationDateTo == null ? DBNull.Value : (object)_creationDateTo }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationsAsync(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotifications(_applicationID, _senderType, _title, _content, _priority, _state, _creationDateFrom, _creationDateTo, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsDapperAsync<T>(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotifications",new {AApplicationID=_applicationID,ASenderType=_senderType,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),APriority=_priority,AState=_state,ACreationDateFrom=_creationDateFrom,ACreationDateTo=_creationDateTo,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetNotifications(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotifications(_applicationID, _senderType, _title, _content, _priority, _state, _creationDateFrom, _creationDateTo, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetNotificationsByPosition
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationsByPosition(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetNotificationsByPosition", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ACurrentUserPositionID", IsOutput = false, Value = _currentUserPositionID == null ? DBNull.Value : (object)_currentUserPositionID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetNotificationsByPositionAsync(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationsByPosition(_applicationID, _currentUserPositionID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsByPositionDapperAsync<T>(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetNotificationsByPosition",new {AApplicationID=_applicationID,ACurrentUserPositionID=_currentUserPositionID} , timeout );
+}
+
+public ResultSet GetNotificationsByPosition(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetNotificationsByPosition(_applicationID, _currentUserPositionID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetOutboxMessages
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetOutboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+var cmd = base.CreateCommand("app.spGetOutboxMessages", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
+					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
+					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
+					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
+					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
+					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetOutboxMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetOutboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetOutboxMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("app.spGetOutboxMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
+}
+
+public ResultSet GetOutboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetOutboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
 #endregion
 
 #region ModifyAnnouncement
@@ -323,44 +5001,6 @@ public async Task<AppCore.Result<IEnumerable<T>>> ModifyApplicationSurveyQuestio
 public ResultSet ModifyApplicationSurveyQuestionChoice(bool? _isNewRecord, Guid? _id, Guid? _questionID, string _name, bool? _enable, string _log, int? timeout = null)
 {
 	using(var cmd = GetCommand_ModifyApplicationSurveyQuestionChoice(_isNewRecord, _id, _questionID, _name, _enable, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetReplyMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetReplyMessages(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetReplyMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetReplyMessagesAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetReplyMessages(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetReplyMessagesDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetReplyMessages",new {AID=_id} , timeout );
-}
-
-public ResultSet GetReplyMessages(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetReplyMessages(_id, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -1397,2606 +6037,6 @@ public ResultSet DeleteFAQ(Guid? _id, string _log, int? timeout = null)
 
 #endregion
 
-#region DeleteFAQGroup
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteFAQGroup(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteFAQGroup", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteFAQGroupAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteFAQGroup(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteFAQGroupDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteFAQGroup",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteFAQGroup(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteFAQGroup(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteMessage(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteMessageAsync(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteMessage(_currentUserID, _messageID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteMessageDapperAsync<T>(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteMessage",new {ACurrentUserID=_currentUserID,AMessageID=_messageID} , timeout );
-}
-
-public ResultSet DeleteMessage(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteMessage(_currentUserID, _messageID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteNotification
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteNotification(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteNotification", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteNotificationAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteNotification(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteNotificationDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteNotification",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteNotification(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteNotification(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteNotificationCondition
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteNotificationCondition(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteNotificationCondition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteNotificationConditionAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteNotificationCondition(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteNotificationConditionDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteNotificationCondition",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteNotificationCondition(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteNotificationCondition(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region PermanentDelete
-
-public System.Data.SqlClient.SqlCommand GetCommand_PermanentDelete(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spPermanentDelete", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> PermanentDeleteAsync(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_PermanentDelete(_currentUserID, _messageID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> PermanentDeleteDapperAsync<T>(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spPermanentDelete",new {ACurrentUserID=_currentUserID,AMessageID=_messageID} , timeout );
-}
-
-public ResultSet PermanentDelete(Guid? _currentUserID, Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_PermanentDelete(_currentUserID, _messageID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetAnnouncement
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncement(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetAnnouncement", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetAnnouncementAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncement(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetAnnouncement",new {AID=_id} , timeout );
-}
-
-public ResultSet GetAnnouncement(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncement(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetAnnouncementPositionTypes
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncementPositionTypes(Guid? _announcementID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetAnnouncementPositionTypes", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AAnnouncementID", IsOutput = false, Value = _announcementID == null ? DBNull.Value : (object)_announcementID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetAnnouncementPositionTypesAsync(Guid? _announcementID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncementPositionTypes(_announcementID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementPositionTypesDapperAsync<T>(Guid? _announcementID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetAnnouncementPositionTypes",new {AAnnouncementID=_announcementID} , timeout );
-}
-
-public ResultSet GetAnnouncementPositionTypes(Guid? _announcementID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncementPositionTypes(_announcementID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurvey
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurvey(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurvey", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurvey(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurvey",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplicationSurvey(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurvey(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyAnswer
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyAnswer(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyAnswer", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyAnswerAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyAnswer(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyAnswerDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyAnswer",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplicationSurveyAnswer(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyAnswer(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyAnswers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyAnswers(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyAnswers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ADate", IsOutput = false, Value = _date == null ? DBNull.Value : (object)_date }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyAnswersAsync(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyAnswers(_userID, _date, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyAnswersDapperAsync<T>(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyAnswers",new {AUserID=_userID,ADate=_date,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetApplicationSurveyAnswers(Guid? _userID, DateTime? _date, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyAnswers(_userID, _date, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyGroup
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyGroup(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyGroup", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyGroupAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyGroup(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyGroupDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyGroup",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplicationSurveyGroup(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyGroup(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyGroups
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyGroups(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyGroups", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationSurveyID", IsOutput = false, Value = _applicationSurveyID == null ? DBNull.Value : (object)_applicationSurveyID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AShowRemov", IsOutput = false, Value = _showRemov == null ? DBNull.Value : (object)_showRemov }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyGroupsAsync(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyGroups(_applicationSurveyID, _applicationID, _name, _showRemov, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyGroupsDapperAsync<T>(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyGroups",new {AApplicationSurveyID=_applicationSurveyID,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AShowRemov=_showRemov,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetApplicationSurveyGroups(Guid? _applicationSurveyID, Guid? _applicationID, string _name, bool? _showRemov, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyGroups(_applicationSurveyID, _applicationID, _name, _showRemov, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyQuestion
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestion(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestion", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyQuestionAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestion(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestion",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplicationSurveyQuestion(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestion(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyQuestionChoice
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestionChoice(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestionChoice", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyQuestionChoiceAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoice(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionChoiceDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestionChoice",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplicationSurveyQuestionChoice(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoice(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyQuestionChoices
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestionChoices(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestionChoices", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AQuestionID", IsOutput = false, Value = _questionID == null ? DBNull.Value : (object)_questionID }, 
-					new Parameter { Name = "@AQuestionIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_questionIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_questionIDs) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyQuestionChoicesAsync(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoices(_questionID, _questionIDs, _name, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionChoicesDapperAsync<T>(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestionChoices",new {AQuestionID=_questionID,AQuestionIDs=string.IsNullOrWhiteSpace(_questionIDs) ? _questionIDs : ReplaceArabicWithPersianChars(_questionIDs),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetApplicationSurveyQuestionChoices(Guid? _questionID, string _questionIDs, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestionChoices(_questionID, _questionIDs, _name, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveyQuestions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyQuestions(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveyQuestions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AGroupID", IsOutput = false, Value = _groupID == null ? DBNull.Value : (object)_groupID }, 
-					new Parameter { Name = "@AGroupIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_groupIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_groupIDs) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveyQuestionsAsync(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestions(_groupID, _groupIDs, _name, _type, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveyQuestionsDapperAsync<T>(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveyQuestions",new {AGroupID=_groupID,AGroupIDs=string.IsNullOrWhiteSpace(_groupIDs) ? _groupIDs : ReplaceArabicWithPersianChars(_groupIDs),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AType=_type,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetApplicationSurveyQuestions(Guid? _groupID, string _groupIDs, string _name, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveyQuestions(_groupID, _groupIDs, _name, _type, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplicationSurveys
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveys(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetApplicationSurveys", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationSurveysAsync(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveys(_applicationID, _name, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationSurveysDapperAsync<T>(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetApplicationSurveys",new {AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetApplicationSurveys(Guid? _applicationID, string _name, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationSurveys(_applicationID, _name, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContact
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContact(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContact", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContact(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContact",new {AID=_id} , timeout );
-}
-
-public ResultSet GetContact(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContact(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContactDetail
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContactDetail(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContactDetail", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactDetailAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactDetail(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactDetailDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContactDetail",new {AID=_id} , timeout );
-}
-
-public ResultSet GetContactDetail(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactDetail(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContactDetails
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContactDetails(string _contactInfoIDs, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContactDetails", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AContactInfoIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_contactInfoIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_contactInfoIDs) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactDetailsAsync(string _contactInfoIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactDetails(_contactInfoIDs, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactDetailsDapperAsync<T>(string _contactInfoIDs, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContactDetails",new {AContactInfoIDs=string.IsNullOrWhiteSpace(_contactInfoIDs) ? _contactInfoIDs : ReplaceArabicWithPersianChars(_contactInfoIDs)} , timeout );
-}
-
-public ResultSet GetContactDetails(string _contactInfoIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactDetails(_contactInfoIDs, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContactInfo
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContactInfo(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContactInfo", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactInfoAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfo(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactInfoDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContactInfo",new {AID=_id} , timeout );
-}
-
-public ResultSet GetContactInfo(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfo(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContactInfos
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContactInfos(Guid? _parentID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContactInfos", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactInfosAsync(Guid? _parentID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactInfosDapperAsync<T>(Guid? _parentID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContactInfos",new {AParentID=_parentID} , timeout );
-}
-
-public ResultSet GetContactInfos(Guid? _parentID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContacts
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContacts(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetContacts", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@ACreationDateFrom", IsOutput = false, Value = _creationDateFrom == null ? DBNull.Value : (object)_creationDateFrom }, 
-					new Parameter { Name = "@ACreationDateTo", IsOutput = false, Value = _creationDateTo == null ? DBNull.Value : (object)_creationDateTo }, 
-					new Parameter { Name = "@AArchivedType", IsOutput = false, Value = _archivedType == null ? DBNull.Value : (object)_archivedType }, 
-					new Parameter { Name = "@ANote", IsOutput = false, Value = string.IsNullOrWhiteSpace(_note) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_note) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactsAsync(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContacts(_applicationID, _title, _content, _creationDateFrom, _creationDateTo, _archivedType, _note, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactsDapperAsync<T>(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetContacts",new {AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),ACreationDateFrom=_creationDateFrom,ACreationDateTo=_creationDateTo,AArchivedType=_archivedType,ANote=string.IsNullOrWhiteSpace(_note) ? _note : ReplaceArabicWithPersianChars(_note),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetContacts(Guid? _applicationID, string _title, string _content, DateTime? _creationDateFrom, DateTime? _creationDateTo, byte? _archivedType, string _note, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContacts(_applicationID, _title, _content, _creationDateFrom, _creationDateTo, _archivedType, _note, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDraftMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDraftMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetDraftMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDraftMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDraftMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDraftMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetDraftMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetDraftMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDraftMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteTicket
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteTicket(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteTicket", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteTicketAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicket(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteTicketDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteTicket",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteTicket(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicket(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteTicketSequence
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteTicketSequence(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteTicketSequence", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteTicketSequenceAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSequence(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteTicketSequenceDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteTicketSequence",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteTicketSequence(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSequence(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteTicketSubject
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteTicketSubject(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteTicketSubject", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteTicketSubjectAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSubject(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteTicketSubjectDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteTicketSubject",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteTicketSubject(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSubject(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteTicketSubjectUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteTicketSubjectUser(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spDeleteTicketSubjectUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteTicketSubjectUserAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSubjectUser(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteTicketSubjectUserDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spDeleteTicketSubjectUser",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteTicketSubjectUser(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteTicketSubjectUser(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetAnnouncements
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncements(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetAnnouncements", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ACurrentUserProvinceID", IsOutput = false, Value = _currentUserProvinceID == null ? DBNull.Value : (object)_currentUserProvinceID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AEnable", IsOutput = false, Value = _enable == null ? DBNull.Value : (object)_enable }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetAnnouncementsAsync(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncements(_userID, _applicationID, _currentUserProvinceID, _title, _enable, _type, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementsDapperAsync<T>(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetAnnouncements",new {AUserID=_userID,AApplicationID=_applicationID,ACurrentUserProvinceID=_currentUserProvinceID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AEnable=_enable,AType=_type,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetAnnouncements(Guid? _userID, Guid? _applicationID, Guid? _currentUserProvinceID, string _title, byte? _enable, byte? _type, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncements(_userID, _applicationID, _currentUserProvinceID, _title, _enable, _type, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetFAQ
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetFAQ(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetFAQ", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetFAQAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQ(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetFAQDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetFAQ",new {AID=_id} , timeout );
-}
-
-public ResultSet GetFAQ(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQ(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicket
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicket(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicket", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicket(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicket",new {AID=_id} , timeout );
-}
-
-public ResultSet GetTicket(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicket(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetFAQGroup
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetFAQGroup(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetFAQGroup", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetFAQGroupAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQGroup(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetFAQGroupDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetFAQGroup",new {AID=_id} , timeout );
-}
-
-public ResultSet GetFAQGroup(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQGroup(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTickets
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTickets(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _ticketAnswerState, string _trackingCode, byte? _priority, Guid? _departmentID, string _departmentName, string _title, DateTime? _readDate, byte? _score, Guid? _userID, Guid? _positionID, Guid? _ownerID, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, byte? _currentUserType, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTickets", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ASubjectID", IsOutput = false, Value = _subjectID == null ? DBNull.Value : (object)_subjectID }, 
-					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
-					new Parameter { Name = "@ATicketAnswerState", IsOutput = false, Value = _ticketAnswerState == null ? DBNull.Value : (object)_ticketAnswerState }, 
-					new Parameter { Name = "@ATrackingCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_trackingCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_trackingCode) }, 
-					new Parameter { Name = "@APriority", IsOutput = false, Value = _priority == null ? DBNull.Value : (object)_priority }, 
-					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
-					new Parameter { Name = "@ADepartmentName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_departmentName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_departmentName) }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AReadDate", IsOutput = false, Value = _readDate == null ? DBNull.Value : (object)_readDate }, 
-					new Parameter { Name = "@AScore", IsOutput = false, Value = _score == null ? DBNull.Value : (object)_score }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AOwnerID", IsOutput = false, Value = _ownerID == null ? DBNull.Value : (object)_ownerID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@ACurrentUserType", IsOutput = false, Value = _currentUserType == null ? DBNull.Value : (object)_currentUserType }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketsAsync(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _ticketAnswerState, string _trackingCode, byte? _priority, Guid? _departmentID, string _departmentName, string _title, DateTime? _readDate, byte? _score, Guid? _userID, Guid? _positionID, Guid? _ownerID, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, byte? _currentUserType, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTickets(_applicationID, _subjectID, _state, _ticketAnswerState, _trackingCode, _priority, _departmentID, _departmentName, _title, _readDate, _score, _userID, _positionID, _ownerID, _pageSize, _pageIndex, _sortExp, _currentUserID, _currentUserType, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketsDapperAsync<T>(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _ticketAnswerState, string _trackingCode, byte? _priority, Guid? _departmentID, string _departmentName, string _title, DateTime? _readDate, byte? _score, Guid? _userID, Guid? _positionID, Guid? _ownerID, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, byte? _currentUserType, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTickets",new {AApplicationID=_applicationID,ASubjectID=_subjectID,AState=_state,ATicketAnswerState=_ticketAnswerState,ATrackingCode=string.IsNullOrWhiteSpace(_trackingCode) ? _trackingCode : ReplaceArabicWithPersianChars(_trackingCode),APriority=_priority,ADepartmentID=_departmentID,ADepartmentName=string.IsNullOrWhiteSpace(_departmentName) ? _departmentName : ReplaceArabicWithPersianChars(_departmentName),ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AReadDate=_readDate,AScore=_score,AUserID=_userID,APositionID=_positionID,AOwnerID=_ownerID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),ACurrentUserID=_currentUserID,ACurrentUserType=_currentUserType} , timeout );
-}
-
-public ResultSet GetTickets(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _ticketAnswerState, string _trackingCode, byte? _priority, Guid? _departmentID, string _departmentName, string _title, DateTime? _readDate, byte? _score, Guid? _userID, Guid? _positionID, Guid? _ownerID, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, byte? _currentUserType, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTickets(_applicationID, _subjectID, _state, _ticketAnswerState, _trackingCode, _priority, _departmentID, _departmentName, _title, _readDate, _score, _userID, _positionID, _ownerID, _pageSize, _pageIndex, _sortExp, _currentUserID, _currentUserType, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetAnnouncementsForBulletin
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetAnnouncementsForBulletin(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetAnnouncementsForBulletin", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ACurrentUserProvinceID", IsOutput = false, Value = _currentUserProvinceID == null ? DBNull.Value : (object)_currentUserProvinceID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetAnnouncementsForBulletinAsync(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncementsForBulletin(_positionID, _applicationID, _currentUserProvinceID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetAnnouncementsForBulletinDapperAsync<T>(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetAnnouncementsForBulletin",new {APositionID=_positionID,AApplicationID=_applicationID,ACurrentUserProvinceID=_currentUserProvinceID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetAnnouncementsForBulletin(Guid? _positionID, Guid? _applicationID, Guid? _currentUserProvinceID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAnnouncementsForBulletin(_positionID, _applicationID, _currentUserProvinceID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetFAQGroups
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetFAQGroups(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetFAQGroups", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetFAQGroupsAsync(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQGroups(_applicationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetFAQGroupsDapperAsync<T>(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetFAQGroups",new {AApplicationID=_applicationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetFAQGroups(Guid? _applicationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQGroups(_applicationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSequence
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSequence(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSequence", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSequenceAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSequence(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSequenceDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSequence",new {AID=_id} , timeout );
-}
-
-public ResultSet GetTicketSequence(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSequence(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetFAQs
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetFAQs(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetFAQs", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AFAQGroupID", IsOutput = false, Value = _fAQGroupID == null ? DBNull.Value : (object)_fAQGroupID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetFAQsAsync(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQs(_applicationID, _fAQGroupID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetFAQsDapperAsync<T>(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetFAQs",new {AApplicationID=_applicationID,AFAQGroupID=_fAQGroupID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetFAQs(Guid? _applicationID, Guid? _fAQGroupID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetFAQs(_applicationID, _fAQGroupID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSequences
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSequences(Guid? _ticketID, Guid? _userID, string _content, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentPositionID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSequences", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ATicketID", IsOutput = false, Value = _ticketID == null ? DBNull.Value : (object)_ticketID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@ACurrentPositionID", IsOutput = false, Value = _currentPositionID == null ? DBNull.Value : (object)_currentPositionID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSequencesAsync(Guid? _ticketID, Guid? _userID, string _content, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentPositionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSequences(_ticketID, _userID, _content, _pageSize, _pageIndex, _sortExp, _currentPositionID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSequencesDapperAsync<T>(Guid? _ticketID, Guid? _userID, string _content, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentPositionID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSequences",new {ATicketID=_ticketID,AUserID=_userID,AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),ACurrentPositionID=_currentPositionID} , timeout );
-}
-
-public ResultSet GetTicketSequences(Guid? _ticketID, Guid? _userID, string _content, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentPositionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSequences(_ticketID, _userID, _content, _pageSize, _pageIndex, _sortExp, _currentPositionID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetInboxMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetInboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetInboxMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetInboxMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetInboxMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetInboxMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetInboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSubject
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSubject(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSubject", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSubjectAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubject(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSubjectDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSubject",new {AID=_id} , timeout );
-}
-
-public ResultSet GetTicketSubject(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubject(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetMessage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetMessageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetMessageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetMessage",new {AID=_id} , timeout );
-}
-
-public ResultSet GetMessage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSubjects
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSubjects(Guid? _applicationID, string _name, byte? _enable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSubjects", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AEnable", IsOutput = false, Value = _enable == null ? DBNull.Value : (object)_enable }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSubjectsAsync(Guid? _applicationID, string _name, byte? _enable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjects(_applicationID, _name, _enable, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSubjectsDapperAsync<T>(Guid? _applicationID, string _name, byte? _enable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSubjects",new {AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnable=_enable,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetTicketSubjects(Guid? _applicationID, string _name, byte? _enable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjects(_applicationID, _name, _enable, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetMessageReceivers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetMessageReceivers(Guid? _messageID, string _messageIDs, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetMessageReceivers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
-					new Parameter { Name = "@AMessageIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_messageIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_messageIDs) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetMessageReceiversAsync(Guid? _messageID, string _messageIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessageReceivers(_messageID, _messageIDs, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetMessageReceiversDapperAsync<T>(Guid? _messageID, string _messageIDs, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetMessageReceivers",new {AMessageID=_messageID,AMessageIDs=string.IsNullOrWhiteSpace(_messageIDs) ? _messageIDs : ReplaceArabicWithPersianChars(_messageIDs)} , timeout );
-}
-
-public ResultSet GetMessageReceivers(Guid? _messageID, string _messageIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessageReceivers(_messageID, _messageIDs, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSubjectUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSubjectUser(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSubjectUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSubjectUserAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjectUser(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSubjectUserDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSubjectUser",new {AID=_id} , timeout );
-}
-
-public ResultSet GetTicketSubjectUser(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjectUser(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetTicketSubjectUsers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetTicketSubjectUsers(Guid? _ticketSubjectID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetTicketSubjectUsers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ATicketSubjectID", IsOutput = false, Value = _ticketSubjectID == null ? DBNull.Value : (object)_ticketSubjectID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetTicketSubjectUsersAsync(Guid? _ticketSubjectID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjectUsers(_ticketSubjectID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetTicketSubjectUsersDapperAsync<T>(Guid? _ticketSubjectID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetTicketSubjectUsers",new {ATicketSubjectID=_ticketSubjectID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetTicketSubjectUsers(Guid? _ticketSubjectID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetTicketSubjectUsers(_ticketSubjectID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotification
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotification(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotification", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotification(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotification",new {AID=_id} , timeout );
-}
-
-public ResultSet GetNotification(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotification(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyTicket
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyTicket(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _subjectID, byte? _state, string _trackingCode, byte? _priority, string _title, Guid? _positionID, Guid? _ownerID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spModifyTicket", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ASubjectID", IsOutput = false, Value = _subjectID == null ? DBNull.Value : (object)_subjectID }, 
-					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
-					new Parameter { Name = "@ATrackingCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_trackingCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_trackingCode) }, 
-					new Parameter { Name = "@APriority", IsOutput = false, Value = _priority == null ? DBNull.Value : (object)_priority }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AOwnerID", IsOutput = false, Value = _ownerID == null ? DBNull.Value : (object)_ownerID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyTicketAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _subjectID, byte? _state, string _trackingCode, byte? _priority, string _title, Guid? _positionID, Guid? _ownerID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicket(_isNewRecord, _id, _applicationID, _subjectID, _state, _trackingCode, _priority, _title, _positionID, _ownerID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyTicketDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _subjectID, byte? _state, string _trackingCode, byte? _priority, string _title, Guid? _positionID, Guid? _ownerID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spModifyTicket",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,ASubjectID=_subjectID,AState=_state,ATrackingCode=string.IsNullOrWhiteSpace(_trackingCode) ? _trackingCode : ReplaceArabicWithPersianChars(_trackingCode),APriority=_priority,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APositionID=_positionID,AOwnerID=_ownerID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyTicket(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _subjectID, byte? _state, string _trackingCode, byte? _priority, string _title, Guid? _positionID, Guid? _ownerID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicket(_isNewRecord, _id, _applicationID, _subjectID, _state, _trackingCode, _priority, _title, _positionID, _ownerID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationCondition
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationCondition(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationCondition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationConditionAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationCondition(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationConditionDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationCondition",new {AID=_id} , timeout );
-}
-
-public ResultSet GetNotificationCondition(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationCondition(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyTicketSequence
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyTicketSequence(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _ticketID, Guid? _userID, string _content, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spModifyTicketSequence", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@ATicketID", IsOutput = false, Value = _ticketID == null ? DBNull.Value : (object)_ticketID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyTicketSequenceAsync(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _ticketID, Guid? _userID, string _content, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSequence(_isNewRecord, _id, _positionID, _ticketID, _userID, _content, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyTicketSequenceDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _ticketID, Guid? _userID, string _content, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spModifyTicketSequence",new {AIsNewRecord=_isNewRecord,AID=_id,APositionID=_positionID,ATicketID=_ticketID,AUserID=_userID,AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyTicketSequence(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _ticketID, Guid? _userID, string _content, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSequence(_isNewRecord, _id, _positionID, _ticketID, _userID, _content, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationConditions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationConditions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationConditions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationConditionsAsync(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationConditions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationConditionsDapperAsync<T>(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationConditions",new {ANotificationID=_notificationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetNotificationConditions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationConditions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyTicketSubject
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyTicketSubject(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, bool? _enable, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spModifyTicketSubject", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AEnable", IsOutput = false, Value = _enable == null ? DBNull.Value : (object)_enable }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyTicketSubjectAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, bool? _enable, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSubject(_isNewRecord, _id, _applicationID, _name, _enable, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyTicketSubjectDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, bool? _enable, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spModifyTicketSubject",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnable=_enable,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyTicketSubject(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, bool? _enable, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSubject(_isNewRecord, _id, _applicationID, _name, _enable, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationPositions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationPositions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationPositions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationPositionsAsync(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationPositions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationPositionsDapperAsync<T>(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationPositions",new {ANotificationID=_notificationID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetNotificationPositions(Guid? _notificationID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationPositions(_notificationID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyTicketSubjectUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyTicketSubjectUser(bool? _isNewRecord, Guid? _id, Guid? _ticketSubjectID, Guid? _userID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spModifyTicketSubjectUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ATicketSubjectID", IsOutput = false, Value = _ticketSubjectID == null ? DBNull.Value : (object)_ticketSubjectID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyTicketSubjectUserAsync(bool? _isNewRecord, Guid? _id, Guid? _ticketSubjectID, Guid? _userID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSubjectUser(_isNewRecord, _id, _ticketSubjectID, _userID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyTicketSubjectUserDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _ticketSubjectID, Guid? _userID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spModifyTicketSubjectUser",new {AIsNewRecord=_isNewRecord,AID=_id,ATicketSubjectID=_ticketSubjectID,AUserID=_userID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyTicketSubjectUser(bool? _isNewRecord, Guid? _id, Guid? _ticketSubjectID, Guid? _userID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyTicketSubjectUser(_isNewRecord, _id, _ticketSubjectID, _userID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotifications
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotifications(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotifications", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ASenderType", IsOutput = false, Value = _senderType == null ? DBNull.Value : (object)_senderType }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@APriority", IsOutput = false, Value = _priority == null ? DBNull.Value : (object)_priority }, 
-					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
-					new Parameter { Name = "@ACreationDateFrom", IsOutput = false, Value = _creationDateFrom == null ? DBNull.Value : (object)_creationDateFrom }, 
-					new Parameter { Name = "@ACreationDateTo", IsOutput = false, Value = _creationDateTo == null ? DBNull.Value : (object)_creationDateTo }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationsAsync(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotifications(_applicationID, _senderType, _title, _content, _priority, _state, _creationDateFrom, _creationDateTo, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsDapperAsync<T>(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotifications",new {AApplicationID=_applicationID,ASenderType=_senderType,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),APriority=_priority,AState=_state,ACreationDateFrom=_creationDateFrom,ACreationDateTo=_creationDateTo,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetNotifications(Guid? _applicationID, byte? _senderType, string _title, string _content, byte? _priority, byte? _state, DateTime? _creationDateFrom, DateTime? _creationDateTo, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotifications(_applicationID, _senderType, _title, _content, _priority, _state, _creationDateFrom, _creationDateTo, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region RatingTicket
-
-public System.Data.SqlClient.SqlCommand GetCommand_RatingTicket(Guid? _ticketID, byte? _score, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spRatingTicket", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ATicketID", IsOutput = false, Value = _ticketID == null ? DBNull.Value : (object)_ticketID }, 
-					new Parameter { Name = "@AScore", IsOutput = false, Value = _score == null ? DBNull.Value : (object)_score }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> RatingTicketAsync(Guid? _ticketID, byte? _score, int? timeout = null)
-{
-	using(var cmd = GetCommand_RatingTicket(_ticketID, _score, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> RatingTicketDapperAsync<T>(Guid? _ticketID, byte? _score, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spRatingTicket",new {ATicketID=_ticketID,AScore=_score} , timeout );
-}
-
-public ResultSet RatingTicket(Guid? _ticketID, byte? _score, int? timeout = null)
-{
-	using(var cmd = GetCommand_RatingTicket(_ticketID, _score, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationsByPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationsByPosition(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationsByPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ACurrentUserPositionID", IsOutput = false, Value = _currentUserPositionID == null ? DBNull.Value : (object)_currentUserPositionID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationsByPositionAsync(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsByPosition(_applicationID, _currentUserPositionID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsByPositionDapperAsync<T>(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationsByPosition",new {AApplicationID=_applicationID,ACurrentUserPositionID=_currentUserPositionID} , timeout );
-}
-
-public ResultSet GetNotificationsByPosition(Guid? _applicationID, Guid? _currentUserPositionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsByPosition(_applicationID, _currentUserPositionID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetTicketOwner
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetTicketOwner(Guid? _ownerID, Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spSetTicketOwner", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AOwnerID", IsOutput = false, Value = _ownerID == null ? DBNull.Value : (object)_ownerID }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetTicketOwnerAsync(Guid? _ownerID, Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetTicketOwner(_ownerID, _id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetTicketOwnerDapperAsync<T>(Guid? _ownerID, Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spSetTicketOwner",new {AOwnerID=_ownerID,AID=_id} , timeout );
-}
-
-public ResultSet SetTicketOwner(Guid? _ownerID, Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetTicketOwner(_ownerID, _id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetTicketSequenceReadDate
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetTicketSequenceReadDate(Guid? _id, Guid? _currentUserPositionID, DateTime? _readDate, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spSetTicketSequenceReadDate", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ACurrentUserPositionID", IsOutput = false, Value = _currentUserPositionID == null ? DBNull.Value : (object)_currentUserPositionID }, 
-					new Parameter { Name = "@AReadDate", IsOutput = false, Value = _readDate == null ? DBNull.Value : (object)_readDate }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetTicketSequenceReadDateAsync(Guid? _id, Guid? _currentUserPositionID, DateTime? _readDate, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetTicketSequenceReadDate(_id, _currentUserPositionID, _readDate, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetTicketSequenceReadDateDapperAsync<T>(Guid? _id, Guid? _currentUserPositionID, DateTime? _readDate, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spSetTicketSequenceReadDate",new {AID=_id,ACurrentUserPositionID=_currentUserPositionID,AReadDate=_readDate,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetTicketSequenceReadDate(Guid? _id, Guid? _currentUserPositionID, DateTime? _readDate, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetTicketSequenceReadDate(_id, _currentUserPositionID, _readDate, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetOutboxMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetOutboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetOutboxMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetOutboxMessagesAsync(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOutboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetOutboxMessagesDapperAsync<T>(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetOutboxMessages",new {ACurrentUserID=_currentUserID,AApplicationID=_applicationID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetOutboxMessages(Guid? _currentUserID, Guid? _applicationID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOutboxMessages(_currentUserID, _applicationID, _title, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region TicketReport
-
-public System.Data.SqlClient.SqlCommand GetCommand_TicketReport(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _score, string _trackingCode, byte? _priority, Guid? _departmentID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spTicketReport", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ASubjectID", IsOutput = false, Value = _subjectID == null ? DBNull.Value : (object)_subjectID }, 
-					new Parameter { Name = "@AState", IsOutput = false, Value = _state == null ? DBNull.Value : (object)_state }, 
-					new Parameter { Name = "@AScore", IsOutput = false, Value = _score == null ? DBNull.Value : (object)_score }, 
-					new Parameter { Name = "@ATrackingCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_trackingCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_trackingCode) }, 
-					new Parameter { Name = "@APriority", IsOutput = false, Value = _priority == null ? DBNull.Value : (object)_priority }, 
-					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> TicketReportAsync(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _score, string _trackingCode, byte? _priority, Guid? _departmentID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_TicketReport(_applicationID, _subjectID, _state, _score, _trackingCode, _priority, _departmentID, _title, _pageSize, _pageIndex, _sortExp, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> TicketReportDapperAsync<T>(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _score, string _trackingCode, byte? _priority, Guid? _departmentID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spTicketReport",new {AApplicationID=_applicationID,ASubjectID=_subjectID,AState=_state,AScore=_score,ATrackingCode=string.IsNullOrWhiteSpace(_trackingCode) ? _trackingCode : ReplaceArabicWithPersianChars(_trackingCode),APriority=_priority,ADepartmentID=_departmentID,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),ACurrentUserID=_currentUserID} , timeout );
-}
-
-public ResultSet TicketReport(Guid? _applicationID, Guid? _subjectID, byte? _state, byte? _score, string _trackingCode, byte? _priority, Guid? _departmentID, string _title, int? _pageSize, int? _pageIndex, string _sortExp, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_TicketReport(_applicationID, _subjectID, _state, _score, _trackingCode, _priority, _departmentID, _title, _pageSize, _pageIndex, _sortExp, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationUsers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationUsers(Guid? _notificationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationUsers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationUsersAsync(Guid? _notificationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationUsers(_notificationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationUsersDapperAsync<T>(Guid? _notificationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationUsers",new {ANotificationID=_notificationID} , timeout );
-}
-
-public ResultSet GetNotificationUsers(Guid? _notificationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationUsers(_notificationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationsByUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationsByUser(Guid? _applicationID, Guid? _userID, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spGetNotificationsByUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationsByUserAsync(Guid? _applicationID, Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsByUser(_applicationID, _userID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsByUserDapperAsync<T>(Guid? _applicationID, Guid? _userID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spGetNotificationsByUser",new {AApplicationID=_applicationID,AUserID=_userID} , timeout );
-}
-
-public ResultSet GetNotificationsByUser(Guid? _applicationID, Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsByUser(_applicationID, _userID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region RemoveMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_RemoveMessage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spRemoveMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> RemoveMessageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveMessage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> RemoveMessageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spRemoveMessage",new {AID=_id} , timeout );
-}
-
-public ResultSet RemoveMessage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveMessage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyMessageSeen
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyMessageSeen(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spModifyMessageSeen", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyMessageSeenAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessageSeen(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyMessageSeenDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spModifyMessageSeen",new {AID=_id} , timeout );
-}
-
-public ResultSet ModifyMessageSeen(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessageSeen(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 #region GetApplicationSurveyGroupByList
 
 public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationSurveyGroupByList(int? timeout = null)
@@ -4034,3885 +6074,6 @@ public ResultSet GetApplicationSurveyGroupByList(int? timeout = null)
 
 #endregion
 
-#region TicketStateUpdate
-
-public System.Data.SqlClient.SqlCommand GetCommand_TicketStateUpdate(int? timeout = null)
-{
-var cmd = base.CreateCommand("app.spTicketStateUpdate", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> TicketStateUpdateAsync(int? timeout = null)
-{
-	using(var cmd = GetCommand_TicketStateUpdate(timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> TicketStateUpdateDapperAsync<T>(int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("app.spTicketStateUpdate",new {} , timeout );
-}
-
-public ResultSet TicketStateUpdate(int? timeout = null)
-{
-	using(var cmd = GetCommand_TicketStateUpdate(timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-}
-
-class ORG: Database
-{
-#region Constructors
-public ORG(string connectionString)
-	:base(connectionString){}
-
-public ORG(string connectionString, IModelValueBinder modelValueBinder)
-	:base(connectionString, modelValueBinder){}
-#endregion
-
-#region GetApplicationStatus
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplicationStatus(string _code, string _host, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetApplicationStatus", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
-					new Parameter { Name = "@AHost", IsOutput = false, Value = string.IsNullOrWhiteSpace(_host) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_host) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationStatusAsync(string _code, string _host, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationStatus(_code, _host, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationStatusDapperAsync<T>(string _code, string _host, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetApplicationStatus",new {ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AHost=string.IsNullOrWhiteSpace(_host) ? _host : ReplaceArabicWithPersianChars(_host)} , timeout );
-}
-
-public ResultSet GetApplicationStatus(string _code, string _host, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplicationStatus(_code, _host, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyApplication
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyApplication(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyApplication", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyApplicationAsync(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyApplication(_isNewRecord, _id, _code, _name, _enabled, _comment, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyApplicationDapperAsync<T>(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyApplication",new {AIsNewRecord=_isNewRecord,AID=_id,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnabled=_enabled,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyApplication(bool? _isNewRecord, Guid? _id, string _code, string _name, bool? _enabled, string _comment, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyApplication(_isNewRecord, _id, _code, _name, _enabled, _comment, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetRolePermissions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetRolePermissions(Guid? _roleID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetRolePermissions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetRolePermissionsAsync(Guid? _roleID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRolePermissions(_roleID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetRolePermissionsDapperAsync<T>(Guid? _roleID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetRolePermissions",new {ARoleID=_roleID} , timeout );
-}
-
-public ResultSet GetRolePermissions(Guid? _roleID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRolePermissions(_roleID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyClient
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyClient(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyClient", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@ASecret", IsOutput = false, Value = string.IsNullOrWhiteSpace(_secret) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_secret) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@ARefreshTokenLifeTime", IsOutput = false, Value = _refreshTokenLifeTime == null ? DBNull.Value : (object)_refreshTokenLifeTime }, 
-					new Parameter { Name = "@AAllowedOrigin", IsOutput = false, Value = string.IsNullOrWhiteSpace(_allowedOrigin) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_allowedOrigin) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyClientAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyClient(_isNewRecord, _id, _applicationID, _name, _secret, _type, _enabled, _refreshTokenLifeTime, _allowedOrigin, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyClientDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyClient",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ASecret=string.IsNullOrWhiteSpace(_secret) ? _secret : ReplaceArabicWithPersianChars(_secret),AType=_type,AEnabled=_enabled,ARefreshTokenLifeTime=_refreshTokenLifeTime,AAllowedOrigin=string.IsNullOrWhiteSpace(_allowedOrigin) ? _allowedOrigin : ReplaceArabicWithPersianChars(_allowedOrigin),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyClient(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _secret, byte? _type, bool? _enabled, int? _refreshTokenLifeTime, string _allowedOrigin, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyClient(_isNewRecord, _id, _applicationID, _name, _secret, _type, _enabled, _refreshTokenLifeTime, _allowedOrigin, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyCommand
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyCommand(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyCommand", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AFullName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_fullName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_fullName) }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyCommandAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyCommand(_isNewRecord, _id, _parentID, _node, _applicationID, _name, _fullName, _title, _type, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyCommandDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyCommand",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFullName=string.IsNullOrWhiteSpace(_fullName) ? _fullName : ReplaceArabicWithPersianChars(_fullName),ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AType=_type,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyCommand(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, Guid? _applicationID, string _name, string _fullName, string _title, byte? _type, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyCommand(_isNewRecord, _id, _parentID, _node, _applicationID, _name, _fullName, _title, _type, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetPositionRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetPositionRoles(Guid? _positionID, string _roleIDs, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetPositionRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@ARoleIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_roleIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_roleIDs) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetPositionRolesAsync(Guid? _positionID, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetPositionRoles(_positionID, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetPositionRolesDapperAsync<T>(Guid? _positionID, string _roleIDs, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetPositionRoles",new {APositionID=_positionID,ARoleIDs=string.IsNullOrWhiteSpace(_roleIDs) ? _roleIDs : ReplaceArabicWithPersianChars(_roleIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetPositionRoles(Guid? _positionID, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetPositionRoles(_positionID, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyDepartment
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyDepartment(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyDepartment", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@AProvinceID", IsOutput = false, Value = _provinceID == null ? DBNull.Value : (object)_provinceID }, 
-					new Parameter { Name = "@AAddress", IsOutput = false, Value = string.IsNullOrWhiteSpace(_address) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_address) }, 
-					new Parameter { Name = "@APostalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_postalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_postalCode) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyDepartmentAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyDepartment(_isNewRecord, _id, _parentID, _node, _type, _code, _name, _enabled, _provinceID, _address, _postalCode, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyDepartmentDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyDepartment",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AType=_type,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEnabled=_enabled,AProvinceID=_provinceID,AAddress=string.IsNullOrWhiteSpace(_address) ? _address : ReplaceArabicWithPersianChars(_address),APostalCode=string.IsNullOrWhiteSpace(_postalCode) ? _postalCode : ReplaceArabicWithPersianChars(_postalCode),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyDepartment(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _code, string _name, bool? _enabled, Guid? _provinceID, string _address, string _postalCode, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyDepartment(_isNewRecord, _id, _parentID, _node, _type, _code, _name, _enabled, _provinceID, _address, _postalCode, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyDynamicPermission
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyDynamicPermission(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyDynamicPermission", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
-					new Parameter { Name = "@AOrder", IsOutput = false, Value = _order == null ? DBNull.Value : (object)_order }, 
-					new Parameter { Name = "@ADetails", IsOutput = false, Value = string.IsNullOrWhiteSpace(_details) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_details) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyDynamicPermissionAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyDynamicPermission(_isNewRecord, _id, _applicationID, _objectID, _order, _details, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyDynamicPermissionDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyDynamicPermission",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AObjectID=_objectID,AOrder=_order,ADetails=string.IsNullOrWhiteSpace(_details) ? _details : ReplaceArabicWithPersianChars(_details)} , timeout );
-}
-
-public ResultSet ModifyDynamicPermission(bool? _isNewRecord, Guid? _id, Guid? _applicationID, Guid? _objectID, int? _order, string _details, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyDynamicPermission(_isNewRecord, _id, _applicationID, _objectID, _order, _details, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionDepartmentMapping
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionDepartmentMapping(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionDepartmentMapping", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionDepartmentMappingAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionDepartmentMapping(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionDepartmentMappingDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionDepartmentMapping",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPositionDepartmentMapping(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionDepartmentMapping(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyPlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyPlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@ANode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_node) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_node) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
-					new Parameter { Name = "@ALatinName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_latinName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_latinName) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyPlaceAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _node, _type, _name, _code, _latinName, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyPlaceDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyPlace",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,ANode=string.IsNullOrWhiteSpace(_node) ? _node : ReplaceArabicWithPersianChars(_node),AType=_type,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),ALatinName=string.IsNullOrWhiteSpace(_latinName) ? _latinName : ReplaceArabicWithPersianChars(_latinName),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, string _node, byte? _type, string _name, string _code, string _latinName, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _node, _type, _name, _code, _latinName, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyPosition(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ARoleIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_roleIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_roleIDs) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyPositionAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPosition(_isNewRecord, _id, _parentID, _applicationID, _departmentID, _userID, _type, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyPosition",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,AApplicationID=_applicationID,ADepartmentID=_departmentID,AUserID=_userID,AType=_type,ARoleIDs=string.IsNullOrWhiteSpace(_roleIDs) ? _roleIDs : ReplaceArabicWithPersianChars(_roleIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyPosition(bool? _isNewRecord, Guid? _id, Guid? _parentID, Guid? _applicationID, Guid? _departmentID, Guid? _userID, byte? _type, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPosition(_isNewRecord, _id, _parentID, _applicationID, _departmentID, _userID, _type, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyPositionHistory
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyPositionHistory(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyPositionHistory", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ALetterNumber", IsOutput = false, Value = string.IsNullOrWhiteSpace(_letterNumber) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_letterNumber) }, 
-					new Parameter { Name = "@ADate", IsOutput = false, Value = _date == null ? DBNull.Value : (object)_date }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
-					new Parameter { Name = "@ACreatorUserID", IsOutput = false, Value = _creatorUserID == null ? DBNull.Value : (object)_creatorUserID }, 
-					new Parameter { Name = "@ACreatorPositionID", IsOutput = false, Value = _creatorPositionID == null ? DBNull.Value : (object)_creatorPositionID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyPositionHistoryAsync(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPositionHistory(_isNewRecord, _id, _positionID, _userID, _letterNumber, _date, _comment, _creatorUserID, _creatorPositionID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionHistoryDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyPositionHistory",new {AIsNewRecord=_isNewRecord,AID=_id,APositionID=_positionID,AUserID=_userID,ALetterNumber=string.IsNullOrWhiteSpace(_letterNumber) ? _letterNumber : ReplaceArabicWithPersianChars(_letterNumber),ADate=_date,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ACreatorUserID=_creatorUserID,ACreatorPositionID=_creatorPositionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyPositionHistory(bool? _isNewRecord, Guid? _id, Guid? _positionID, Guid? _userID, string _letterNumber, DateTime? _date, string _comment, Guid? _creatorUserID, Guid? _creatorPositionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPositionHistory(_isNewRecord, _id, _positionID, _userID, _letterNumber, _date, _comment, _creatorUserID, _creatorPositionID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyPositionType
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyPositionType(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyPositionType", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyPositionTypeAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPositionType(_isNewRecord, _id, _parentID, _positionType, _userType, _applicationID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyPositionTypeDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyPositionType",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,APositionType=_positionType,AUserType=_userType,AApplicationID=_applicationID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyPositionType(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _positionType, byte? _userType, Guid? _applicationID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPositionType(_isNewRecord, _id, _parentID, _positionType, _userType, _applicationID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyRefreshToken
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyRefreshToken(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyRefreshToken", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AIssuedDate", IsOutput = false, Value = _issuedDate == null ? DBNull.Value : (object)_issuedDate }, 
-					new Parameter { Name = "@AExpireDate", IsOutput = false, Value = _expireDate == null ? DBNull.Value : (object)_expireDate }, 
-					new Parameter { Name = "@AProtectedTicket", IsOutput = false, Value = string.IsNullOrWhiteSpace(_protectedTicket) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_protectedTicket) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyRefreshTokenAsync(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyRefreshToken(_isNewRecord, _id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyRefreshTokenDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyRefreshToken",new {AIsNewRecord=_isNewRecord,AID=_id,AUserID=_userID,AIssuedDate=_issuedDate,AExpireDate=_expireDate,AProtectedTicket=string.IsNullOrWhiteSpace(_protectedTicket) ? _protectedTicket : ReplaceArabicWithPersianChars(_protectedTicket)} , timeout );
-}
-
-public ResultSet ModifyRefreshToken(bool? _isNewRecord, Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyRefreshToken(_isNewRecord, _id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyRole
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyRole(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyRole", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@APermissions", IsOutput = false, Value = string.IsNullOrWhiteSpace(_permissions) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_permissions) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyRoleAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyRole(_isNewRecord, _id, _applicationID, _name, _permissions, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyRoleDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyRole",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APermissions=string.IsNullOrWhiteSpace(_permissions) ? _permissions : ReplaceArabicWithPersianChars(_permissions),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyRole(bool? _isNewRecord, Guid? _id, Guid? _applicationID, string _name, string _permissions, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyRole(_isNewRecord, _id, _applicationID, _name, _permissions, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteApplication
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteApplication(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteApplication", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteApplicationAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteApplication(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteApplicationDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteApplication",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteApplication(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteApplication(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyUserSetting
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyUserSetting(Guid? _userID, string _setting, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyUserSetting", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ASetting", IsOutput = false, Value = string.IsNullOrWhiteSpace(_setting) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_setting) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyUserSettingAsync(Guid? _userID, string _setting, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyUserSetting(_userID, _setting, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyUserSettingDapperAsync<T>(Guid? _userID, string _setting, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyUserSetting",new {AUserID=_userID,ASetting=string.IsNullOrWhiteSpace(_setting) ? _setting : ReplaceArabicWithPersianChars(_setting)} , timeout );
-}
-
-public ResultSet ModifyUserSetting(Guid? _userID, string _setting, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyUserSetting(_userID, _setting, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region CreateRefreshToken
-
-public System.Data.SqlClient.SqlCommand GetCommand_CreateRefreshToken(Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spCreateRefreshToken", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AIssuedDate", IsOutput = false, Value = _issuedDate == null ? DBNull.Value : (object)_issuedDate }, 
-					new Parameter { Name = "@AExpireDate", IsOutput = false, Value = _expireDate == null ? DBNull.Value : (object)_expireDate }, 
-					new Parameter { Name = "@AProtectedTicket", IsOutput = false, Value = string.IsNullOrWhiteSpace(_protectedTicket) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_protectedTicket) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> CreateRefreshTokenAsync(Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	using(var cmd = GetCommand_CreateRefreshToken(_id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> CreateRefreshTokenDapperAsync<T>(Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spCreateRefreshToken",new {AID=_id,AUserID=_userID,AIssuedDate=_issuedDate,AExpireDate=_expireDate,AProtectedTicket=string.IsNullOrWhiteSpace(_protectedTicket) ? _protectedTicket : ReplaceArabicWithPersianChars(_protectedTicket)} , timeout );
-}
-
-public ResultSet CreateRefreshToken(Guid? _id, Guid? _userID, DateTime? _issuedDate, DateTime? _expireDate, string _protectedTicket, int? timeout = null)
-{
-	using(var cmd = GetCommand_CreateRefreshToken(_id, _userID, _issuedDate, _expireDate, _protectedTicket, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyWebServiceUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyWebServiceUser(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyWebServiceUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-					new Parameter { Name = "@AOrganID", IsOutput = false, Value = _organID == null ? DBNull.Value : (object)_organID }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
-					new Parameter { Name = "@ACreatorID", IsOutput = false, Value = _creatorID == null ? DBNull.Value : (object)_creatorID }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyWebServiceUserAsync(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyWebServiceUser(_isNewRecord, _id, _userName, _password, _organID, _enabled, _passwordExpireDate, _creatorID, _comment, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyWebServiceUserDapperAsync<T>(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyWebServiceUser",new {AIsNewRecord=_isNewRecord,AID=_id,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),AOrganID=_organID,AEnabled=_enabled,APasswordExpireDate=_passwordExpireDate,ACreatorID=_creatorID,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment)} , timeout );
-}
-
-public ResultSet ModifyWebServiceUser(bool? _isNewRecord, Guid? _id, string _userName, string _password, Guid? _organID, bool? _enabled, DateTime? _passwordExpireDate, Guid? _creatorID, string _comment, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyWebServiceUser(_isNewRecord, _id, _userName, _password, _organID, _enabled, _passwordExpireDate, _creatorID, _comment, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region RemoveUserFromPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_RemoveUserFromPosition(Guid? _positionID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spRemoveUserFromPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> RemoveUserFromPositionAsync(Guid? _positionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveUserFromPosition(_positionID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> RemoveUserFromPositionDapperAsync<T>(Guid? _positionID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spRemoveUserFromPosition",new {APositionID=_positionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet RemoveUserFromPosition(Guid? _positionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveUserFromPosition(_positionID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteClient
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteClient(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteClient", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteClientAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteClient(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteClientDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteClient",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteClient(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteClient(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteCommand
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteCommand(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteCommand", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteCommandAsync(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteCommand(_id, _applicationID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteCommandDapperAsync<T>(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteCommand",new {AID=_id,AApplicationID=_applicationID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteCommand(Guid? _id, Guid? _applicationID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteCommand(_id, _applicationID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetDefaultPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetDefaultPosition(Guid? _positionID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetDefaultPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetDefaultPositionAsync(Guid? _positionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetDefaultPosition(_positionID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetDefaultPositionDapperAsync<T>(Guid? _positionID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetDefaultPosition",new {APositionID=_positionID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetDefaultPosition(Guid? _positionID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetDefaultPosition(_positionID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteDepartment
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteDepartment(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteDepartment", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteDepartmentAsync(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteDepartment(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteDepartmentDapperAsync<T>(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteDepartment",new {AID=_id,ACurrentUserID=_currentUserID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteDepartment(Guid? _id, Guid? _currentUserID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteDepartment(_id, _currentUserID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyMessageSeen
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyMessageSeen(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyMessageSeen", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyMessageSeenAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessageSeen(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyMessageSeenDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyMessageSeen",new {AID=_id} , timeout );
-}
-
-public ResultSet ModifyMessageSeen(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessageSeen(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteDynamicPermission
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteDynamicPermission(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteDynamicPermission", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteDynamicPermissionAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteDynamicPermission(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteDynamicPermissionDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteDynamicPermission",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteDynamicPermission(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteDynamicPermission(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyMessage(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _content, int? _parentID, byte? _sendType, Guid? _senderID, string _receiverUserIDs, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@ASendType", IsOutput = false, Value = _sendType == null ? DBNull.Value : (object)_sendType }, 
-					new Parameter { Name = "@ASenderID", IsOutput = false, Value = _senderID == null ? DBNull.Value : (object)_senderID }, 
-					new Parameter { Name = "@AReceiverUserIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_receiverUserIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_receiverUserIDs) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyMessageAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _content, int? _parentID, byte? _sendType, Guid? _senderID, string _receiverUserIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessage(_isNewRecord, _id, _applicationID, _type, _title, _content, _parentID, _sendType, _senderID, _receiverUserIDs, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyMessageDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _content, int? _parentID, byte? _sendType, Guid? _senderID, string _receiverUserIDs, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyMessage",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AType=_type,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),AParentID=_parentID,ASendType=_sendType,ASenderID=_senderID,AReceiverUserIDs=string.IsNullOrWhiteSpace(_receiverUserIDs) ? _receiverUserIDs : ReplaceArabicWithPersianChars(_receiverUserIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyMessage(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _content, int? _parentID, byte? _sendType, Guid? _senderID, string _receiverUserIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyMessage(_isNewRecord, _id, _applicationID, _type, _title, _content, _parentID, _sendType, _senderID, _receiverUserIDs, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetPositionTypeRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetPositionTypeRoles(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetPositionTypeRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-					new Parameter { Name = "@ARoleIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_roleIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_roleIDs) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetPositionTypeRolesAsync(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetPositionTypeRoles(_applicationID, _positionType, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetPositionTypeRolesDapperAsync<T>(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetPositionTypeRoles",new {AApplicationID=_applicationID,APositionType=_positionType,ARoleIDs=string.IsNullOrWhiteSpace(_roleIDs) ? _roleIDs : ReplaceArabicWithPersianChars(_roleIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetPositionTypeRoles(Guid? _applicationID, byte? _positionType, string _roleIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetPositionTypeRoles(_applicationID, _positionType, _roleIDs, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetSecurityStampByCellPhone
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetSecurityStampByCellPhone(string _cellPhone, string _stamp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetSecurityStampByCellPhone", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
-					new Parameter { Name = "@AStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_stamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_stamp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetSecurityStampByCellPhoneAsync(string _cellPhone, string _stamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStampByCellPhone(_cellPhone, _stamp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetSecurityStampByCellPhoneDapperAsync<T>(string _cellPhone, string _stamp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetSecurityStampByCellPhone",new {ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AStamp=string.IsNullOrWhiteSpace(_stamp) ? _stamp : ReplaceArabicWithPersianChars(_stamp)} , timeout );
-}
-
-public ResultSet SetSecurityStampByCellPhone(string _cellPhone, string _stamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStampByCellPhone(_cellPhone, _stamp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetSecurityStamp
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetSecurityStamp(Guid? _id, string _securityStamp, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetSecurityStamp", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ASecurityStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_securityStamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_securityStamp) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetSecurityStampAsync(Guid? _id, string _securityStamp, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStamp(_id, _securityStamp, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetSecurityStampDapperAsync<T>(Guid? _id, string _securityStamp, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetSecurityStamp",new {AID=_id,ASecurityStamp=string.IsNullOrWhiteSpace(_securityStamp) ? _securityStamp : ReplaceArabicWithPersianChars(_securityStamp),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetSecurityStamp(Guid? _id, string _securityStamp, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStamp(_id, _securityStamp, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetSecurityStampByEmail
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetSecurityStampByEmail(string _email, string _stamp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetSecurityStampByEmail", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@AStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_stamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_stamp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetSecurityStampByEmailAsync(string _email, string _stamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStampByEmail(_email, _stamp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetSecurityStampByEmailDapperAsync<T>(string _email, string _stamp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetSecurityStampByEmail",new {AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),AStamp=string.IsNullOrWhiteSpace(_stamp) ? _stamp : ReplaceArabicWithPersianChars(_stamp)} , timeout );
-}
-
-public ResultSet SetSecurityStampByEmail(string _email, string _stamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetSecurityStampByEmail(_email, _stamp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetUserPassword
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetUserPassword(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetUserPassword", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetUserPasswordAsync(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetUserPassword(_id, _password, _passwordExpireDate, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetUserPasswordDapperAsync<T>(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetUserPassword",new {AID=_id,APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),APasswordExpireDate=_passwordExpireDate,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetUserPassword(Guid? _id, string _password, DateTime? _passwordExpireDate, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetUserPassword(_id, _password, _passwordExpireDate, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region VerifyUserCellPhone
-
-public System.Data.SqlClient.SqlCommand GetCommand_VerifyUserCellPhone(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spVerifyUserCellPhone", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AIsVerified", IsOutput = false, Value = _isVerified == null ? DBNull.Value : (object)_isVerified }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> VerifyUserCellPhoneAsync(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_VerifyUserCellPhone(_userID, _isVerified, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> VerifyUserCellPhoneDapperAsync<T>(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spVerifyUserCellPhone",new {AUserID=_userID,AIsVerified=_isVerified,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet VerifyUserCellPhone(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_VerifyUserCellPhone(_userID, _isVerified, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeletePlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeletePlace(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeletePlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeletePlaceAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeletePlaceDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeletePlace",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeletePlace(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region VerifyUserEmail
-
-public System.Data.SqlClient.SqlCommand GetCommand_VerifyUserEmail(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spVerifyUserEmail", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AIsVerified", IsOutput = false, Value = _isVerified == null ? DBNull.Value : (object)_isVerified }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> VerifyUserEmailAsync(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_VerifyUserEmail(_userID, _isVerified, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> VerifyUserEmailDapperAsync<T>(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spVerifyUserEmail",new {AUserID=_userID,AIsVerified=_isVerified,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet VerifyUserEmail(Guid? _userID, bool? _isVerified, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_VerifyUserEmail(_userID, _isVerified, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetUserWithSecurityStamp
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetUserWithSecurityStamp(Guid? _userID, string _userName, string _securityStamp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetUserWithSecurityStamp", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@ASecurityStamp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_securityStamp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_securityStamp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetUserWithSecurityStampAsync(Guid? _userID, string _userName, string _securityStamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserWithSecurityStamp(_userID, _userName, _securityStamp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetUserWithSecurityStampDapperAsync<T>(Guid? _userID, string _userName, string _securityStamp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetUserWithSecurityStamp",new {AUserID=_userID,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),ASecurityStamp=string.IsNullOrWhiteSpace(_securityStamp) ? _securityStamp : ReplaceArabicWithPersianChars(_securityStamp)} , timeout );
-}
-
-public ResultSet GetUserWithSecurityStamp(Guid? _userID, string _userName, string _securityStamp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserWithSecurityStamp(_userID, _userName, _securityStamp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeletePosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeletePosition(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeletePosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ARemoverID", IsOutput = false, Value = _removerID == null ? DBNull.Value : (object)_removerID }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeletePositionAsync(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePosition(_id, _removerID, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeletePositionDapperAsync<T>(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeletePosition",new {AID=_id,ARemoverID=_removerID,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeletePosition(Guid? _id, Guid? _removerID, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePosition(_id, _removerID, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeletePositionHistory
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeletePositionHistory(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeletePositionHistory", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeletePositionHistoryAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePositionHistory(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeletePositionHistoryDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeletePositionHistory",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeletePositionHistory(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePositionHistory(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteRefreshToken
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteRefreshToken(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteRefreshToken", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteRefreshTokenAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteRefreshToken(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteRefreshTokenDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteRefreshToken",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteRefreshToken(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteRefreshToken(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteRole
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteRole(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteRole", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteRoleAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteRole(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteRoleDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteRole",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteRole(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteRole(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteUser(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteUserAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteUser(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteUserDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteUser",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeleteUser(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteUser(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteWebServiceUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteWebServiceUser(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spDeleteWebServiceUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteWebServiceUserAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteWebServiceUser(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteWebServiceUserDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spDeleteWebServiceUser",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteWebServiceUser(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteWebServiceUser(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplication
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplication(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetApplication", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplication(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetApplication",new {AID=_id} , timeout );
-}
-
-public ResultSet GetApplication(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplication(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionRoles(Guid? _positionID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionRolesAsync(Guid? _positionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionRoles(_positionID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionRolesDapperAsync<T>(Guid? _positionID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionRoles",new {APositionID=_positionID} , timeout );
-}
-
-public ResultSet GetPositionRoles(Guid? _positionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionRoles(_positionID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetApplications
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetApplications(string _name, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetApplications", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetApplicationsAsync(string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplications(_name, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetApplicationsDapperAsync<T>(string _name, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetApplications",new {AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
-}
-
-public ResultSet GetApplications(string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetApplications(_name, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SetRolePermission
-
-public System.Data.SqlClient.SqlCommand GetCommand_SetRolePermission(Guid? _roleID, string _permissionIDs, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spSetRolePermission", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
-					new Parameter { Name = "@APermissionIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_permissionIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_permissionIDs) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SetRolePermissionAsync(Guid? _roleID, string _permissionIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetRolePermission(_roleID, _permissionIDs, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SetRolePermissionDapperAsync<T>(Guid? _roleID, string _permissionIDs, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spSetRolePermission",new {ARoleID=_roleID,APermissionIDs=string.IsNullOrWhiteSpace(_permissionIDs) ? _permissionIDs : ReplaceArabicWithPersianChars(_permissionIDs),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet SetRolePermission(Guid? _roleID, string _permissionIDs, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_SetRolePermission(_roleID, _permissionIDs, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetClient
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetClient(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetClient", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetClientAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetClient(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetClientDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetClient",new {AID=_id} , timeout );
-}
-
-public ResultSet GetClient(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetClient(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetClients
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetClients(Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetClients", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetClientsAsync(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetClients(_applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetClientsDapperAsync<T>(Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetClients",new {AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetClients(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetClients(_applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyUser(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-					new Parameter { Name = "@APasswordExpireDate", IsOutput = false, Value = _passwordExpireDate == null ? DBNull.Value : (object)_passwordExpireDate }, 
-					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
-					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AEmailVerified", IsOutput = false, Value = _emailVerified == null ? DBNull.Value : (object)_emailVerified }, 
-					new Parameter { Name = "@ACellPhoneVerified", IsOutput = false, Value = _cellPhoneVerified == null ? DBNull.Value : (object)_cellPhoneVerified }, 
-					new Parameter { Name = "@AForeigner", IsOutput = false, Value = _foreigner == null ? DBNull.Value : (object)_foreigner }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyUserAsync(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyUser(_isNewRecord, _id, _enabled, _username, _password, _passwordExpireDate, _firstName, _lastName, _nationalCode, _email, _cellPhone, _applicationID, _emailVerified, _cellPhoneVerified, _foreigner, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyUserDapperAsync<T>(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyUser",new {AIsNewRecord=_isNewRecord,AID=_id,AEnabled=_enabled,AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),APasswordExpireDate=_passwordExpireDate,AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AApplicationID=_applicationID,AEmailVerified=_emailVerified,ACellPhoneVerified=_cellPhoneVerified,AForeigner=_foreigner,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyUser(bool? _isNewRecord, Guid? _id, bool? _enabled, string _username, string _password, DateTime? _passwordExpireDate, string _firstName, string _lastName, string _nationalCode, string _email, string _cellPhone, Guid? _applicationID, bool? _emailVerified, bool? _cellPhoneVerified, bool? _foreigner, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyUser(_isNewRecord, _id, _enabled, _username, _password, _passwordExpireDate, _firstName, _lastName, _nationalCode, _email, _cellPhone, _applicationID, _emailVerified, _cellPhoneVerified, _foreigner, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetCommand
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetCommand(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetCommand", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetCommandAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommand(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetCommandDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetCommand",new {AID=_id} , timeout );
-}
-
-public ResultSet GetCommand(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommand(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ChangeUserAvailability
-
-public System.Data.SqlClient.SqlCommand GetCommand_ChangeUserAvailability(Guid? _id, string _username, bool? _enabled, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spChangeUserAvailability", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
-					new Parameter { Name = "@AEnabled", IsOutput = false, Value = _enabled == null ? DBNull.Value : (object)_enabled }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ChangeUserAvailabilityAsync(Guid? _id, string _username, bool? _enabled, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ChangeUserAvailability(_id, _username, _enabled, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ChangeUserAvailabilityDapperAsync<T>(Guid? _id, string _username, bool? _enabled, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spChangeUserAvailability",new {AID=_id,AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),AEnabled=_enabled,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ChangeUserAvailability(Guid? _id, string _username, bool? _enabled, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ChangeUserAvailability(_id, _username, _enabled, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetCommands
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetCommands(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetCommands", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetCommandsAsync(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommands(_applicationID, _roleID, _parentID, _name, _title, _type, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetCommandsDapperAsync<T>(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetCommands",new {AApplicationID=_applicationID,ARoleID=_roleID,AParentID=_parentID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AType=_type} , timeout );
-}
-
-public ResultSet GetCommands(Guid? _applicationID, Guid? _roleID, Guid? _parentID, string _name, string _title, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommands(_applicationID, _roleID, _parentID, _name, _title, _type, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDepartment
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDepartment(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDepartment", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDepartmentAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDepartment(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDepartmentDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDepartment",new {AID=_id} , timeout );
-}
-
-public ResultSet GetDepartment(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDepartment(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDepartments
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDepartments(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDepartments", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AProvinceID", IsOutput = false, Value = _provinceID == null ? DBNull.Value : (object)_provinceID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ACode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_code) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_code) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@ASearchWithHierarchy", IsOutput = false, Value = _searchWithHierarchy == null ? DBNull.Value : (object)_searchWithHierarchy }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDepartmentsAsync(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDepartments(_parentID, _provinceID, _type, _code, _name, _searchWithHierarchy, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDepartmentsDapperAsync<T>(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDepartments",new {AParentID=_parentID,AProvinceID=_provinceID,AType=_type,ACode=string.IsNullOrWhiteSpace(_code) ? _code : ReplaceArabicWithPersianChars(_code),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ASearchWithHierarchy=_searchWithHierarchy,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetDepartments(Guid? _parentID, Guid? _provinceID, byte? _type, string _code, string _name, bool? _searchWithHierarchy, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDepartments(_parentID, _provinceID, _type, _code, _name, _searchWithHierarchy, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDynamicPermission
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermission(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDynamicPermission", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDynamicPermissionAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermission(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDynamicPermission",new {AID=_id} , timeout );
-}
-
-public ResultSet GetDynamicPermission(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermission(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDynamicPermissionDetails
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionDetails(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDynamicPermissionDetails", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ADynamicPermissionIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_dynamicPermissionIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_dynamicPermissionIDs) }, 
-					new Parameter { Name = "@ADynamicPermissionID", IsOutput = false, Value = _dynamicPermissionID == null ? DBNull.Value : (object)_dynamicPermissionID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDynamicPermissionDetailsAsync(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionDetails(_dynamicPermissionIDs, _dynamicPermissionID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionDetailsDapperAsync<T>(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionDetails",new {ADynamicPermissionIDs=string.IsNullOrWhiteSpace(_dynamicPermissionIDs) ? _dynamicPermissionIDs : ReplaceArabicWithPersianChars(_dynamicPermissionIDs),ADynamicPermissionID=_dynamicPermissionID} , timeout );
-}
-
-public ResultSet GetDynamicPermissionDetails(string _dynamicPermissionIDs, Guid? _dynamicPermissionID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionDetails(_dynamicPermissionIDs, _dynamicPermissionID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDynamicPermissionObjectsByPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionObjectsByPosition(Guid? _positionID, Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDynamicPermissionObjectsByPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDynamicPermissionObjectsByPositionAsync(Guid? _positionID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionObjectsByPosition(_positionID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionObjectsByPositionDapperAsync<T>(Guid? _positionID, Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionObjectsByPosition",new {APositionID=_positionID,AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetDynamicPermissionObjectsByPosition(Guid? _positionID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionObjectsByPosition(_positionID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDynamicPermissionPositions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissionPositions(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDynamicPermissionPositions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDynamicPermissionPositionsAsync(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionPositions(_objectID, _applicationID, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionPositionsDapperAsync<T>(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDynamicPermissionPositions",new {AObjectID=_objectID,AApplicationID=_applicationID,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetDynamicPermissionPositions(Guid? _objectID, Guid? _applicationID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissionPositions(_objectID, _applicationID, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetDynamicPermissions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetDynamicPermissions(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetDynamicPermissions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AObjectID", IsOutput = false, Value = _objectID == null ? DBNull.Value : (object)_objectID }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetDynamicPermissionsAsync(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissions(_objectID, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetDynamicPermissionsDapperAsync<T>(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetDynamicPermissions",new {AObjectID=_objectID,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetDynamicPermissions(Guid? _objectID, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetDynamicPermissions(_objectID, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetModifyUserValidation
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetModifyUserValidation(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetModifyUserValidation", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
-					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetModifyUserValidationAsync(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetModifyUserValidation(_id, _nationalCode, _username, _cellPhone, _email, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetModifyUserValidationDapperAsync<T>(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetModifyUserValidation",new {AID=_id,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email)} , timeout );
-}
-
-public ResultSet GetModifyUserValidation(Guid? _id, string _nationalCode, string _username, string _cellPhone, string _email, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetModifyUserValidation(_id, _nationalCode, _username, _cellPhone, _email, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ResetUserPassword
-
-public System.Data.SqlClient.SqlCommand GetCommand_ResetUserPassword(Guid? _id, string _userName, string _password, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spResetUserPassword", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ResetUserPasswordAsync(Guid? _id, string _userName, string _password, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ResetUserPassword(_id, _userName, _password, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ResetUserPasswordDapperAsync<T>(Guid? _id, string _userName, string _password, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spResetUserPassword",new {AID=_id,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ResetUserPassword(Guid? _id, string _userName, string _password, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ResetUserPassword(_id, _userName, _password, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetOnlineUsersAndPositionsCount
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetOnlineUsersAndPositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetOnlineUsersAndPositionsCount", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AAccessTokenExpireTimeSpan", IsOutput = false, Value = _accessTokenExpireTimeSpan == null ? DBNull.Value : (object)_accessTokenExpireTimeSpan }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetOnlineUsersAndPositionsCountAsync(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOnlineUsersAndPositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetOnlineUsersAndPositionsCountDapperAsync<T>(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetOnlineUsersAndPositionsCount",new {AApplicationID=_applicationID,AAccessTokenExpireTimeSpan=_accessTokenExpireTimeSpan} , timeout );
-}
-
-public ResultSet GetOnlineUsersAndPositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOnlineUsersAndPositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetOnlinePositionsCount
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetOnlinePositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetOnlinePositionsCount", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AAccessTokenExpireTimeSpan", IsOutput = false, Value = _accessTokenExpireTimeSpan == null ? DBNull.Value : (object)_accessTokenExpireTimeSpan }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetOnlinePositionsCountAsync(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOnlinePositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetOnlinePositionsCountDapperAsync<T>(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetOnlinePositionsCount",new {AApplicationID=_applicationID,AAccessTokenExpireTimeSpan=_accessTokenExpireTimeSpan} , timeout );
-}
-
-public ResultSet GetOnlinePositionsCount(Guid? _applicationID, int? _accessTokenExpireTimeSpan, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOnlinePositionsCount(_applicationID, _accessTokenExpireTimeSpan, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyNotification
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyNotification(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _abstract, string _content, bool? _enable, DateTime? _releaseDate, DateTime? _dueDate, int? _order, Guid? _userID, string _userTypes, bool? _allUsers, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyNotification", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ATitle", IsOutput = false, Value = string.IsNullOrWhiteSpace(_title) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_title) }, 
-					new Parameter { Name = "@AAbstract", IsOutput = false, Value = string.IsNullOrWhiteSpace(_abstract) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_abstract) }, 
-					new Parameter { Name = "@AContent", IsOutput = false, Value = string.IsNullOrWhiteSpace(_content) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_content) }, 
-					new Parameter { Name = "@AEnable", IsOutput = false, Value = _enable == null ? DBNull.Value : (object)_enable }, 
-					new Parameter { Name = "@AReleaseDate", IsOutput = false, Value = _releaseDate == null ? DBNull.Value : (object)_releaseDate }, 
-					new Parameter { Name = "@ADueDate", IsOutput = false, Value = _dueDate == null ? DBNull.Value : (object)_dueDate }, 
-					new Parameter { Name = "@AOrder", IsOutput = false, Value = _order == null ? DBNull.Value : (object)_order }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AUserTypes", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userTypes) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userTypes) }, 
-					new Parameter { Name = "@AAllUsers", IsOutput = false, Value = _allUsers == null ? DBNull.Value : (object)_allUsers }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyNotificationAsync(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _abstract, string _content, bool? _enable, DateTime? _releaseDate, DateTime? _dueDate, int? _order, Guid? _userID, string _userTypes, bool? _allUsers, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyNotification(_isNewRecord, _id, _applicationID, _type, _title, _abstract, _content, _enable, _releaseDate, _dueDate, _order, _userID, _userTypes, _allUsers, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyNotificationDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _abstract, string _content, bool? _enable, DateTime? _releaseDate, DateTime? _dueDate, int? _order, Guid? _userID, string _userTypes, bool? _allUsers, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyNotification",new {AIsNewRecord=_isNewRecord,AID=_id,AApplicationID=_applicationID,AType=_type,ATitle=string.IsNullOrWhiteSpace(_title) ? _title : ReplaceArabicWithPersianChars(_title),AAbstract=string.IsNullOrWhiteSpace(_abstract) ? _abstract : ReplaceArabicWithPersianChars(_abstract),AContent=string.IsNullOrWhiteSpace(_content) ? _content : ReplaceArabicWithPersianChars(_content),AEnable=_enable,AReleaseDate=_releaseDate,ADueDate=_dueDate,AOrder=_order,AUserID=_userID,AUserTypes=string.IsNullOrWhiteSpace(_userTypes) ? _userTypes : ReplaceArabicWithPersianChars(_userTypes),AAllUsers=_allUsers,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyNotification(bool? _isNewRecord, Guid? _id, Guid? _applicationID, byte? _type, string _title, string _abstract, string _content, bool? _enable, DateTime? _releaseDate, DateTime? _dueDate, int? _order, Guid? _userID, string _userTypes, bool? _allUsers, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyNotification(_isNewRecord, _id, _applicationID, _type, _title, _abstract, _content, _enable, _releaseDate, _dueDate, _order, _userID, _userTypes, _allUsers, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPlace(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPlaceAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlace(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPlaceDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPlace",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPlace(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlace(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPlaces
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPlaces", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@AAncestorLevel", IsOutput = false, Value = _ancestorLevel == null ? DBNull.Value : (object)_ancestorLevel }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPlacesAsync(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPlacesDapperAsync<T>(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPlaces",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AParentID=_parentID,AType=_type,AAncestorLevel=_ancestorLevel,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
-}
-
-public ResultSet GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPosition(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPosition(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPosition",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPosition(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPosition(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionDepartmentMappings
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionDepartmentMappings(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionDepartmentMappings", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-					new Parameter { Name = "@ADepartmentType", IsOutput = false, Value = _departmentType == null ? DBNull.Value : (object)_departmentType }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionDepartmentMappingsAsync(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionDepartmentMappings(_applicationID, _positionType, _departmentType, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionDepartmentMappingsDapperAsync<T>(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionDepartmentMappings",new {AApplicationID=_applicationID,APositionType=_positionType,ADepartmentType=_departmentType,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetPositionDepartmentMappings(Guid? _applicationID, byte? _positionType, byte? _departmentType, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionDepartmentMappings(_applicationID, _positionType, _departmentType, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionHistory
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionHistory(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionHistory", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionHistoryAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionHistory(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionHistoryDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionHistory",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPositionHistory(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionHistory(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionPermissions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionPermissions(Guid? _positionID, Guid? _commandID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionPermissions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@ACommandID", IsOutput = false, Value = _commandID == null ? DBNull.Value : (object)_commandID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionPermissionsAsync(Guid? _positionID, Guid? _commandID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionPermissions(_positionID, _commandID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionPermissionsDapperAsync<T>(Guid? _positionID, Guid? _commandID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionPermissions",new {APositionID=_positionID,ACommandID=_commandID} , timeout );
-}
-
-public ResultSet GetPositionPermissions(Guid? _positionID, Guid? _commandID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionPermissions(_positionID, _commandID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositions
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositions(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositions", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
-					new Parameter { Name = "@ADepartmentName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_departmentName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_departmentName) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ATypes", IsOutput = false, Value = string.IsNullOrWhiteSpace(_types) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_types) }, 
-					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
-					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
-					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
-					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionsAsync(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositions(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionsDapperAsync<T>(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositions",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AApplicationID=_applicationID,ADepartmentID=_departmentID,ADepartmentName=string.IsNullOrWhiteSpace(_departmentName) ? _departmentName : ReplaceArabicWithPersianChars(_departmentName),AType=_type,ATypes=string.IsNullOrWhiteSpace(_types) ? _types : ReplaceArabicWithPersianChars(_types),AUserType=_userType,AUserID=_userID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnableState=_enableState,ARoleID=_roleID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetPositions(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositions(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionHistorys
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionHistorys(Guid? _positionID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionHistorys", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionHistorysAsync(Guid? _positionID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionHistorys(_positionID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionHistorysDapperAsync<T>(Guid? _positionID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionHistorys",new {APositionID=_positionID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetPositionHistorys(Guid? _positionID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionHistorys(_positionID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionsWithRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionsWithRoles(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionsWithRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ADepartmentID", IsOutput = false, Value = _departmentID == null ? DBNull.Value : (object)_departmentID }, 
-					new Parameter { Name = "@ADepartmentName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_departmentName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_departmentName) }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ATypes", IsOutput = false, Value = string.IsNullOrWhiteSpace(_types) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_types) }, 
-					new Parameter { Name = "@AUserType", IsOutput = false, Value = _userType == null ? DBNull.Value : (object)_userType }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AFirstName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_firstName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_firstName) }, 
-					new Parameter { Name = "@ALastName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_lastName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_lastName) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
-					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
-					new Parameter { Name = "@ARoleID", IsOutput = false, Value = _roleID == null ? DBNull.Value : (object)_roleID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionsWithRolesAsync(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionsWithRoles(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionsWithRolesDapperAsync<T>(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionsWithRoles",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AApplicationID=_applicationID,ADepartmentID=_departmentID,ADepartmentName=string.IsNullOrWhiteSpace(_departmentName) ? _departmentName : ReplaceArabicWithPersianChars(_departmentName),AType=_type,ATypes=string.IsNullOrWhiteSpace(_types) ? _types : ReplaceArabicWithPersianChars(_types),AUserType=_userType,AUserID=_userID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AFirstName=string.IsNullOrWhiteSpace(_firstName) ? _firstName : ReplaceArabicWithPersianChars(_firstName),ALastName=string.IsNullOrWhiteSpace(_lastName) ? _lastName : ReplaceArabicWithPersianChars(_lastName),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnableState=_enableState,ARoleID=_roleID,APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetPositionsWithRoles(string _iDs, Guid? _applicationID, Guid? _departmentID, string _departmentName, byte? _type, string _types, byte? _userType, Guid? _userID, string _nationalCode, string _name, string _firstName, string _lastName, string _email, string _cellphone, byte? _enableState, Guid? _roleID, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionsWithRoles(_iDs, _applicationID, _departmentID, _departmentName, _type, _types, _userType, _userID, _nationalCode, _name, _firstName, _lastName, _email, _cellphone, _enableState, _roleID, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionType
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionType(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionType", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionTypeAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionType(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypeDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionType",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPositionType(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionType(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionTypeRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionTypeRoles(Guid? _applicationID, byte? _positionType, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionTypeRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionTypeRolesAsync(Guid? _applicationID, byte? _positionType, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionTypeRoles(_applicationID, _positionType, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypeRolesDapperAsync<T>(Guid? _applicationID, byte? _positionType, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionTypeRoles",new {AApplicationID=_applicationID,APositionType=_positionType} , timeout );
-}
-
-public ResultSet GetPositionTypeRoles(Guid? _applicationID, byte? _positionType, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionTypeRoles(_applicationID, _positionType, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPositionTypes
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPositionTypes(Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetPositionTypes", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPositionTypesAsync(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionTypes(_applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPositionTypesDapperAsync<T>(Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetPositionTypes",new {AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetPositionTypes(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPositionTypes(_applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetRefreshToken
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetRefreshToken(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetRefreshToken", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetRefreshTokenAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRefreshToken(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetRefreshTokenDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetRefreshToken",new {AID=_id} , timeout );
-}
-
-public ResultSet GetRefreshToken(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRefreshToken(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetRole
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetRole(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetRole", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetRoleAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRole(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetRoleDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetRole",new {AID=_id} , timeout );
-}
-
-public ResultSet GetRole(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRole(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetSecurityStamp
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetSecurityStamp(Guid? _userID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetSecurityStamp", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetSecurityStampAsync(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStamp(_userID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetSecurityStampDapperAsync<T>(Guid? _userID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetSecurityStamp",new {AUserID=_userID} , timeout );
-}
-
-public ResultSet GetSecurityStamp(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStamp(_userID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetRoles
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetRoles(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetRoles", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-					new Parameter { Name = "@APositionID", IsOutput = false, Value = _positionID == null ? DBNull.Value : (object)_positionID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetRolesAsync(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRoles(_applicationID, _name, _positionType, _positionID, _userID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetRolesDapperAsync<T>(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetRoles",new {AApplicationID=_applicationID,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),APositionType=_positionType,APositionID=_positionID,AUserID=_userID,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetRoles(Guid? _applicationID, string _name, byte? _positionType, Guid? _positionID, Guid? _userID, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetRoles(_applicationID, _name, _positionType, _positionID, _userID, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetSecurityStampByCellPhone
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetSecurityStampByCellPhone(string _cellPhone, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetSecurityStampByCellPhone", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ACellPhone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellPhone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellPhone) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetSecurityStampByCellPhoneAsync(string _cellPhone, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStampByCellPhone(_cellPhone, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetSecurityStampByCellPhoneDapperAsync<T>(string _cellPhone, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetSecurityStampByCellPhone",new {ACellPhone=string.IsNullOrWhiteSpace(_cellPhone) ? _cellPhone : ReplaceArabicWithPersianChars(_cellPhone)} , timeout );
-}
-
-public ResultSet GetSecurityStampByCellPhone(string _cellPhone, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStampByCellPhone(_cellPhone, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetSecurityStampByEmail
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetSecurityStampByEmail(string _email, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetSecurityStampByEmail", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetSecurityStampByEmailAsync(string _email, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStampByEmail(_email, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetSecurityStampByEmailDapperAsync<T>(string _email, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetSecurityStampByEmail",new {AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email)} , timeout );
-}
-
-public ResultSet GetSecurityStampByEmail(string _email, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSecurityStampByEmail(_email, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetSuperiorPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetSuperiorPosition(Guid? _magistrateID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetSuperiorPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AMagistrateID", IsOutput = false, Value = _magistrateID == null ? DBNull.Value : (object)_magistrateID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetSuperiorPositionAsync(Guid? _magistrateID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSuperiorPosition(_magistrateID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetSuperiorPositionDapperAsync<T>(Guid? _magistrateID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetSuperiorPosition",new {AMagistrateID=_magistrateID} , timeout );
-}
-
-public ResultSet GetSuperiorPosition(Guid? _magistrateID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetSuperiorPosition(_magistrateID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetUser(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetUserAsync(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUser(_id, _userName, _nationalCode, _email, _password, _applicationID, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetUserDapperAsync<T>(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetUser",new {AID=_id,AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password),AApplicationID=_applicationID,ACurrentUserID=_currentUserID} , timeout );
-}
-
-public ResultSet GetUser(Guid? _id, string _userName, string _nationalCode, string _email, string _password, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUser(_id, _userName, _nationalCode, _email, _password, _applicationID, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetUserByUserNameOrEmail
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetUserByUserNameOrEmail(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetUserByUserNameOrEmail", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUsername", IsOutput = false, Value = string.IsNullOrWhiteSpace(_username) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_username) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ACurrentUserID", IsOutput = false, Value = _currentUserID == null ? DBNull.Value : (object)_currentUserID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetUserByUserNameOrEmailAsync(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserByUserNameOrEmail(_username, _email, _applicationID, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetUserByUserNameOrEmailDapperAsync<T>(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetUserByUserNameOrEmail",new {AUsername=string.IsNullOrWhiteSpace(_username) ? _username : ReplaceArabicWithPersianChars(_username),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),AApplicationID=_applicationID,ACurrentUserID=_currentUserID} , timeout );
-}
-
-public ResultSet GetUserByUserNameOrEmail(string _username, string _email, Guid? _applicationID, Guid? _currentUserID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserByUserNameOrEmail(_username, _email, _applicationID, _currentUserID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetUsers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetUsers(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetUsers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ANationalCode", IsOutput = false, Value = string.IsNullOrWhiteSpace(_nationalCode) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_nationalCode) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@AEmail", IsOutput = false, Value = string.IsNullOrWhiteSpace(_email) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_email) }, 
-					new Parameter { Name = "@ACellphone", IsOutput = false, Value = string.IsNullOrWhiteSpace(_cellphone) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_cellphone) }, 
-					new Parameter { Name = "@AEnablOrDisable", IsOutput = false, Value = _enablOrDisable == null ? DBNull.Value : (object)_enablOrDisable }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetUsersAsync(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUsers(_applicationID, _nationalCode, _name, _email, _cellphone, _enablOrDisable, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetUsersDapperAsync<T>(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetUsers",new {AApplicationID=_applicationID,ANationalCode=string.IsNullOrWhiteSpace(_nationalCode) ? _nationalCode : ReplaceArabicWithPersianChars(_nationalCode),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),AEmail=string.IsNullOrWhiteSpace(_email) ? _email : ReplaceArabicWithPersianChars(_email),ACellphone=string.IsNullOrWhiteSpace(_cellphone) ? _cellphone : ReplaceArabicWithPersianChars(_cellphone),AEnablOrDisable=_enablOrDisable,APageSize=_pageSize,APageIndex=_pageIndex,ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp)} , timeout );
-}
-
-public ResultSet GetUsers(Guid? _applicationID, string _nationalCode, string _name, string _email, string _cellphone, byte? _enablOrDisable, int? _pageSize, int? _pageIndex, string _sortExp, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUsers(_applicationID, _nationalCode, _name, _email, _cellphone, _enablOrDisable, _pageSize, _pageIndex, _sortExp, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetUserSetting
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetUserSetting(Guid? _userID, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetUserSetting", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetUserSettingAsync(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserSetting(_userID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetUserSettingDapperAsync<T>(Guid? _userID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetUserSetting",new {AUserID=_userID} , timeout );
-}
-
-public ResultSet GetUserSetting(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetUserSetting(_userID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetWebServiceUser
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUser(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetWebServiceUser", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetWebServiceUserAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUser(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUserDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetWebServiceUser",new {AID=_id} , timeout );
-}
-
-public ResultSet GetWebServiceUser(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUser(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetWebServiceUserByUserPass
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUserByUserPass(string _userName, string _password, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetWebServiceUserByUserPass", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetWebServiceUserByUserPassAsync(string _userName, string _password, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUserByUserPass(_userName, _password, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUserByUserPassDapperAsync<T>(string _userName, string _password, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetWebServiceUserByUserPass",new {AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password)} , timeout );
-}
-
-public ResultSet GetWebServiceUserByUserPass(string _userName, string _password, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUserByUserPass(_userName, _password, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetWebServiceUsers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetWebServiceUsers(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spGetWebServiceUsers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_userName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_userName) }, 
-					new Parameter { Name = "@AOrganID", IsOutput = false, Value = _organID == null ? DBNull.Value : (object)_organID }, 
-					new Parameter { Name = "@AEnableState", IsOutput = false, Value = _enableState == null ? DBNull.Value : (object)_enableState }, 
-					new Parameter { Name = "@AComment", IsOutput = false, Value = string.IsNullOrWhiteSpace(_comment) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_comment) }, 
-					new Parameter { Name = "@ASortExp", IsOutput = false, Value = string.IsNullOrWhiteSpace(_sortExp) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_sortExp) }, 
-					new Parameter { Name = "@APageSize", IsOutput = false, Value = _pageSize == null ? DBNull.Value : (object)_pageSize }, 
-					new Parameter { Name = "@APageIndex", IsOutput = false, Value = _pageIndex == null ? DBNull.Value : (object)_pageIndex }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetWebServiceUsersAsync(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUsers(_userName, _organID, _enableState, _comment, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetWebServiceUsersDapperAsync<T>(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spGetWebServiceUsers",new {AUserName=string.IsNullOrWhiteSpace(_userName) ? _userName : ReplaceArabicWithPersianChars(_userName),AOrganID=_organID,AEnableState=_enableState,AComment=string.IsNullOrWhiteSpace(_comment) ? _comment : ReplaceArabicWithPersianChars(_comment),ASortExp=string.IsNullOrWhiteSpace(_sortExp) ? _sortExp : ReplaceArabicWithPersianChars(_sortExp),APageSize=_pageSize,APageIndex=_pageIndex} , timeout );
-}
-
-public ResultSet GetWebServiceUsers(string _userName, Guid? _organID, byte? _enableState, string _comment, string _sortExp, int? _pageSize, int? _pageIndex, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetWebServiceUsers(_userName, _organID, _enableState, _comment, _sortExp, _pageSize, _pageIndex, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyNotificationOrders
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyNotificationOrders(string _orders, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spModifyNotificationOrders", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AOrders", IsOutput = false, Value = string.IsNullOrWhiteSpace(_orders) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_orders) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-					new Parameter { Name = "@AResult", IsOutput = true }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyNotificationOrdersAsync(string _orders, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyNotificationOrders(_orders, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyNotificationOrdersDapperAsync<T>(string _orders, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spModifyNotificationOrders",new {AOrders=string.IsNullOrWhiteSpace(_orders) ? _orders : ReplaceArabicWithPersianChars(_orders),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyNotificationOrders(string _orders, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyNotificationOrders(_orders, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region MapDepartmentsToPosition
-
-public System.Data.SqlClient.SqlCommand GetCommand_MapDepartmentsToPosition(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spMapDepartmentsToPosition", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@APositionType", IsOutput = false, Value = _positionType == null ? DBNull.Value : (object)_positionType }, 
-					new Parameter { Name = "@AMappings", IsOutput = false, Value = string.IsNullOrWhiteSpace(_mappings) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_mappings) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> MapDepartmentsToPositionAsync(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_MapDepartmentsToPosition(_applicationID, _positionType, _mappings, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> MapDepartmentsToPositionDapperAsync<T>(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spMapDepartmentsToPosition",new {AApplicationID=_applicationID,APositionType=_positionType,AMappings=string.IsNullOrWhiteSpace(_mappings) ? _mappings : ReplaceArabicWithPersianChars(_mappings),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet MapDepartmentsToPosition(Guid? _applicationID, byte? _positionType, string _mappings, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_MapDepartmentsToPosition(_applicationID, _positionType, _mappings, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region MapPositionsToDepartment
-
-public System.Data.SqlClient.SqlCommand GetCommand_MapPositionsToDepartment(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("org.spMapPositionsToDepartment", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@ADepartmentType", IsOutput = false, Value = _departmentType == null ? DBNull.Value : (object)_departmentType }, 
-					new Parameter { Name = "@AMappings", IsOutput = false, Value = string.IsNullOrWhiteSpace(_mappings) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_mappings) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> MapPositionsToDepartmentAsync(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_MapPositionsToDepartment(_applicationID, _departmentType, _mappings, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> MapPositionsToDepartmentDapperAsync<T>(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("org.spMapPositionsToDepartment",new {AApplicationID=_applicationID,ADepartmentType=_departmentType,AMappings=string.IsNullOrWhiteSpace(_mappings) ? _mappings : ReplaceArabicWithPersianChars(_mappings),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet MapPositionsToDepartment(Guid? _applicationID, byte? _departmentType, string _mappings, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_MapPositionsToDepartment(_applicationID, _departmentType, _mappings, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
 }
 
 class PBL: Database
@@ -7923,512 +6084,6 @@ public PBL(string connectionString)
 
 public PBL(string connectionString, IModelValueBinder modelValueBinder)
 	:base(connectionString, modelValueBinder){}
-#endregion
-
-#region GetScopes
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetScopes(Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetScopes", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetScopesAsync(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetScopes(_applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetScopesDapperAsync<T>(Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetScopes",new {AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetScopes(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetScopes(_applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region AddLog
-
-public System.Data.SqlClient.SqlCommand GetCommand_AddLog(string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spAddLog", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> AddLogAsync(string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_AddLog(_log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> AddLogDapperAsync<T>(string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spAddLog",new {ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet AddLog(string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_AddLog(_log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyContactInfos
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyContactInfos(Guid? _parentID, string _contactInfos, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spModifyContactInfos", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AContactInfos", IsOutput = false, Value = string.IsNullOrWhiteSpace(_contactInfos) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_contactInfos) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyContactInfosAsync(Guid? _parentID, string _contactInfos, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContactInfos(_parentID, _contactInfos, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyContactInfosDapperAsync<T>(Guid? _parentID, string _contactInfos, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spModifyContactInfos",new {AParentID=_parentID,AContactInfos=string.IsNullOrWhiteSpace(_contactInfos) ? _contactInfos : ReplaceArabicWithPersianChars(_contactInfos)} , timeout );
-}
-
-public ResultSet ModifyContactInfos(Guid? _parentID, string _contactInfos, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContactInfos(_parentID, _contactInfos, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region SendMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_SendMessage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spSendMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> SendMessageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_SendMessage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> SendMessageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spSendMessage",new {AID=_id} , timeout );
-}
-
-public ResultSet SendMessage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_SendMessage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region RemoveMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_RemoveMessage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spRemoveMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> RemoveMessageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveMessage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> RemoveMessageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spRemoveMessage",new {AID=_id} , timeout );
-}
-
-public ResultSet RemoveMessage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_RemoveMessage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetOutboxMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetOutboxMessages(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetOutboxMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetOutboxMessagesAsync(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOutboxMessages(_applicationID, _userID, _type, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetOutboxMessagesDapperAsync<T>(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetOutboxMessages",new {AApplicationID=_applicationID,AUserID=_userID,AType=_type} , timeout );
-}
-
-public ResultSet GetOutboxMessages(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetOutboxMessages(_applicationID, _userID, _type, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetMessageReceivers
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetMessageReceivers(Guid? _messageID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetMessageReceivers", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AMessageID", IsOutput = false, Value = _messageID == null ? DBNull.Value : (object)_messageID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetMessageReceiversAsync(Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessageReceivers(_messageID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetMessageReceiversDapperAsync<T>(Guid? _messageID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetMessageReceivers",new {AMessageID=_messageID} , timeout );
-}
-
-public ResultSet GetMessageReceivers(Guid? _messageID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessageReceivers(_messageID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetMessage
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetMessage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetMessage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetMessageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetMessageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetMessage",new {AID=_id} , timeout );
-}
-
-public ResultSet GetMessage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetMessage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetCommands
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetCommands(Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetCommands", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetCommandsAsync(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommands(_applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetCommandsDapperAsync<T>(Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetCommands",new {AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetCommands(Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommands(_applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetInboxMessages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetInboxMessages(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetInboxMessages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetInboxMessagesAsync(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInboxMessages(_applicationID, _userID, _type, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetInboxMessagesDapperAsync<T>(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetInboxMessages",new {AApplicationID=_applicationID,AUserID=_userID,AType=_type} , timeout );
-}
-
-public ResultSet GetInboxMessages(Guid? _applicationID, Guid? _userID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetInboxMessages(_applicationID, _userID, _type, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyPlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _type, string _name, string _latinName, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spModifyPlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-					new Parameter { Name = "@ALatinName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_latinName) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_latinName) }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyPlaceAsync(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _type, string _name, string _latinName, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _type, _name, _latinName, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyPlaceDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _type, string _name, string _latinName, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spModifyPlace",new {AIsNewRecord=_isNewRecord,AID=_id,AParentID=_parentID,AType=_type,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name),ALatinName=string.IsNullOrWhiteSpace(_latinName) ? _latinName : ReplaceArabicWithPersianChars(_latinName),ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet ModifyPlace(bool? _isNewRecord, Guid? _id, Guid? _parentID, byte? _type, string _name, string _latinName, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyPlace(_isNewRecord, _id, _parentID, _type, _name, _latinName, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPlace(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetPlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPlaceAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlace(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPlaceDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetPlace",new {AID=_id} , timeout );
-}
-
-public ResultSet GetPlace(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlace(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeletePlace
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeletePlace(Guid? _id, string _log, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spDeletePlace", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeletePlaceAsync(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeletePlaceDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spDeletePlace",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
-}
-
-public ResultSet DeletePlace(Guid? _id, string _log, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeletePlace(_id, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
 #endregion
 
 #region ExecPasswordBlackList
@@ -8463,44 +6118,6 @@ public async Task<AppCore.Result<IEnumerable<T>>> ExecPasswordBlackListDapperAsy
 public ResultSet ExecPasswordBlackList(int? _repeatCount, string _log, int? timeout = null)
 {
 	using(var cmd = GetCommand_ExecPasswordBlackList(_repeatCount, _log, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetAttachmentsByParentIDs
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetAttachmentsByParentIDs(string _parentIDs, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetAttachmentsByParentIDs", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_parentIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_parentIDs) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetAttachmentsByParentIDsAsync(string _parentIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAttachmentsByParentIDs(_parentIDs, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetAttachmentsByParentIDsDapperAsync<T>(string _parentIDs, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetAttachmentsByParentIDs",new {AParentIDs=string.IsNullOrWhiteSpace(_parentIDs) ? _parentIDs : ReplaceArabicWithPersianChars(_parentIDs)} , timeout );
-}
-
-public ResultSet GetAttachmentsByParentIDs(string _parentIDs, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetAttachmentsByParentIDs(_parentIDs, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -8546,15 +6163,14 @@ public ResultSet GetAttachment(Guid? _id, int? timeout = null)
 
 #endregion
 
-#region DeleteAttachment
+#region GetAttachmentsByParentIDs
 
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteAttachment(Guid? _id, string _log, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_GetAttachmentsByParentIDs(string _parentIDs, int? timeout = null)
 {
-var cmd = base.CreateCommand("pbl.spDeleteAttachment", 
+var cmd = base.CreateCommand("pbl.spGetAttachmentsByParentIDs", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
+					new Parameter { Name = "@AParentIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_parentIDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_parentIDs) }, 
 	});
 
 			if (timeout != null)
@@ -8562,22 +6178,98 @@ var cmd = base.CreateCommand("pbl.spDeleteAttachment",
 			return cmd;
 }
 
-public async Task<ResultSet> DeleteAttachmentAsync(Guid? _id, string _log, int? timeout = null)
+public async Task<ResultSet> GetAttachmentsByParentIDsAsync(string _parentIDs, int? timeout = null)
 {
-	using(var cmd = GetCommand_DeleteAttachment(_id, _log, timeout))
+	using(var cmd = GetCommand_GetAttachmentsByParentIDs(_parentIDs, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteAttachmentDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> GetAttachmentsByParentIDsDapperAsync<T>(string _parentIDs, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("pbl.spDeleteAttachment",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
+	return await  DapperQueryAsync<T>("pbl.spGetAttachmentsByParentIDs",new {AParentIDs=string.IsNullOrWhiteSpace(_parentIDs) ? _parentIDs : ReplaceArabicWithPersianChars(_parentIDs)} , timeout );
 }
 
-public ResultSet DeleteAttachment(Guid? _id, string _log, int? timeout = null)
+public ResultSet GetAttachmentsByParentIDs(string _parentIDs, int? timeout = null)
 {
-	using(var cmd = GetCommand_DeleteAttachment(_id, _log, timeout))
+	using(var cmd = GetCommand_GetAttachmentsByParentIDs(_parentIDs, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetAttachments
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetAttachments(Guid? _parentID, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spGetAttachments", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetAttachmentsAsync(Guid? _parentID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAttachments(_parentID, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetAttachmentsDapperAsync<T>(Guid? _parentID, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spGetAttachments",new {AParentID=_parentID} , timeout );
+}
+
+public ResultSet GetAttachments(Guid? _parentID, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetAttachments(_parentID, timeout))
+{
+	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
+}
+}
+
+#endregion
+
+#region GetPasswordBlackList
+
+public System.Data.SqlClient.SqlCommand GetCommand_GetPasswordBlackList(string _password, int? timeout = null)
+{
+var cmd = base.CreateCommand("pbl.spGetPasswordBlackList", 
+	System.Data.CommandType.StoredProcedure, 
+	new Parameter[]{
+					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
+	});
+
+			if (timeout != null)
+				cmd.CommandTimeout = (int)timeout;
+			return cmd;
+}
+
+public async Task<ResultSet> GetPasswordBlackListAsync(string _password, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPasswordBlackList(_password, timeout))
+{
+	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
+}
+}
+
+public async Task<AppCore.Result<IEnumerable<T>>> GetPasswordBlackListDapperAsync<T>(string _password, int? timeout = null)
+{
+	return await  DapperQueryAsync<T>("pbl.spGetPasswordBlackList",new {APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password)} , timeout );
+}
+
+public ResultSet GetPasswordBlackList(string _password, int? timeout = null)
+{
+	using(var cmd = GetCommand_GetPasswordBlackList(_password, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -8631,14 +6323,14 @@ public ResultSet ModifyAttachment(bool? _isNewRecord, Guid? _id, Guid? _parentID
 
 #endregion
 
-#region GetAttachments
+#region AddLog
 
-public System.Data.SqlClient.SqlCommand GetCommand_GetAttachments(Guid? _parentID, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_AddLog(string _log, int? timeout = null)
 {
-var cmd = base.CreateCommand("pbl.spGetAttachments", 
+var cmd = base.CreateCommand("pbl.spAddLog", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
 	});
 
 			if (timeout != null)
@@ -8646,22 +6338,22 @@ var cmd = base.CreateCommand("pbl.spGetAttachments",
 			return cmd;
 }
 
-public async Task<ResultSet> GetAttachmentsAsync(Guid? _parentID, int? timeout = null)
+public async Task<ResultSet> AddLogAsync(string _log, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetAttachments(_parentID, timeout))
+	using(var cmd = GetCommand_AddLog(_log, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> GetAttachmentsDapperAsync<T>(Guid? _parentID, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> AddLogDapperAsync<T>(string _log, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("pbl.spGetAttachments",new {AParentID=_parentID} , timeout );
+	return await  DapperQueryAsync<T>("pbl.spAddLog",new {ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
 }
 
-public ResultSet GetAttachments(Guid? _parentID, int? timeout = null)
+public ResultSet AddLog(string _log, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetAttachments(_parentID, timeout))
+	using(var cmd = GetCommand_AddLog(_log, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }
@@ -8669,210 +6361,15 @@ public ResultSet GetAttachments(Guid? _parentID, int? timeout = null)
 
 #endregion
 
-#region GetPlaces
+#region DeleteAttachment
 
-public System.Data.SqlClient.SqlCommand GetCommand_GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
+public System.Data.SqlClient.SqlCommand GetCommand_DeleteAttachment(Guid? _id, string _log, int? timeout = null)
 {
-var cmd = base.CreateCommand("pbl.spGetPlaces", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIDs", IsOutput = false, Value = string.IsNullOrWhiteSpace(_iDs) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_iDs) }, 
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@AAncestorLevel", IsOutput = false, Value = _ancestorLevel == null ? DBNull.Value : (object)_ancestorLevel }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPlacesAsync(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetPlacesDapperAsync<T>(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetPlaces",new {AIDs=string.IsNullOrWhiteSpace(_iDs) ? _iDs : ReplaceArabicWithPersianChars(_iDs),AParentID=_parentID,AType=_type,AAncestorLevel=_ancestorLevel,AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
-}
-
-public ResultSet GetPlaces(string _iDs, Guid? _parentID, byte? _type, int? _ancestorLevel, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPlaces(_iDs, _parentID, _type, _ancestorLevel, _name, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetCommandsByApplicant
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetCommandsByApplicant(Guid? _userID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetCommandsByApplicant", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetCommandsByApplicantAsync(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommandsByApplicant(_userID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetCommandsByApplicantDapperAsync<T>(Guid? _userID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetCommandsByApplicant",new {AUserID=_userID} , timeout );
-}
-
-public ResultSet GetCommandsByApplicant(Guid? _userID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetCommandsByApplicant(_userID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationUserTypes
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationUserTypes(Guid? _notificationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetNotificationUserTypes", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ANotificationID", IsOutput = false, Value = _notificationID == null ? DBNull.Value : (object)_notificationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationUserTypesAsync(Guid? _notificationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationUserTypes(_notificationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationUserTypesDapperAsync<T>(Guid? _notificationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetNotificationUserTypes",new {ANotificationID=_notificationID} , timeout );
-}
-
-public ResultSet GetNotificationUserTypes(Guid? _notificationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationUserTypes(_notificationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotificationsForBulletin
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotificationsForBulletin(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetNotificationsForBulletin", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationsForBulletinAsync(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsForBulletin(_userID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsForBulletinDapperAsync<T>(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetNotificationsForBulletin",new {AUserID=_userID,AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetNotificationsForBulletin(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotificationsForBulletin(_userID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotifications
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotifications(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetNotifications", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AUserID", IsOutput = false, Value = _userID == null ? DBNull.Value : (object)_userID }, 
-					new Parameter { Name = "@AApplicationID", IsOutput = false, Value = _applicationID == null ? DBNull.Value : (object)_applicationID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetNotificationsAsync(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotifications(_userID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationsDapperAsync<T>(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetNotifications",new {AUserID=_userID,AApplicationID=_applicationID} , timeout );
-}
-
-public ResultSet GetNotifications(Guid? _userID, Guid? _applicationID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotifications(_userID, _applicationID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetNotification
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetNotification(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetNotification", 
+var cmd = base.CreateCommand("pbl.spDeleteAttachment", 
 	System.Data.CommandType.StoredProcedure, 
 	new Parameter[]{
 					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
+					new Parameter { Name = "@ALog", IsOutput = false, Value = string.IsNullOrWhiteSpace(_log) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_log) }, 
 	});
 
 			if (timeout != null)
@@ -8880,466 +6377,22 @@ var cmd = base.CreateCommand("pbl.spGetNotification",
 			return cmd;
 }
 
-public async Task<ResultSet> GetNotificationAsync(Guid? _id, int? timeout = null)
+public async Task<ResultSet> DeleteAttachmentAsync(Guid? _id, string _log, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetNotification(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetNotificationDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetNotification",new {AID=_id} , timeout );
-}
-
-public ResultSet GetNotification(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetNotification(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetPasswordBlackList
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetPasswordBlackList(string _password, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetPasswordBlackList", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@APassword", IsOutput = false, Value = string.IsNullOrWhiteSpace(_password) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_password) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetPasswordBlackListAsync(string _password, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetPasswordBlackList(_password, timeout))
+	using(var cmd = GetCommand_DeleteAttachment(_id, _log, timeout))
 {
 	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
 }
 }
 
-public async Task<AppCore.Result<IEnumerable<T>>> GetPasswordBlackListDapperAsync<T>(string _password, int? timeout = null)
+public async Task<AppCore.Result<IEnumerable<T>>> DeleteAttachmentDapperAsync<T>(Guid? _id, string _log, int? timeout = null)
 {
-	return await  DapperQueryAsync<T>("pbl.spGetPasswordBlackList",new {APassword=string.IsNullOrWhiteSpace(_password) ? _password : ReplaceArabicWithPersianChars(_password)} , timeout );
+	return await  DapperQueryAsync<T>("pbl.spDeleteAttachment",new {AID=_id,ALog=string.IsNullOrWhiteSpace(_log) ? _log : ReplaceArabicWithPersianChars(_log)} , timeout );
 }
 
-public ResultSet GetPasswordBlackList(string _password, int? timeout = null)
+public ResultSet DeleteAttachment(Guid? _id, string _log, int? timeout = null)
 {
-	using(var cmd = GetCommand_GetPasswordBlackList(_password, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContactInfos
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContactInfos(Guid? _parentID, int? timeout = null)
-{
-var cmd = base.CreateCommand("pbl.spGetContactInfos", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AParentID", IsOutput = false, Value = _parentID == null ? DBNull.Value : (object)_parentID }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContactInfosAsync(Guid? _parentID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContactInfosDapperAsync<T>(Guid? _parentID, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("pbl.spGetContactInfos",new {AParentID=_parentID} , timeout );
-}
-
-public ResultSet GetContactInfos(Guid? _parentID, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContactInfos(_parentID, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-}
-
-class CNT: Database
-{
-#region Constructors
-public CNT(string connectionString)
-	:base(connectionString){}
-
-public CNT(string connectionString, IModelValueBinder modelValueBinder)
-	:base(connectionString, modelValueBinder){}
-#endregion
-
-#region DeleteContent
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteContent(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spDeleteContent", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteContentAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteContent(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteContentDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spDeleteContent",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteContent(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteContent(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteContentValue
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteContentValue(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spDeleteContentValue", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteContentValueAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteContentValue(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteContentValueDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spDeleteContentValue",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteContentValue(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteContentValue(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region DeleteLanguage
-
-public System.Data.SqlClient.SqlCommand GetCommand_DeleteLanguage(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spDeleteLanguage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> DeleteLanguageAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteLanguage(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> DeleteLanguageDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spDeleteLanguage",new {AID=_id} , timeout );
-}
-
-public ResultSet DeleteLanguage(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_DeleteLanguage(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContentValues
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContentValues(Guid? _languageID, byte? _type, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spGetContentValues", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@ALanguageID", IsOutput = false, Value = _languageID == null ? DBNull.Value : (object)_languageID }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContentValuesAsync(Guid? _languageID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContentValues(_languageID, _type, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContentValuesDapperAsync<T>(Guid? _languageID, byte? _type, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spGetContentValues",new {ALanguageID=_languageID,AType=_type} , timeout );
-}
-
-public ResultSet GetContentValues(Guid? _languageID, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContentValues(_languageID, _type, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetContents
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetContents(Guid? _id, byte? _type, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spGetContents", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetContentsAsync(Guid? _id, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContents(_id, _type, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetContentsDapperAsync<T>(Guid? _id, byte? _type, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spGetContents",new {AID=_id,AType=_type} , timeout );
-}
-
-public ResultSet GetContents(Guid? _id, byte? _type, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetContents(_id, _type, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region GetLanguages
-
-public System.Data.SqlClient.SqlCommand GetCommand_GetLanguages(Guid? _id, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spGetLanguages", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> GetLanguagesAsync(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetLanguages(_id, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> GetLanguagesDapperAsync<T>(Guid? _id, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spGetLanguages",new {AID=_id} , timeout );
-}
-
-public ResultSet GetLanguages(Guid? _id, int? timeout = null)
-{
-	using(var cmd = GetCommand_GetLanguages(_id, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyContent
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyContent(bool? _isNewRecord, Guid? _id, byte? _type, int? _code, string _key, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spModifyContent", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AType", IsOutput = false, Value = _type == null ? DBNull.Value : (object)_type }, 
-					new Parameter { Name = "@ACode", IsOutput = false, Value = _code == null ? DBNull.Value : (object)_code }, 
-					new Parameter { Name = "@AKey", IsOutput = false, Value = string.IsNullOrWhiteSpace(_key) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_key) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyContentAsync(bool? _isNewRecord, Guid? _id, byte? _type, int? _code, string _key, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContent(_isNewRecord, _id, _type, _code, _key, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyContentDapperAsync<T>(bool? _isNewRecord, Guid? _id, byte? _type, int? _code, string _key, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spModifyContent",new {AIsNewRecord=_isNewRecord,AID=_id,AType=_type,ACode=_code,AKey=string.IsNullOrWhiteSpace(_key) ? _key : ReplaceArabicWithPersianChars(_key)} , timeout );
-}
-
-public ResultSet ModifyContent(bool? _isNewRecord, Guid? _id, byte? _type, int? _code, string _key, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContent(_isNewRecord, _id, _type, _code, _key, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyContentValue
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyContentValue(bool? _isNewRecord, Guid? _id, Guid? _contentID, Guid? _languageID, string _value, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spModifyContentValue", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@AContentID", IsOutput = false, Value = _contentID == null ? DBNull.Value : (object)_contentID }, 
-					new Parameter { Name = "@ALanguageID", IsOutput = false, Value = _languageID == null ? DBNull.Value : (object)_languageID }, 
-					new Parameter { Name = "@AValue", IsOutput = false, Value = string.IsNullOrWhiteSpace(_value) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_value) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyContentValueAsync(bool? _isNewRecord, Guid? _id, Guid? _contentID, Guid? _languageID, string _value, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContentValue(_isNewRecord, _id, _contentID, _languageID, _value, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyContentValueDapperAsync<T>(bool? _isNewRecord, Guid? _id, Guid? _contentID, Guid? _languageID, string _value, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spModifyContentValue",new {AIsNewRecord=_isNewRecord,AID=_id,AContentID=_contentID,ALanguageID=_languageID,AValue=string.IsNullOrWhiteSpace(_value) ? _value : ReplaceArabicWithPersianChars(_value)} , timeout );
-}
-
-public ResultSet ModifyContentValue(bool? _isNewRecord, Guid? _id, Guid? _contentID, Guid? _languageID, string _value, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyContentValue(_isNewRecord, _id, _contentID, _languageID, _value, timeout))
-{
-	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
-}
-}
-
-#endregion
-
-#region ModifyLanguage
-
-public System.Data.SqlClient.SqlCommand GetCommand_ModifyLanguage(bool? _isNewRecord, Guid? _id, bool? _rTL, string _culture, string _name, int? timeout = null)
-{
-var cmd = base.CreateCommand("cnt.spModifyLanguage", 
-	System.Data.CommandType.StoredProcedure, 
-	new Parameter[]{
-					new Parameter { Name = "@AIsNewRecord", IsOutput = false, Value = _isNewRecord == null ? DBNull.Value : (object)_isNewRecord }, 
-					new Parameter { Name = "@AID", IsOutput = false, Value = _id == null ? DBNull.Value : (object)_id }, 
-					new Parameter { Name = "@ARTL", IsOutput = false, Value = _rTL == null ? DBNull.Value : (object)_rTL }, 
-					new Parameter { Name = "@ACulture", IsOutput = false, Value = string.IsNullOrWhiteSpace(_culture) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_culture) }, 
-					new Parameter { Name = "@AName", IsOutput = false, Value = string.IsNullOrWhiteSpace(_name) ? DBNull.Value : (object)ReplaceArabicWithPersianChars(_name) }, 
-	});
-
-			if (timeout != null)
-				cmd.CommandTimeout = (int)timeout;
-			return cmd;
-}
-
-public async Task<ResultSet> ModifyLanguageAsync(bool? _isNewRecord, Guid? _id, bool? _rTL, string _culture, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyLanguage(_isNewRecord, _id, _rTL, _culture, _name, timeout))
-{
-	return new ResultSet(cmd, await ExecuteAsync(cmd), _modelValueBinder);
-}
-}
-
-public async Task<AppCore.Result<IEnumerable<T>>> ModifyLanguageDapperAsync<T>(bool? _isNewRecord, Guid? _id, bool? _rTL, string _culture, string _name, int? timeout = null)
-{
-	return await  DapperQueryAsync<T>("cnt.spModifyLanguage",new {AIsNewRecord=_isNewRecord,AID=_id,ARTL=_rTL,ACulture=string.IsNullOrWhiteSpace(_culture) ? _culture : ReplaceArabicWithPersianChars(_culture),AName=string.IsNullOrWhiteSpace(_name) ? _name : ReplaceArabicWithPersianChars(_name)} , timeout );
-}
-
-public ResultSet ModifyLanguage(bool? _isNewRecord, Guid? _id, bool? _rTL, string _culture, string _name, int? timeout = null)
-{
-	using(var cmd = GetCommand_ModifyLanguage(_isNewRecord, _id, _rTL, _culture, _name, timeout))
+	using(var cmd = GetCommand_DeleteAttachment(_id, _log, timeout))
 {
 	return new ResultSet(cmd, Execute(cmd), _modelValueBinder);
 }

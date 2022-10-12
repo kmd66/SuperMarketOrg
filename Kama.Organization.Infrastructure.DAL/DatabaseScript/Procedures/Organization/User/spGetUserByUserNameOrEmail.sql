@@ -1,4 +1,4 @@
-﻿USE [Kama.Bonyad.Organization]
+﻿USE [Kama.Sm.Organization]
 GO
 
 -- this sp is only for login, because it returns password!!!

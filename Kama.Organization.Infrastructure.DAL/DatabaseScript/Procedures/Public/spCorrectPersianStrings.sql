@@ -1,4 +1,4 @@
-﻿USE [Kama.Bonyad.Organization]
+﻿USE [Kama.Sm.Organization]
 GO
 
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'dbo.spCorrectPersianStrings') AND type in (N'P', N'PC'))

@@ -1,6 +1,6 @@
 ﻿
 
---USE [Kama.Bonyad.Organization]
+--USE [Kama.Sm.Organization]
 
 ----ALTER TABLE org.[User]
 ----ALTER COLUMN NationalCode VARCHAR(18)

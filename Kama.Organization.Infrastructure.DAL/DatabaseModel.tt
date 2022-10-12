@@ -9,6 +9,6 @@
 <#@ import namespace="Kama.Organization.Core.Model" #>
 <#@ output extension=".cs" #>
 <#
-	var generator = new Kama.DatabaseModel.Generator(@"Data Source=94.139.162.23\sql2019,1433;Initial Catalog=Kama.Bonyad.Organization;User ID=kama; Password=K@maPMGs@dUL98", "dbo");
+	var generator = new Kama.DatabaseModel.Generator(@"Data Source=94.139.162.23;Initial Catalog=Kama.Sm.Organization;User ID=kama; Password=kama@@1389", "dbo");
 #>
 <#=generator.Generate("Kama.Organization.Infrastructure.DAL")#>

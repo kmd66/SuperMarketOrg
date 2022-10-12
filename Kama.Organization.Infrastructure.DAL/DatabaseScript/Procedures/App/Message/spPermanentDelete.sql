@@ -1,4 +1,4 @@
-USE [Kama.Bonyad.Organization]
+USE [Kama.Sm.Organization]
 GO
 
 IF EXISTS(Select 1 From SYS.PROCEDURES WHERE [object_id] = OBJECT_ID ('app.spPermanentDeleteMessage'))

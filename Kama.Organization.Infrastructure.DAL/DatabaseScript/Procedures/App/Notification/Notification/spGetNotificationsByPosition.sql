@@ -1,4 +1,4 @@
-USE [Kama.Bonyad.Organization]
+USE [Kama.Sm.Organization]
 GO
 
 IF EXISTS(SELECT 1 FROM SYS.PROCEDURES WHERE [object_id] = OBJECT_ID('app.spGetNotificationsByPosition'))

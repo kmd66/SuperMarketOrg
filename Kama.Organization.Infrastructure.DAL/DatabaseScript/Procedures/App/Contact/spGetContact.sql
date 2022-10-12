@@ -1,4 +1,4 @@
-USE [Kama.Bonyad.Organization]
+USE [Kama.Sm.Organization]
 GO
 
 IF EXISTS(SELECT 1 FROM sys.procedures WHERE [object_id] = OBJECT_ID('app.spGetContact'))
